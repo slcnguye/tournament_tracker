@@ -1,0 +1,24 @@
+<div class="container">
+  <h2>Tournament</h2>
+
+  <div ng-form="$ctrl.form">
+    <div class="form-group">
+      <label class="control-label required">Name</label>
+      <input class="form-control" type="text" ng-model="$ctrl.tournament.name" required>
+    </div>
+    <div class="form-group">
+      <label class="control-label">Scoring</label>
+      <select class="form-control" type="text" ng-model="$ctrl.tournament.scoreType">
+        <option value="3PW">3 points per Win</option>
+        <option value="ELO">Elo</option>
+      </select>
+    </div>
+
+    <div class="form-group has-error">
+      <p class="help-block">{{ $ctrl.errors }}</p>
+    </div>
+    <button type="submit" class="btn btn-primary" ng-disabled="$ctrl.form.$invalid" ng-click="$ctrl.createTournament($ctrl.tournament)">Create</button>
+  </div>
+
+  <div ng-bind="$ctrl.tournament.name"></div>
+</div>
