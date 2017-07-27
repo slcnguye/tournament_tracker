@@ -24,12 +24,19 @@ export class TournamentDetailComponent {
       this.Player.query().$promise
     ]).then((response) => {
       this.tournament = response[0];
-      this.tournamentPlayers = response[1];
+      const tournamentPlayers = response[1];
       this.players = response[2];
 
       this.playersById = {};
       _.each(this.players, (player) => {
         this.playersById[player._id] = player;
+      });
+
+      this.tournamentPlayers = _.map(tournamentPlayers, (tournamentPlayer) => {
+        const player = angular.copy(tournamentPlayer);
+        player.name = this.playersById[player.playerId].name;
+        player.score = player.score || 0;
+        return player;
       });
     });
   }

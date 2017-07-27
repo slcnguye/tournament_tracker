@@ -1,4 +1,4 @@
-<div class="container">
+<div id="tournament-detail" class="container">
   <h2>
     <span ng-bind="$ctrl.tournament.name"></span>
     <span>-</span>
@@ -6,16 +6,23 @@
   </h2>
 
   <div class="panel panel-default">
-    <div class="panel-heading">Players</div>
+    <div class="panel-heading action-heading">
+      <span>Players</span>
+      <button class="btn btn-default">
+        <i class="fa fa-plus" aria-hidden="true" ui-sref="add-player({ tournamentId: $ctrl.tournamentId })"></i>
+      </button>
+    </div>
     <table class="table">
       <thead>
+      <th>Rank</th>
       <th>Name</th>
       <th>Score</th>
       </thead>
       <tbody>
-      <tr ng-repeat="tournamentPlayer in $ctrl.tournamentPlayers">
-        <td ng-bind="$ctrl.playersById[tournamentPlayer.playerId].name"></td>
-        <td ng-bind="$ctrl.playersById[tournamentPlayer.playerId].score || 0"></td>
+      <tr ng-repeat="tournamentPlayer in $ctrl.tournamentPlayers | orderBy: 'score':true ">
+        <td ng-bind="$index + 1"></td>
+        <td ng-bind="tournamentPlayer.name"></td>
+        <td ng-bind="tournamentPlayer.score"></td>
       </tr>
       </tbody>
     </table>
