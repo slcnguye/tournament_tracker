@@ -4,7 +4,7 @@ import jsonpatch from 'fast-json-patch';
 
 let apiutils = {};
 
-apiutils.respondWithResult = function(res, statusCode) {
+  apiutils.respondWithResult = function(res, statusCode) {
       statusCode = statusCode || 200;
       return function(entity) {
         if(entity) {

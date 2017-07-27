@@ -10,7 +10,7 @@
 
 'use strict';
 
-import {Tournament} from '../../sqldb';
+import {Tournament, TournamentPlayer, Player} from '../../sqldb';
 import apiutils from '../api.utils'
 
 // Gets a list of Tournaments
@@ -78,6 +78,6 @@ export function destroy(req, res) {
     }
   })
     .then(apiutils.handleEntityNotFound(res))
-    .then(apiutils.emoveEntity(res))
+    .then(apiutils.removeEntity(res))
     .catch(apiutils.handleError(res));
 }

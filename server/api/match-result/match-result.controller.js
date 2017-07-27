@@ -78,6 +78,6 @@ export function destroy(req, res) {
     }
   })
     .then(apiutils.handleEntityNotFound(res))
-    .then(apiutils.emoveEntity(res))
+    .then(apiutils.removeEntity(res))
     .catch(apiutils.handleError(res));
 }

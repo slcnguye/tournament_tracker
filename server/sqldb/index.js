@@ -24,6 +24,7 @@ db.MatchResult = db.sequelize.import('../api/match-result/match-result.model');
 
 db.Tournament.hasMany(db.Match, {as: 'Matches'});
 db.Tournament.belongsToMany(db.Player, {through: db.TournamentPlayer});
+// db.TournamentPlayer.belongsTo(db.Player);
 db.Player.belongsToMany(db.Tournament, {through: db.TournamentPlayer});
 db.Match.belongsToMany(db.TournamentPlayer, {through: db.MatchResult});
 db.TournamentPlayer.belongsToMany(db.Match, {through: db.MatchResult});

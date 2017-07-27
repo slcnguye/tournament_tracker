@@ -1,0 +1,39 @@
+<div class="container">
+  <h2>
+    <span ng-bind="$ctrl.tournament.name"></span>
+    <span>-</span>
+    <span ng-bind="$ctrl.tournament.scoreType"></span>
+  </h2>
+
+  <div class="panel panel-default">
+    <div class="panel-heading">Players</div>
+    <table class="table">
+      <thead>
+      <th>Name</th>
+      <th>Score</th>
+      </thead>
+      <tbody>
+      <tr ng-repeat="tournamentPlayer in $ctrl.tournamentPlayers">
+        <td ng-bind="$ctrl.playersById[tournamentPlayer.playerId].name"></td>
+        <td ng-bind="$ctrl.playersById[tournamentPlayer.playerId].score || 0"></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="panel panel-default">
+    <div class="panel-heading">Matches</div>
+    <table class="table">
+      <thead>
+      <th>Name</th>
+      <th>Score</th>
+      </thead>
+      <tbody>
+      <tr ng-repeat="tournamentPlayer in $ctrl.tournamentPlayers">
+        <td ng-bind="$ctrl.playersById[tournamentPlayer.playerId].name"></td>
+        <td ng-bind="$ctrl.playersById[tournamentPlayer.playerId].score || 0"></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

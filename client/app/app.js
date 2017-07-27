@@ -19,16 +19,20 @@ import account from './account';
 import admin from './admin';
 import navbar from '../components/navbar/navbar.component';
 import footer from '../components/footer/footer.component';
-import main from './main/main.component';
-import newtournament from './new-tournament/new-tournament.component';
-import addplayer from './add-player/add-player.component';
+import ngenter from '../components/ng-enter/ng-enter.directive';
+import Main from './main/main.component';
+import NewTournament from './new-tournament/new-tournament.component';
+import AddPlayer from './add-player/add-player.component';
+import Tournament from './tournament/tournament.component';
+import TournamentDetail from './tournament-detail/tournament-detail.component';
 import constants from './app.constants';
 import util from '../components/util/util.module';
 
 import './app.scss';
 
 angular.module('tournamentTrackerApp', [ngCookies, ngResource, ngSanitize, uiRouter, uiBootstrap,
-  _Auth, account, admin, 'validation.match', navbar, footer, main, newtournament, addplayer, constants, util
+  _Auth, account, admin, 'validation.match', navbar, footer, ngenter, constants, util,
+  Main, AddPlayer, NewTournament, Tournament, TournamentDetail
 ])
   .config(routeConfig)
   .run(function($rootScope, $location, Auth) {

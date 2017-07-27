@@ -10,12 +10,11 @@
       <a href="/" class="navbar-brand">tournament-tracker</a>
     </div>
     <div uib-collapse="$ctrl.isCollapsed" class="navbar-collapse collapse" id="navbar-main">
-      <!--<ul class="nav navbar-nav">-->
-        <!--<li ng-repeat="item in $ctrl.menu" ui-sref-active="active">-->
-            <!--<a ui-sref="{{item.state}}">{{item.title}}</a>-->
-        <!--</li>-->
-        <!--<li ng-show="$ctrl.isAdmin()" ui-sref-active="active"><a ui-sref="admin">Admin</a></li>-->
-      <!--</ul>-->
+      <ul class="nav navbar-nav">
+        <li>
+          <a ui-sref="tournament">Tournaments</a>
+        </li>
+      </ul>
 
       <ul class="nav navbar-nav navbar-right">
         <li>

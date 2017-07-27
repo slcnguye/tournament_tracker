@@ -1,0 +1,19 @@
+<div id="tournament" class="container">
+  <h2>Tournaments</h2>
+
+  <table class="table">
+    <thead>
+    <th>Name</th>
+    <th>Score Type</th>
+    <th>Completed</th>
+    </thead>
+    <tbody>
+    <tr ng-repeat="tournament in $ctrl.tournaments"
+        ui-sref="tournament-detail({ tournamentId: tournament._id })" class="tournament-row">
+      <td ng-bind="tournament.name"></td>
+      <td ng-bind="tournament.scoreType"></td>
+      <td ng-bind="tournament.completed"></td>
+    </tr>
+    </tbody>
+  </table>
+</div>

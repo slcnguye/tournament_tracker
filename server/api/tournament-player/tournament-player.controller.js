@@ -11,11 +11,16 @@
 'use strict';
 
 import {TournamentPlayer} from '../../sqldb';
-import apiutils from '../api.utils'
+import apiutils from '../api.utils';
+
 
 // Gets a list of TournamentPlayers
 export function index(req, res) {
-  return TournamentPlayer.findAll()
+  return TournamentPlayer.findAll({
+    where: {
+      tournamentId: req.query.tournamentId
+    }
+  })
     .then(apiutils.respondWithResult(res))
     .catch(apiutils.handleError(res));
 }
@@ -78,6 +83,6 @@ export function destroy(req, res) {
     }
   })
     .then(apiutils.handleEntityNotFound(res))
-    .then(apiutils.emoveEntity(res))
+    .then(apiutils.removeEntity(res))
     .catch(apiutils.handleError(res));
 }

@@ -1,9 +1,9 @@
 'use strict';
 
-export function TournamentResource($resource) {
+export function PlayerResource($resource) {
   'ngInject';
 
-  return $resource('/api/tournaments/:id', {
+  return $resource('/api/players/:id', {
     id: '@_id'
   }, {
     create: {
@@ -12,8 +12,8 @@ export function TournamentResource($resource) {
     get: {
       method: 'GET'
     },
-    getPlayers: {
-      method: 'GET',
+    'query':  {
+      method:'GET',
       isArray:true
     }
   });

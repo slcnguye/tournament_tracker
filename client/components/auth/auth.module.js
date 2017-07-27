@@ -19,6 +19,12 @@ import {
 import {
   TournamentResource
 } from './tournament.service'
+import {
+  TournamentPlayerResource
+} from './tournament-player.service'
+import {
+  PlayerResource
+} from './player.service'
 
 import uiRouter from 'angular-ui-router';
 
@@ -34,5 +40,7 @@ export default angular.module('tournamentTrackerApp.auth', [constants, util, ngC
   .factory('Auth', AuthService)
   .factory('User', UserResource)
   .factory('Tournament', TournamentResource)
+  .factory('TournamentPlayer', TournamentPlayerResource)
+  .factory('Player', PlayerResource)
   .config(['$httpProvider', addInterceptor])
   .name;
