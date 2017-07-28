@@ -61,8 +61,8 @@ export function upsert(req, res) {
 
 // Updates an existing TournamentPlayer in the DB
 export function patch(req, res) {
-  if(req.body._id) {
-    Reflect.deleteProperty(req.body, '_id');
+  if(req.body.id) {
+    Reflect.deleteProperty(req.body, 'id');
   }
   return TournamentPlayer.find({
     where: {

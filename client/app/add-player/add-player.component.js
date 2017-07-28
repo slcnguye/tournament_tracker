@@ -52,9 +52,11 @@ export class AddPlayerComponent {
 
     this.$q.when(promise).then((player) => {
       if (!_.find(this.tournamentPlayers, { playerId: player._id })) {
+        const initScore = this.tournament.scoreType === "ELO" ? 2000 : 0;
         this.TournamentPlayer.create({
           tournamentId: this.tournament._id,
-          playerId: player._id
+          playerId: player._id,
+          score: initScore
         }).$promise
           .then((tournamentPlayer) => {
             this.tournamentPlayers.push(tournamentPlayer);

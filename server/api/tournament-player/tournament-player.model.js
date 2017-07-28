@@ -8,7 +8,11 @@ export default function(sequelize, DataTypes) {
       primaryKey: true,
       autoIncrement: true
     },
-    score: DataTypes.INTEGER
+    score: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0,
+      allowNull: false
+    }
   }, {
     timestamps: true
   });

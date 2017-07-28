@@ -15,7 +15,11 @@ import apiutils from '../api.utils'
 
 // Gets a list of MatchResults
 export function index(req, res) {
-  return MatchResult.findAll()
+  return MatchResult.findAll({
+    where: {
+      matchId: req.query.matchId
+    }
+  })
     .then(apiutils.respondWithResult(res))
     .catch(apiutils.handleError(res));
 }

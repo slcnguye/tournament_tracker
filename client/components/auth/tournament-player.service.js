@@ -4,7 +4,7 @@ export function TournamentPlayerResource($resource) {
   'ngInject';
 
   return $resource('/api/tournament-players/:id', {
-    id: '@_id'
+    id: '@id'
   }, {
     create: {
       method: 'POST'
@@ -14,6 +14,9 @@ export function TournamentPlayerResource($resource) {
     },
     delete: {
       method: 'DELETE'
+    },
+    patch: {
+      method: 'PATCH'
     }
   });
 }

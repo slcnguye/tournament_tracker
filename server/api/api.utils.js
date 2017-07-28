@@ -1,6 +1,7 @@
 'use strict';
 
 import jsonpatch from 'fast-json-patch';
+import _ from 'lodash';
 
 let apiutils = {};
 
@@ -16,12 +17,17 @@ let apiutils = {};
 
 apiutils.patchUpdates = function(patches) {
   return function(entity) {
-    try {
-      // eslint-disable-next-line prefer-reflect
-      jsonpatch.apply(entity, patches, /*validate*/ true);
-    } catch(err) {
-      return Promise.reject(err);
-    }
+    _.each(patches, (value, key) => {
+      entity[key] = value;
+    });
+    // try {
+    //   jsonpatch.applyPatch(entity, patches, /*validate*/ true);
+    // } catch(err) {
+    //   return Promise.reject(err);
+    // }
+    // eslint-disable-next-line prefer-reflect
+    console.log(entity);
+    console.log(patches);
 
     return entity.save();
   };

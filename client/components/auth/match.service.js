@@ -1,9 +1,9 @@
 'use strict';
 
-export function PlayerResource($resource) {
+export function MatchResource($resource) {
   'ngInject';
 
-  return $resource('/api/players/:id', {
+  return $resource('/api/matches/:id', {
     id: '@id'
   }, {
     create: {
@@ -12,9 +12,8 @@ export function PlayerResource($resource) {
     get: {
       method: 'GET'
     },
-    'query':  {
-      method:'GET',
-      isArray:true
+    delete: {
+      method: 'DELETE'
     }
   });
 }

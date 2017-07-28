@@ -8,9 +8,9 @@ export default function(sequelize, DataTypes) {
       primaryKey: true,
       autoIncrement: true
     },
-    result: {
-      type:   DataTypes.ENUM,
-      values: ['W', 'L', 'D'],
+    scoreDelta: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0,
       allowNull: false
     }
   }, {
