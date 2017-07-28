@@ -41,6 +41,54 @@ export class TournamentDetailComponent {
     });
   }
 
+  addMatch() {
+    this.addMatching = true;
+  }
+
+  saveMatch() {
+    this.resetMatchInputs();
+  }
+
+  cancelMatch() {
+    this.resetMatchInputs();
+  }
+
+  resetMatchInputs() {
+    this.addMatching = false;
+    this.matchPlayer1 = null;
+    this.matchPlayer2 = null;
+  }
+
+  // Inline calculations for score
+  calculateScoreForWinner(winner, loser) {
+    if (this.tournament.scoreType == "3PW") {
+      return 3;
+    } else if (this.tournament.scoreType == "ELO" && winner && winner.score && loser && loser.score) {
+      const k = 16;
+      const eloDifference = winner.score - loser.score;
+      const percentage = 1 / ( 1 + Math.pow(10, eloDifference / 400) );
+
+      const win = Math.round(k * ( 1 - percentage ));
+      // const draw = Math.round(k * ( .5 - percentage ));
+      // const lose = Math.round(k * ( 0 - percentage ));
+      return win;
+    }
+   }
+
+  calculateScoreForLoser(winner, loser) {
+    if (this.tournament.scoreType == "3PW") {
+      return 0;
+    } else if (this.tournament.scoreType == "ELO" && winner && winner.score && loser && loser.score) {
+      const k = 16;
+      const eloDifference = winner.score - loser.score;
+      const percentage = 1 / ( 1 + Math.pow(10, eloDifference / 400) );
+
+      // const win = Math.round(k * ( 1 - percentage ));
+      // const draw = Math.round(k * ( .5 - percentage ));
+      const lose = Math.round(k * ( 0 - percentage ));
+      return lose;
+    }
+  }
 //  how do you create matches with match results
 }
 

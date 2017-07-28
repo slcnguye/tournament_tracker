@@ -1,5 +1,5 @@
 <div id="tournament-detail" class="container">
-  <h2>
+  <h2 ng-if="$ctrl.tournament">
     <span ng-bind="$ctrl.tournament.name"></span>
     <span>-</span>
     <span ng-bind="$ctrl.tournament.scoreType"></span>
@@ -8,8 +8,8 @@
   <div class="panel panel-default">
     <div class="panel-heading action-heading">
       <span>Players</span>
-      <button class="btn btn-sm btn-default">
-        <i class="fa fa-plus" aria-hidden="true" ui-sref="add-player({ tournamentId: $ctrl.tournamentId })"></i>
+      <button class="btn btn-sm btn-default" ui-sref="add-player({ tournamentId: $ctrl.tournamentId })">
+        <i class="fa fa-plus" aria-hidden="true"></i>
       </button>
     </div>
     <table class="table">
@@ -29,7 +29,48 @@
   </div>
 
   <div class="panel panel-default">
-    <div class="panel-heading">Matches</div>
+    <div class="panel-heading action-heading">
+      <span>Matches</span>
+      <button ng-show="!$ctrl.addMatching" class="btn btn-sm btn-default" ng-click="$ctrl.addMatch()">
+        <i class="fa fa-plus" aria-hidden="true"></i>
+      </button>
+    </div>
+    <div class="panel-body" ng-if="$ctrl.addMatching">
+      <div class="row">
+        <div class="col-xs-4">
+          <div class="input-group player-input-group">
+            <span class="input-group-addon">
+              <i class="fa fa-trophy" aria-hidden="true"></i>
+              <div ng-bind="'+' + $ctrl.calculateScoreForWinner($ctrl.matchPlayer1, $ctrl.matchPlayer2)"></div>
+            </span>
+            <input type="text" ng-model="$ctrl.matchPlayer1" class="form-control player-input"
+                   uib-typeahead="player as player.name for player in $ctrl.tournamentPlayers | filter:$viewValue | limitTo:8"
+                   placeholder="Match Winner...">
+          </div>
+        </div>
+        <div class="col-xs-4">
+          <div class="input-group player-input-group">
+            <span class="input-group-addon">
+              <i class="fa fa-thumbs-o-down" aria-hidden="true"></i>
+              <div ng-bind="$ctrl.calculateScoreForLoser($ctrl.matchPlayer1, $ctrl.matchPlayer2) || '-'"></div>
+            </span>
+            <input type="text" ng-model="$ctrl.matchPlayer2" class="form-control player-input"
+                   uib-typeahead="player as player.name for player in $ctrl.tournamentPlayers | filter:$viewValue | limitTo:8"
+                   placeholder="Match Contender...">
+          </div>
+        </div>
+        <div class="pull-right">
+          <button class="btn btn-default"
+                  ng-disabled="(!$ctrl.playersById[$ctrl.matchPlayer1.playerId] || !$ctrl.playersById[$ctrl.matchPlayer2.playerId]) || $ctrl.playersById[$ctrl.matchPlayer1.playerId] == $ctrl.playersById[$ctrl.matchPlayer2.playerId]"
+                  ng-click="$ctrl.saveMatch()">
+            Save
+          </button>
+          <button class="btn btn-link" ng-click="$ctrl.cancelMatch()">
+            Cancel
+          </button>
+        </div>
+      </div>
+    </div>
     <table class="table">
       <thead>
       <th>Name</th>
@@ -43,4 +84,5 @@
       </tbody>
     </table>
   </div>
+
 </div>
