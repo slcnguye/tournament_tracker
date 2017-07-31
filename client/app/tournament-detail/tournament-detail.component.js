@@ -54,8 +54,9 @@ export class TournamentDetailComponent {
         this.MatchResult.query({matchId: match._id}).$promise
           .then((matchResults) => {
             const matchDetail = angular.copy(match);
-            matchDetail.player1 = matchResults[0];
-            matchDetail.player2 = matchResults[1];
+            const result1IsWinner = matchResults[0].scoreDelta > matchResults[1].scoreDelta;
+            matchDetail.player1 = result1IsWinner ? matchResults[0] : matchResults[1];
+            matchDetail.player2 = result1IsWinner ? matchResults[1] : matchResults[0];
             this.matchDetails.push(matchDetail);
           });
       });
