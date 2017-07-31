@@ -5,3 +5,4 @@ applications:
   command: NODE_ENV=production node ./server
   services:
     - mtg-tournament-tracker-db
+  buildpack: nodejs_buildpack
