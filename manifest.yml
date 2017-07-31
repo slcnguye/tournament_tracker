@@ -1,7 +1,7 @@
 ---
 applications:
 - name: mtg-tournament-tracker
-  memory: 64M
-  command: gulp serve:dist
+  memory: 512M
+  command: NODE_ENV=production node ./server
   services:
     - mtg-tournament-tracker-db

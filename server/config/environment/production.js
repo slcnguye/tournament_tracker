@@ -16,6 +16,6 @@ module.exports = {
 
   // Sequelize connection options
   sequelize: {
-    uri: process.env.VCAP_SERVICES.mysql.credentials.uri
+    uri: process.env["VCAP_SERVICES"]["p-mysql"]["credentials"]["uri"]
   }
 };
