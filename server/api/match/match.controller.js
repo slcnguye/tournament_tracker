@@ -10,15 +10,16 @@
 
 'use strict';
 
-import {Match} from '../../sqldb';
-import apiutils from '../api.utils'
+import {Match, MatchResult} from '../../sqldb';
+import apiutils from '../api.utils';
 
 // Gets a list of Matchs
 export function index(req, res) {
   return Match.findAll({
     where: {
       tournamentId: req.query.tournamentId
-    }
+    },
+    include: [MatchResult]
   })
     .then(apiutils.respondWithResult(res))
     .catch(apiutils.handleError(res));

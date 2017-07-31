@@ -15,9 +15,6 @@ import errorHandler from 'errorhandler';
 import path from 'path';
 import config from './environment';
 import passport from 'passport';
-import session from 'express-session';
-import sqldb from '../sqldb';
-import expressSequelizeSession from 'express-sequelize-session';
 
 export default function(app) {
   var env = app.get('env');

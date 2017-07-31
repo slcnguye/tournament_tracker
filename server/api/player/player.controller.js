@@ -11,7 +11,7 @@
 'use strict';
 
 import {Player} from '../../sqldb';
-import apiutils from '../api.utils'
+import apiutils from '../api.utils';
 
 // Gets a list of Players
 export function index(req, res) {

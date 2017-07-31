@@ -14,7 +14,7 @@ export function TournamentResource($resource) {
     },
     getPlayers: {
       method: 'GET',
-      isArray:true
+      isArray: true
     }
   });
 }

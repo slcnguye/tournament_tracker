@@ -26,18 +26,18 @@ export class TournamentDetailComponent {
       this.TournamentPlayer.query({tournamentId: this.tournamentId}).$promise,
       this.Player.query().$promise,
       this.Match.query({tournamentId: this.tournamentId}).$promise
-    ]).then((response) => {
+    ]).then(response => {
       this.tournament = response[0];
       const tournamentPlayers = response[1];
       this.players = response[2];
       this.matches = response[3];
 
       this.playersById = {};
-      _.each(this.players, (player) => {
+      _.each(this.players, player => {
         this.playersById[player._id] = player;
       });
 
-      this.tournamentPlayers = _.map(tournamentPlayers, (tournamentPlayer) => {
+      this.tournamentPlayers = _.map(tournamentPlayers, tournamentPlayer => {
         const player = angular.copy(tournamentPlayer);
         player.name = this.playersById[player.playerId].name;
         player.score = player.score || 0;
@@ -45,14 +45,14 @@ export class TournamentDetailComponent {
       });
 
       this.tournamentPlayersById = {};
-      _.each(this.tournamentPlayers, (tournamentPlayer) => {
+      _.each(this.tournamentPlayers, tournamentPlayer => {
         this.tournamentPlayersById[tournamentPlayer._id] = tournamentPlayer;
       });
 
       this.matchDetails = [];
-      _.each(this.matches, (match) => {
+      _.each(this.matches, match => {
         this.MatchResult.query({matchId: match._id}).$promise
-          .then((matchResults) => {
+          .then(matchResults => {
             const matchDetail = angular.copy(match);
             const result1IsWinner = matchResults[0].scoreDelta > matchResults[1].scoreDelta;
             matchDetail.player1 = result1IsWinner ? matchResults[0] : matchResults[1];
@@ -62,7 +62,6 @@ export class TournamentDetailComponent {
       });
     });
   }
-
 
 
   addMatch() {
@@ -77,7 +76,7 @@ export class TournamentDetailComponent {
     };
 
     this.Match.create(match).$promise
-      .then((savedMatch) => {
+      .then(savedMatch => {
         const matchResult1 = {
           tournamentPlayerId: winner._id,
           matchId: savedMatch._id,
@@ -99,7 +98,7 @@ export class TournamentDetailComponent {
           this.MatchResult.create(matchResult2).$promise,
           this.TournamentPlayer.patch({id: updatedWinner._id, score: updatedWinner.score}).$promise,
           this.TournamentPlayer.patch({id: updatedLoser._id, score: updatedLoser.score}).$promise
-        ]).then((matchResults) => {
+        ]).then(matchResults => {
           const matchDetail = angular.copy(savedMatch);
           matchDetail.player1 = matchResults[0];
           matchDetail.player2 = matchResults[1];
@@ -122,31 +121,31 @@ export class TournamentDetailComponent {
 
   // Inline calculations for score
   calculateScoreForWinner(winner, loser) {
-    if (this.tournament.scoreType == "3PW") {
+    if(this.tournament.scoreType == '3PW') {
       return 3;
-    } else if (this.tournament.scoreType == "ELO" && winner && winner.score && loser && loser.score) {
+    } else if(this.tournament.scoreType == 'ELO' && winner && winner.score && loser && loser.score) {
       const k = 32;
       const eloDifference = loser.score - winner.score;
-      const percentage = 1 / ( 1 + Math.pow(10, eloDifference / 400) );
+      const percentage = 1 / (1 + Math.pow(10, eloDifference / 400));
 
-      const win = Math.round(k * ( 1 - percentage ));
-      const draw = Math.round(k * ( .5 - percentage ));
-      const lose = Math.round(k * ( 0 - percentage ));
+      const win = Math.round(k * (1 - percentage));
+      // const draw = Math.round(k * (.5 - percentage));
+      // const lose = Math.round(k * (0 - percentage));
       return win;
     }
-   }
+  }
 
   calculateScoreForLoser(winner, loser) {
-    if (this.tournament.scoreType == "3PW") {
+    if(this.tournament.scoreType == '3PW') {
       return 0;
-    } else if (this.tournament.scoreType == "ELO" && winner && winner.score && loser && loser.score) {
+    } else if(this.tournament.scoreType == 'ELO' && winner && winner.score && loser && loser.score) {
       const k = 32;
       const eloDifference = winner.score - loser.score;
-      const percentage = 1 / ( 1 + Math.pow(10, eloDifference / 400) );
+      const percentage = 1 / (1 + Math.pow(10, eloDifference / 400));
 
-      const win = Math.round(k * ( 1 - percentage ));
-      const draw = Math.round(k * ( .5 - percentage ));
-      const lose = Math.round(k * ( 0 - percentage ));
+      // const win = Math.round(k * (1 - percentage));
+      // const draw = Math.round(k * (.5 - percentage));
+      const lose = Math.round(k * (0 - percentage));
       return lose;
     }
   }

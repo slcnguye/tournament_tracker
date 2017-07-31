@@ -13,7 +13,7 @@ export class TournamentComponent {
 
   $onInit() {
     this.Tournament.query().$promise
-      .then((tournaments) => {
+      .then(tournaments => {
         this.tournaments = tournaments;
       });
   }

@@ -22,12 +22,12 @@ export class AddPlayerComponent {
       this.Tournament.get({id: tournamentId}).$promise,
       this.Player.query().$promise,
       this.TournamentPlayer.query({tournamentId}).$promise
-    ]).then((response) => {
+    ]).then(response => {
       this.tournament = response[0];
       this.players = response[1];
       this.tournamentPlayers = response[2];
       this.playersById = {};
-      _.each(this.players, (player) => {
+      _.each(this.players, player => {
         this.playersById[player._id] = player;
       });
     });
@@ -38,27 +38,27 @@ export class AddPlayerComponent {
     this.playerNameToAdd = null;
 
     let promise;
-    let player = _.find(this.players, { name: playerName });
-    if (!player) {
+    let existingPlayer = _.find(this.players, { name: playerName });
+    if(!existingPlayer) {
       promise = this.Player.create({ name: playerName }).$promise
-        .then((player) => {
-          this.players.push(player);
-          this.playersById[player._id] = player;
-          return player;
-      });
+        .then(savedPlayer => {
+          this.players.push(savedPlayer);
+          this.playersById[savedPlayer._id] = savedPlayer;
+          return savedPlayer;
+        });
     } else {
-      promise = player;
+      promise = existingPlayer;
     }
 
-    this.$q.when(promise).then((player) => {
-      if (!_.find(this.tournamentPlayers, { playerId: player._id })) {
-        const initScore = this.tournament.scoreType === "ELO" ? 2000 : 0;
+    this.$q.when(promise).then(player => {
+      if(!_.find(this.tournamentPlayers, { playerId: player._id })) {
+        const initScore = this.tournament.scoreType === 'ELO' ? 2000 : 0;
         this.TournamentPlayer.create({
           tournamentId: this.tournament._id,
           playerId: player._id,
           score: initScore
         }).$promise
-          .then((tournamentPlayer) => {
+          .then(tournamentPlayer => {
             this.tournamentPlayers.push(tournamentPlayer);
           });
       }

@@ -20,11 +20,11 @@ describe('Directive: ngEnter', function() {
     // expect(element.text()).toBe('this is the ngEnter directive');
   }));
 
-  it('it should call the mock function on pressing enter', function () {
-    scope.mockFunction = function(){};
+  it('it should call the mock function on pressing enter', function() {
+    scope.mockFunction = function() {};
     compileDirective();
 
-    spyOn(scope,'mockFunction');
+    spyOn(scope, 'mockFunction');
     let e = $.Event('keypress');
     e.which = 13; //choose the one you want
     e.keyCode = 13;
@@ -35,9 +35,9 @@ describe('Directive: ngEnter', function() {
   /**
    * Compile the directive into HTML
    */
-  function compileDirective(){
+  function compileDirective() {
     element = angular.element('<input type="text" ng-enter="mockFunction()" />');
-    inject(function($compile){
+    inject(function($compile) {
       element = $compile(element)(scope);
     });
     scope.$apply();

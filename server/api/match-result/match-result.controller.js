@@ -11,7 +11,7 @@
 'use strict';
 
 import {MatchResult} from '../../sqldb';
-import apiutils from '../api.utils'
+import apiutils from '../api.utils';
 
 // Gets a list of MatchResults
 export function index(req, res) {

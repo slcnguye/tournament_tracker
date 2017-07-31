@@ -51,7 +51,6 @@ describe('Player API:', function() {
     it('should respond with the newly created player', function() {
       newPlayer.name.should.equal('New Player');
     });
-
   });
 
   describe('GET /api/players/:id', function() {

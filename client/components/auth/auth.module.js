@@ -18,19 +18,19 @@ import {
 } from './user.service';
 import {
   TournamentResource
-} from './tournament.service'
+} from './tournament.service';
 import {
   TournamentPlayerResource
-} from './tournament-player.service'
+} from './tournament-player.service';
 import {
   PlayerResource
-} from './player.service'
+} from './player.service';
 import {
   MatchResource
-} from './match.service'
+} from './match.service';
 import {
   MatchResultResource
-} from './match-result.service'
+} from './match-result.service';
 
 import uiRouter from 'angular-ui-router';
 

@@ -16,14 +16,14 @@ export class NewTournamentComponent {
     };
   }
 
-  createTournament(tournament) {
+  createTournament() {
     this.Tournament.create(this.tournament).$promise
-      .then((tournament) => {
+      .then(tournament => {
         this.$state.go('add-player', { tournamentId: tournament._id });
       })
       .catch(err => {
         this.errors = err.data.message;
-    });
+      });
   }
 }
 

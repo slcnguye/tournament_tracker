@@ -10,8 +10,8 @@
 
 'use strict';
 
-import {Tournament, TournamentPlayer, Player} from '../../sqldb';
-import apiutils from '../api.utils'
+import {Tournament} from '../../sqldb';
+import apiutils from '../api.utils';
 
 // Gets a list of Tournaments
 export function index(req, res) {

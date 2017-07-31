@@ -51,7 +51,6 @@ describe('TournamentPlayer API:', function() {
     it('should respond with the newly created tournamentPlayer', function() {
       newTournamentPlayer.name.should.equal('New TournamentPlayer');
     });
-
   });
 
   describe('GET /api/tournament-players/:id', function() {

@@ -1,34 +1,24 @@
 'use strict';
 
-import jsonpatch from 'fast-json-patch';
 import _ from 'lodash';
 
 let apiutils = {};
 
-  apiutils.respondWithResult = function(res, statusCode) {
-      statusCode = statusCode || 200;
-      return function(entity) {
-        if(entity) {
-          return res.status(statusCode).json(entity);
-        }
-        return null;
-      };
-    };
+apiutils.respondWithResult = function(res, statusCode) {
+  statusCode = statusCode || 200;
+  return function(entity) {
+    if(entity) {
+      return res.status(statusCode).json(entity);
+    }
+    return null;
+  };
+};
 
 apiutils.patchUpdates = function(patches) {
   return function(entity) {
     _.each(patches, (value, key) => {
       entity[key] = value;
     });
-    // try {
-    //   jsonpatch.applyPatch(entity, patches, /*validate*/ true);
-    // } catch(err) {
-    //   return Promise.reject(err);
-    // }
-    // eslint-disable-next-line prefer-reflect
-    console.log(entity);
-    console.log(patches);
-
     return entity.save();
   };
 };

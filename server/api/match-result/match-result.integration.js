@@ -51,7 +51,6 @@ describe('MatchResult API:', function() {
     it('should respond with the newly created matchResult', function() {
       newMatchResult.name.should.equal('New MatchResult');
     });
-
   });
 
   describe('GET /api/match-results/:id', function() {
