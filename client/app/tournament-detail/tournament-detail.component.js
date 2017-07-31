@@ -124,7 +124,7 @@ export class TournamentDetailComponent {
     if (this.tournament.scoreType == "3PW") {
       return 3;
     } else if (this.tournament.scoreType == "ELO" && winner && winner.score && loser && loser.score) {
-      const k = 16;
+      const k = 32;
       const eloDifference = loser.score - winner.score;
       const percentage = 1 / ( 1 + Math.pow(10, eloDifference / 400) );
 
@@ -139,7 +139,7 @@ export class TournamentDetailComponent {
     if (this.tournament.scoreType == "3PW") {
       return 0;
     } else if (this.tournament.scoreType == "ELO" && winner && winner.score && loser && loser.score) {
-      const k = 16;
+      const k = 32;
       const eloDifference = winner.score - loser.score;
       const percentage = 1 / ( 1 + Math.pow(10, eloDifference / 400) );
 
