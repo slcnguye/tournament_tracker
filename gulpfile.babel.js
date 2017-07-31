@@ -544,7 +544,8 @@ gulp.task('copy:assets', () => {
 
 gulp.task('copy:server', () => {
     return gulp.src([
-        'package.json'
+        'package.json',
+        'manifest.yml'
     ], {cwdbase: true})
         .pipe(gulp.dest(paths.dist));
 });
