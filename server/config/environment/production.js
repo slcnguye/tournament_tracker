@@ -14,15 +14,8 @@ module.exports = {
     || process.env.PORT
     || 8080,
 
+  // Sequelize connection options
   sequelize: {
-    uri: process.env.SEQUELIZE_URI
-      || 'sqlite://',
-    options: {
-      logging: false,
-      storage: 'dist.sqlite',
-      define: {
-        timestamps: false
-      }
-    }
+    uri: process.env.VCAP_SERVICES.mysql.credentials.uri
   }
 };

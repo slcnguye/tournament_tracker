@@ -1,0 +1,7 @@
+---
+applications:
+- name: mtg-tournament-tracker
+  memory: 64M
+  command: gulp serve:dist
+  services:
+    - mtg-tournament-tracker-db

@@ -9,11 +9,7 @@ module.exports = {
   sequelize: {
     uri: 'mariadb://tournament_tracker:Admin1!@localhost:3306/tournament_tracker',
     options: {
-      logging: false,
-      storage: 'dev.sqlite',
-      define: {
-        timestamps: false
-      }
+      logging: console.log,
     }
   },
 
