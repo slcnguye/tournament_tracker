@@ -48,18 +48,6 @@ export class TournamentDetailComponent {
       _.each(this.tournamentPlayers, tournamentPlayer => {
         this.tournamentPlayersById[tournamentPlayer._id] = tournamentPlayer;
       });
-
-      this.matchDetails = [];
-      _.each(this.matches, match => {
-        this.MatchResult.query({matchId: match._id}).$promise
-          .then(matchResults => {
-            const matchDetail = angular.copy(match);
-            const result1IsWinner = matchResults[0].scoreDelta > matchResults[1].scoreDelta;
-            matchDetail.player1 = result1IsWinner ? matchResults[0] : matchResults[1];
-            matchDetail.player2 = result1IsWinner ? matchResults[1] : matchResults[0];
-            this.matchDetails.push(matchDetail);
-          });
-      });
     });
   }
 
@@ -99,10 +87,10 @@ export class TournamentDetailComponent {
           this.TournamentPlayer.patch({id: updatedWinner._id, score: updatedWinner.score}).$promise,
           this.TournamentPlayer.patch({id: updatedLoser._id, score: updatedLoser.score}).$promise
         ]).then(matchResults => {
-          const matchDetail = angular.copy(savedMatch);
-          matchDetail.player1 = matchResults[0];
-          matchDetail.player2 = matchResults[1];
-          this.matchDetails.push(matchDetail);
+          savedMatch['match-results'] = [];
+          savedMatch['match-results'].push(matchResults[0]);
+          savedMatch['match-results'].push(matchResults[1]);
+          this.matches.push(savedMatch);
         });
       });
 

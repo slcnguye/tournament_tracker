@@ -19,7 +19,10 @@ export function index(req, res) {
     where: {
       tournamentId: req.query.tournamentId
     },
-    include: [MatchResult]
+    include: [MatchResult],
+    order: [
+      [MatchResult, 'scoreDelta', 'DESC']
+    ]
   })
     .then(apiutils.respondWithResult(res))
     .catch(apiutils.handleError(res));
