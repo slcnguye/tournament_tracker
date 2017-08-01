@@ -19,7 +19,9 @@ This project was generated with the [Angular Full-Stack Generator](https://githu
 
 ## Build & development
 
-Run `gulp build` for building and `gulp serve` for preview.
+1. Run `gulp build` for building and `gulp serve` for preview.
+
+2. Run `cf push mtg-tournament-tracker` to push to PCF.
 
 ## Testing
 
