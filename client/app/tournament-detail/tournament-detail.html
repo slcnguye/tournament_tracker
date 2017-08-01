@@ -1,9 +1,8 @@
 <div id="tournament-detail" class="container">
-  <h2 ng-if="$ctrl.tournament">
-    <span ng-bind="$ctrl.tournament.name"></span>
-    <span>-</span>
-    <span ng-bind="$ctrl.tournament.scoreType"></span>
-  </h2>
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a ui-sref="tournament">Tournaments</a></li>
+    <li class="breadcrumb-item active" ng-bind="$ctrl.tournament.name"></li>
+  </ol>
 
   <div class="panel panel-default">
     <div class="panel-heading action-heading">

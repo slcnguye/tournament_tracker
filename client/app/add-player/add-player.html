@@ -1,10 +1,14 @@
 <div class="container">
-  <h2 ng-if="$ctrl.tournament">
-    <span ng-bind="$ctrl.tournament.name"></span>
-    <span>-</span>
-    <span ng-bind="$ctrl.tournament.scoreType"></span>
-  </h2>
-  <h3>Players</h3>
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item">
+      <a ui-sref="tournament">Tournaments</a>
+    </li>
+    <li class="breadcrumb-item">
+      <a ui-sref="tournament-detail({tournamentId: $ctrl.tournament._id})" ng-bind="$ctrl.tournament.name"></a>
+    </li>
+    <li class="breadcrumb-item active">Players</li>
+  </ol>
+
   <input type="text" ng-model="$ctrl.playerNameToAdd" class="form-control"
          uib-typeahead="player.name for player in $ctrl.players | filter:$viewValue | limitTo:8"
          ng-enter="$ctrl.addPlayer()" placeholder="Add new player...">
