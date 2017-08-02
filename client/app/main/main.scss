@@ -66,15 +66,15 @@
     padding: 20px 10px;
   }
 
-  .active-stats {
+  .active-stats-bg {
     background: url("../assets/images/mtg_mage.png");
     background-size: cover;
     display: flex;
   }
 
-  .test {
+  .active-stats {
     background: linear-gradient(#5196c6, #9e3656);
-    opacity: 0.85;
+    opacity: 0.90;
     flex: 1;
   }
 }
