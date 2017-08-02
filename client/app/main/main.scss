@@ -1,27 +1,80 @@
-.thing-form {
-  margin: 20px 0;
-}
+#main {
+  background: linear-gradient(to bottom right, $ssk-dark-gray, $ssk-gray) no-repeat;
+  //background: url("../assets/images/mtg_background2.jpg") top no-repeat, linear-gradient(to bottom right, $ssk-dark-gray, $ssk-gray) bottom no-repeat;
+  //background-size: 100% 50%, 100%;
+  height: 100%;
 
-#banner {
-  border-bottom: none;
-  margin-top: -20px;
-}
+  .content {
+    height: 100%;
+    display: flex;
+    flex-direction: column-reverse;
+  }
 
-#banner h1 {
-  font-size: 60px;
-  line-height: 1;
-  letter-spacing: -1px;
-}
+  .content-body {
+    display: flex;
+    flex: 0.85;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom: 75px;
+    margin-top: 75px;
 
-.hero-unit {
-  position: relative;
-  padding: 30px 15px;
-  color: #F5F5F5;
-  text-align: center;
-  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
-  background: #4393B9;
-}
+    color: white;
+  }
 
-.navbar-text {
-  margin-left: 15px;
+  .active-tournaments {
+    background-color: $ssk-blue;
+    height: 33.3333333%;
+    padding: 20px 10px;
+  }
+
+  .tournament-row {
+    padding-top: 20px;
+    display: flex;
+    height: calc( 100% - 20px );
+  }
+
+  .tournament-box {
+    flex: 1;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
+  }
+
+  .tournament-box + .tournament-box {
+    border-left: 1px $ssk-gray solid;
+  }
+
+  .tournament {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .selected-tournament {
+    margin-bottom: -3px;
+    border-bottom: 3px $ssk-red solid;
+  }
+
+  .active-matches {
+    background-color: $ssk-dark-blue;
+    height: 66.6666666%;
+    padding: 20px 10px;
+  }
+
+  .active-stats {
+    background: url("../assets/images/mtg_mage.png");
+    background-size: cover;
+    display: flex;
+  }
+
+  .test {
+    background: linear-gradient(#5196c6, #9e3656);
+    opacity: 0.85;
+    flex: 1;
+  }
 }

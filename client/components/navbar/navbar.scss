@@ -1,0 +1,15 @@
+#navbar {
+  background-color: $ssk-red;
+  margin-bottom: 0;
+
+  .magic-logo {
+    height: 100px;
+    width: 100px;
+    margin-top: 20px;
+    position: absolute;
+  }
+
+  .navbar-brand {
+    color: white;
+  }
+}

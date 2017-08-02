@@ -16,6 +16,45 @@ $fa-font-path: '/assets/fonts/font-awesome/';
   padding: 0.2em 0;
 }
 
+// Sang's Style Kit
+
+.padding {
+  padding: 10px;
+}
+
+.cursor {
+  cursor: pointer;
+}
+
+.btn-circle {
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  padding: 6px 0;
+  font-size: 12px;
+  line-height: 1.428571429;
+  border-radius: 15px;
+}
+
+.ssk-btn-transparent {
+  color: white;
+  background-color: inherit;
+  border: 2px #ccc solid;
+}
+
+// Button Links
+.ssk-link {
+  color: inherit;
+  text-decoration: underline;
+}
+
+// Color
+$ssk-red: #c83738;
+$ssk-blue: #152339;
+$ssk-dark-blue: #121721;
+$ssk-dark-gray: #29313E;
+$ssk-gray: #313A49;
+
 // Component styles are injected through gulp
 /* inject:scss */
 @import 'add-player/add-player';
@@ -26,4 +65,5 @@ $fa-font-path: '/assets/fonts/font-awesome/';
 @import 'tournament/tournament';
 @import '../components/footer/footer';
 @import '../components/modal/modal';
+@import '../components/navbar/navbar';
 /* endinject */

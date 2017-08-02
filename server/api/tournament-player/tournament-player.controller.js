@@ -16,11 +16,13 @@ import apiutils from '../api.utils';
 
 // Gets a list of TournamentPlayers
 export function index(req, res) {
-  return TournamentPlayer.findAll({
-    where: {
-      tournamentId: req.query.tournamentId
-    }
-  })
+  const query = {
+    where: {}
+  };
+  if (req.query.tournamentId) {
+    query.where.tournamentId = req.query.tournamentId;
+  }
+  return TournamentPlayer.findAll(query)
     .then(apiutils.respondWithResult(res))
     .catch(apiutils.handleError(res));
 }

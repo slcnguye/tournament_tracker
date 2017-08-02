@@ -1,6 +1,36 @@
-<header class="hero-unit" id="banner">
-  <div class="container">
-    <h1>Active Tournaments</h1>
-    <p class="lead">Recent tournament standings</p>
+<div id="main">
+  <div class="content">
+    <div class="content-body">
+      <div style="flex: 2; background-color: white">
+        <div class="active-tournaments">
+          <div>
+            <span>Active Tournaments</span>
+            <div class="pull-right">
+              <a class="ssk-link small" ui-sref="tournament">All Tournaments</a>
+            </div>
+          </div>
+          <div class="tournament-row">
+            <div class="tournament-box lead padding cursor"
+                 ng-repeat="activeTournament in $ctrl.activeTournaments"
+                 ng-click="$ctrl.setSelectedTournament(activeTournament)">
+              <div class="tournament" ng-class="{'selected-tournament': $ctrl.selectedTournamentId === activeTournament._id}"
+                   ng-bind="activeTournament.name"></div>
+            </div>
+            <div class="tournament-box">
+              <a class="ssk-link" ui-sref="new-tournament">
+                <btn class="btn btn-circle ssk-btn-transparent">
+                  <i class="fa fa-plus" aria-hidden="true"></i>
+                </btn>
+                <div class="small">Create New</div>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="active-matches"></div>
+      </div>
+      <div class="active-stats" style="flex: 1; background-color: white">
+        <div class="test"></div>
+      </div>
+    </div>
   </div>
-</header>
+</div>
