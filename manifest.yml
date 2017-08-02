@@ -1,7 +1,7 @@
 ---
 applications:
 - name: mtg-tournament-tracker
-  memory: 512M
+  memory: 64M
   command: NODE_ENV=production node ./server
   services:
     - mtg-tournament-tracker-db
