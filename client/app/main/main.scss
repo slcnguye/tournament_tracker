@@ -64,6 +64,11 @@
     background-color: $ssk-dark-blue;
     height: 66.6666666%;
     padding: 20px 10px;
+    overflow: hidden;
+  }
+
+  .active-match-action-bar {
+    padding-bottom: 40px;
   }
 
   .active-stats-bg {

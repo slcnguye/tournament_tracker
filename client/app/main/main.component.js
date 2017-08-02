@@ -5,12 +5,14 @@ import _ from 'lodash';
 
 export class MainController {
 
-  constructor($q, TournamentPlayer, Tournament) {
+  constructor($q, TournamentPlayer, Player, Tournament, Match) {
     'ngInject';
 
     this.$q = $q;
+    this.Player = Player;
     this.TournamentPlayer = TournamentPlayer;
     this.Tournament = Tournament;
+    this.Match = Match;
   }
 
   $onInit() {
@@ -43,6 +45,27 @@ export class MainController {
 
   setSelectedTournament(tournament) {
     this.selectedTournamentId = tournament._id;
+    this.$q.all([
+      this.TournamentPlayer.query({tournamentId: this.selectedTournamentId}).$promise,
+      this.Match.query({tournamentId: this.selectedTournamentId}).$promise,
+      this.Player.query().$promise
+    ]).then(response => {
+        const tournamentPlayers = response[0];
+        this.matches = response[1];
+        this.players = response[2];
+
+        this.tournamentPlayers = _.map(tournamentPlayers, tournamentPlayer => {
+          const player = angular.copy(tournamentPlayer);
+          player.name = _.find(this.players, {_id: player.playerId}).name;
+          player.score = player.score || 0;
+          return player;
+        });
+
+        this.tournamentPlayersById = {};
+        _.each(this.tournamentPlayers, tournamentPlayer => {
+          this.tournamentPlayersById[tournamentPlayer._id] = tournamentPlayer;
+        });
+      });
   }
 }
 
