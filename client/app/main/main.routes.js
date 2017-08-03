@@ -5,6 +5,6 @@ export default function routes($stateProvider) {
 
   $stateProvider.state('main', {
     url: '/',
-    template: '<main></main>'
+    template: '<main style="height: 100%"></main>'
   });
 }

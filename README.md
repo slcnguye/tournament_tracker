@@ -17,6 +17,8 @@ This project was generated with the [Angular Full-Stack Generator](https://githu
 
 2. Run `gulp serve` to start the development server. It should automatically open the client in your browser when ready.
 
+3. Run `gulp lint:scripts` and fix eslint errors before merges into master.
+
 ## Build & development
 
 1. Run `gulp build` for building and `gulp serve` for preview.
@@ -26,3 +28,7 @@ This project was generated with the [Angular Full-Stack Generator](https://githu
 ## Testing
 
 Running `npm test` will run the unit tests with karma.
+
+## PCF Commands
+
+1. `cf set-env my-app OPTIMIZE_MEMORY true`
