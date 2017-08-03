@@ -23,14 +23,14 @@ export class MainController {
 
         // Find most recent matches for each tournament
         const recentMatches = [];
-        _.each(tournamentPlayersByTournament, (players) => {
+        _.each(tournamentPlayersByTournament, players => {
           recentMatches.push(_.first(_.orderBy(players, ['updatedAt'], ['desc'])));
         });
 
         const orderedRecentMatches = _.orderBy(recentMatches, ['updatedAt'], ['desc']);
         const numTournamentsToDisplay = orderedRecentMatches.length > 3 ? 3 : orderedRecentMatches.length;
         const getTournamentsDeferred = [];
-        for (let i = 0; i < numTournamentsToDisplay; ++i) {
+        for(let i = 0; i < numTournamentsToDisplay; ++i) {
           const tournamentId = orderedRecentMatches[i].tournamentId;
           getTournamentsDeferred.push(this.Tournament.get({ id: tournamentId }).$promise);
         }
@@ -50,23 +50,23 @@ export class MainController {
       this.Match.query({tournamentId: this.selectedTournamentId}).$promise,
       this.Player.query().$promise
     ]).then(response => {
-        const tournamentPlayers = _.orderBy(response[0], ['score'], ['desc']);
-        this.matches = response[1];
-        this.players = response[2];
+      const tournamentPlayers = _.orderBy(response[0], ['score'], ['desc']);
+      this.matches = response[1];
+      this.players = response[2];
 
-        this.tournamentPlayers = _.map(tournamentPlayers, (tournamentPlayer, index) => {
-          const player = angular.copy(tournamentPlayer);
-          player.name = _.find(this.players, {_id: player.playerId}).name;
-          player.score = player.score || 0;
-          player.rank = index + 1;
-          return player;
-        });
-
-        this.tournamentPlayersById = {};
-        _.each(this.tournamentPlayers, tournamentPlayer => {
-          this.tournamentPlayersById[tournamentPlayer._id] = tournamentPlayer;
-        });
+      this.tournamentPlayers = _.map(tournamentPlayers, (tournamentPlayer, index) => {
+        const player = angular.copy(tournamentPlayer);
+        player.name = _.find(this.players, {_id: player.playerId}).name;
+        player.score = player.score || 0;
+        player.rank = index + 1;
+        return player;
       });
+
+      this.tournamentPlayersById = {};
+      _.each(this.tournamentPlayers, tournamentPlayer => {
+        this.tournamentPlayersById[tournamentPlayer._id] = tournamentPlayer;
+      });
+    });
   }
 
   getAvatar(playerId) {
@@ -74,7 +74,7 @@ export class MainController {
       background: `url(../assets/images/profile_images/${playerId % 10 + 1}.jpg)`,
       'background-size': 'cover',
       'background-clip': 'content-box'
-  };
+    };
   }
 }
 

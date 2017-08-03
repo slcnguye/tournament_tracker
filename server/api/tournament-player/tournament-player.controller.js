@@ -19,7 +19,7 @@ export function index(req, res) {
   const query = {
     where: {}
   };
-  if (req.query.tournamentId) {
+  if(req.query.tournamentId) {
     query.where.tournamentId = req.query.tournamentId;
   }
   return TournamentPlayer.findAll(query)
