@@ -1,5 +1,4 @@
 #main {
-  background: linear-gradient(to bottom right, $ssk-dark-gray, $ssk-gray) no-repeat;
   //background: url("../assets/images/mtg_background2.jpg") top no-repeat, linear-gradient(to bottom right, $ssk-dark-gray, $ssk-gray) bottom no-repeat;
   //background-size: 100% 50%, 100%;
   height: 100%;
@@ -25,7 +24,7 @@
   .active-tournaments {
     background-color: $ssk-blue;
     height: 33.3333333%;
-    padding: 20px 10px;
+    padding: 20px;
   }
 
   .tournament-row {
@@ -63,8 +62,14 @@
   .active-matches {
     background-color: $ssk-dark-blue;
     height: 66.6666666%;
-    padding: 20px 10px;
+    padding: 20px;
     overflow: hidden;
+  }
+
+  .match-table>tbody>tr>td {
+    border: none;
+    border-bottom: 2px $ssk-gray solid;
+    padding: 15px;
   }
 
   .active-match-action-bar {
@@ -75,11 +80,64 @@
     background: url("../assets/images/mtg_mage.png");
     background-size: cover;
     display: flex;
+    flex: 1;
   }
 
   .active-stats {
-    background: linear-gradient(#5196c6, #9e3656);
+    background: linear-gradient($ssk-light-blue, $ssk-purple);
     opacity: 0.90;
     flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .active-stats-top-players {
+    flex: 2;
+    padding: 20px;
+  }
+
+  .player-info {
+    display: flex;
+  }
+
+  .player-info>* {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .score {
+    flex: 1;
+    justify-content: flex-end;
+  }
+
+  .rank-indicator {
+    background: url("../assets/images/d20.png");
+    height: 40px;
+    width: 40px;
+    background-size: cover;
+    margin-top: 10px;
+  }
+
+  .profile-image {
+    height: 60px;
+    width: 60px;
+    border-radius: 50%;
+    border: 2px solid $ssk-gray;
+    background-clip: content-box;
+    margin: 0 auto;
+    padding: 3px;
+  }
+
+  .active-stats-player-of-week {
+    flex: 1;
+    background: linear-gradient($ssk-light-purple, $ssk-purple);
+    padding: 20px;
+  }
+
+  .active-stats-players {
+    flex: 1;
+    padding: 20px;
   }
 }

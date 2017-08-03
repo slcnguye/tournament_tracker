@@ -3,23 +3,26 @@
     <li class="breadcrumb-item active">Tournaments</li>
   </ol>
 
-  <a class="btn btn-default pull-right" ui-sref="new-tournament">Create Tournament</a>
-
-  <table class="table">
-    <thead>
-    <th>Name</th>
-    <th>Score Type</th>
-    <th>Date</th>
-    <!--<th>Completed</th>-->
-    </thead>
-    <tbody>
-    <tr ng-repeat="tournament in $ctrl.tournaments"
-        ui-sref="tournament-detail({ tournamentId: tournament._id })" class="tournament-row">
-      <td ng-bind="tournament.name"></td>
-      <td ng-bind="tournament.scoreType"></td>
-      <td ng-bind="tournament.createdAt | date:'mediumDate'"></td>
-      <!--<td ng-bind="tournament.completed"></td>-->
-    </tr>
-    </tbody>
-  </table>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <a class="btn btn-default" ui-sref="new-tournament">Create Tournament</a>
+    </div>
+    <table class="table">
+      <thead>
+      <th>Name</th>
+      <th>Score Type</th>
+      <th>Date</th>
+      <!--<th>Completed</th>-->
+      </thead>
+      <tbody>
+      <tr ng-repeat="tournament in $ctrl.tournaments"
+          ui-sref="tournament-detail({ tournamentId: tournament._id })" class="tournament-row">
+        <td ng-bind="tournament.name"></td>
+        <td ng-bind="tournament.scoreType"></td>
+        <td ng-bind="tournament.createdAt | date:'mediumDate'"></td>
+        <!--<td ng-bind="tournament.completed"></td>-->
+      </tr>
+      </tbody>
+    </table>
+  </div>
 </div>

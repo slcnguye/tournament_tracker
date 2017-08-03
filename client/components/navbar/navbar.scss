@@ -2,11 +2,17 @@
   background-color: $ssk-red;
   margin-bottom: 0;
 
-  .magic-logo {
+  .magic-dashboard-logo {
     height: 100px;
     width: 100px;
     margin-top: 20px;
     position: absolute;
+  }
+
+  .magic-logo {
+    margin-top: 5px;
+    height: 40px;
+    width: 40px;
   }
 
   .navbar-brand {

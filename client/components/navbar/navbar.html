@@ -3,12 +3,15 @@
     <!--<div class="navbar-header">-->
     <!--</div>-->
     <div id="navbar-main">
-      <img class="magic-logo" src="assets/images/magic_logo.png">
-      <!--<ul class="nav navbar-nav">-->
+      <img ng-if="$ctrl.isDashboard()" class="magic-dashboard-logo" src="assets/images/magic_logo.png">
+      <ul class="nav navbar-nav">
+        <a href="/">
+          <img ng-if="!$ctrl.isDashboard()" class="magic-logo" src="assets/images/magic_logo.png">
+        </a>
         <!--<li>-->
           <!--<a ui-sref="tournament">Tournaments</a>-->
         <!--</li>-->
-      <!--</ul>-->
+      </ul>
       <ul class="nav navbar-nav navbar-right">
         <a href="/" class="navbar-brand">Tournament Tracker</a>
       </ul>
