@@ -65,7 +65,7 @@
             <div class="padding-bottom">
               <span class="lead">Top Players</span>
               <div class="pull-right">
-                <a class="ssk-link small" ui-sref="tournament-detail({tournamentId: $ctrl.selectedTournamentId})">Add Rankings</a>
+                <a class="ssk-link small" ui-sref="tournament-detail({tournamentId: $ctrl.selectedTournamentId})">All Rankings</a>
               </div>
             </div>
             <div class="player-info padding-bottom" ng-repeat="tournamentPlayer in $ctrl.tournamentPlayers | limitTo: 3 track by tournamentPlayer._id">
