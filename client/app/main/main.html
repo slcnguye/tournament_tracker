@@ -4,13 +4,13 @@
       <div style="flex: 2; background-color: white">
         <div class="active-tournaments">
           <div>
-            <span class="lead">Active Tournaments</span>
+            <span class="ssk-text-large">Active Tournaments</span>
             <div class="pull-right">
               <a class="ssk-link small" ui-sref="tournament">All Tournaments</a>
             </div>
           </div>
           <div class="tournament-row">
-            <div class="tournament-box lead padding cursor"
+            <div class="tournament-box ssk-text-large padding cursor"
                  ng-repeat="activeTournament in $ctrl.activeTournaments"
                  ng-click="$ctrl.setSelectedTournament(activeTournament)">
               <div class="tournament" ng-class="{'selected-tournament': $ctrl.selectedTournamentId === activeTournament._id}"
@@ -28,12 +28,12 @@
         </div>
         <div class="active-matches">
           <div class="active-match-action-bar">
-            <span class="lead">Matches</span>
+            <span class="ssk-text-large">Matches</span>
             <div class="pull-right">
               <a class="ssk-link small" ui-sref="tournament-detail({tournamentId: $ctrl.selectedTournamentId})">All Matches</a>
             </div>
           </div>
-          <table class="table match-table">
+          <table class="table ssk-table">
             <tbody>
             <tr ng-if="$ctrl.matches.length === 0">
               <td colspan="100%">
@@ -49,7 +49,7 @@
               </td>
               <td>
                 <strong>
-                  + <span ng-bind="match['match-results'][0].scoreDelta"></span>
+                  +<span ng-bind="match['match-results'][0].scoreDelta"></span>
                 </strong>
               </td>
               <td><span ng-bind="match['match-results'][1].scoreDelta"></span></td>
@@ -59,39 +59,39 @@
           </table>
         </div>
       </div>
-      <div class="active-stats-bg">
+      <div class="active-stats-bg hidden-xs hidden-sm">
         <div class="active-stats">
           <div class="active-stats-top-players">
             <div class="padding-bottom">
-              <span class="lead">Top Players</span>
+              <span class="ssk-text-large">Top Players</span>
               <div class="pull-right">
                 <a class="ssk-link small" ui-sref="tournament-detail({tournamentId: $ctrl.selectedTournamentId})">All Rankings</a>
               </div>
             </div>
             <div class="player-info padding-bottom" ng-repeat="tournamentPlayer in $ctrl.tournamentPlayers | limitTo: 3 track by tournamentPlayer._id">
-              <div class="rank-indicator lead no-margin" ng-bind="tournamentPlayer.rank"></div>
+              <div class="rank-indicator ssk-text-large" ng-bind="tournamentPlayer.rank"></div>
               <div class="padding-left padding-right">
                 <div class="profile-image" ng-style="$ctrl.getAvatar(tournamentPlayer.playerId)"></div>
               </div>
-              <div class="lead no-margin" ng-bind="tournamentPlayer.name"></div>
-              <div class="score padding-right lead no-margin" ng-bind="tournamentPlayer.score"></div>
+              <div class="ssk-text-large" ng-bind="tournamentPlayer.name"></div>
+              <div class="score padding-right ssk-text-large" ng-bind="tournamentPlayer.score"></div>
             </div>
           </div>
           <div class="active-stats-player-of-week">
             <div class="padding-bottom">
-              <span class="lead">Player of the week</span>
+              <span class="ssk-text-large">Player of the week</span>
             </div>
             <div class="player-info" ng-repeat="tournamentPlayer in $ctrl.tournamentPlayers | orderBy:'updatedAt':true | limitTo: 1 track by tournamentPlayer._id">
-              <div class="rank-indicator lead no-margin" ng-bind="tournamentPlayer.rank"></div>
+              <div class="rank-indicator ssk-text-large" ng-bind="tournamentPlayer.rank"></div>
               <div class="padding-left padding-right profile-display">
                 <div class="profile-image" ng-style="$ctrl.getAvatar(tournamentPlayer.playerId)"></div>
               </div>
-              <div class="lead no-margin" ng-bind="tournamentPlayer.name"></div>
-              <div class="score padding-right lead no-margin" ng-bind="tournamentPlayer.score"></div>
+              <div class="ssk-text-large" ng-bind="tournamentPlayer.name"></div>
+              <div class="score padding-right ssk-text-large" ng-bind="tournamentPlayer.score"></div>
             </div>
           </div>
           <div class="active-stats-players">
-            <span class="lead">Total Players</span>
+            <span class="ssk-text-large">Total Players</span>
             <div class="pull-right">
               <a class="ssk-link small" ui-sref="add-player({tournamentId: $ctrl.selectedTournamentId})">Add Player</a>
             </div>

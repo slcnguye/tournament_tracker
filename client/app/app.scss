@@ -7,6 +7,18 @@ $fa-font-path: '/assets/fonts/font-awesome/';
 
 // Sang's Style Kit
 
+// Color
+$ssk-red: #c83738;
+$ssk-blue: #152339;
+$ssk-dark-blue: #181F2E;
+$ssk-dark-gray: #29313E;
+$ssk-gray: #3F4C61;
+$ssk-light-blue: #5196c6;
+$ssk-light-purple: #834b6c;
+$ssk-purple: #9e3656;
+
+$ssk-font-color: white;
+
 .padding {
   padding: 10px;
 }
@@ -46,30 +58,86 @@ $fa-font-path: '/assets/fonts/font-awesome/';
 }
 
 .ssk-btn-transparent {
-  color: white;
+  color: $ssk-font-color;
   background-color: inherit;
   border: 2px #ccc solid;
 }
 
-// Button Links
+// Typography
+.ssk-text-large {
+  font-size: 150%;
+}
+
+// Flex
+.ssk-flex-end {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.ssk-flex-space-between {
+  display: flex;
+  justify-content: space-between;
+}
+
+// Button
+.ssk-btn-primary {
+  color: $ssk-font-color;
+  background-color: $ssk-light-blue;
+  border-color: $ssk-light-blue;
+}
+
 .ssk-link {
-  color: inherit;
+  color: $ssk-font-color;
   text-decoration: underline;
 }
 
-// Color
-$ssk-red: #c83738;
-$ssk-blue: #152339;
-$ssk-dark-blue: #181F2E;
-$ssk-dark-gray: #29313E;
-$ssk-gray: #3F4C61;
-$ssk-light-blue: #5196c6;
-$ssk-light-purple: #834b6c;
-$ssk-purple: #9e3656;
+// Panel
+.ssk-panel {
+  color: white;
+  background-color: $ssk-dark-blue;
+}
 
-/**
- * App-wide Styles
- */
+// Tables
+.ssk-table {
+  margin: 0;
+}
+
+.ssk-table>thead>tr>th {
+  border-bottom: 0;
+  padding: 8px 15px;
+}
+
+.ssk-table>tbody>tr>td {
+  border: none;
+  border-bottom: 2px $ssk-gray solid;
+  padding: 15px;
+}
+
+.ssk-table>tbody>tr:last-child>td {
+  border: none;
+}
+
+// Breadcrumbs
+.ssk-breadcrumb {
+  margin: 30px 0;
+  background-color: inherit;
+  padding: 0;
+  color: $ssk-font-color;
+}
+
+.ssk-breadcrumb>.active {
+  color: $ssk-font-color;
+}
+
+.ssk-breadcrumb>li+li:before {
+  content: ">";
+  padding: 0 30px;
+  color: $ssk-font-color;
+}
+
+  /**
+   * App-wide Styles
+   */
 
 .browserupgrade {
   margin: 0.2em 0;
@@ -79,7 +147,8 @@ $ssk-purple: #9e3656;
 }
 
 body {
-  background: linear-gradient(to bottom right, $ssk-dark-gray, $ssk-gray) no-repeat;
+  background: url('../assets/images/Magic-BG2.png');
+  color: $ssk-font-color;
 }
 
 // Component styles are injected through gulp
