@@ -172,7 +172,8 @@ $ssk-font-color: white;
 }
 
 body {
-  background: url('../assets/images/Magic-BG2.png');
+  background: url('../assets/images/Magic-BG2.png') no-repeat;
+  background-size: cover;
   color: $ssk-font-color;
   font-family: TheSans;
 }

@@ -68,7 +68,7 @@
     background-color: $ssk-dark-blue;
     height: 66.6666666%;
     padding: 20px;
-    overflow: scroll;
+    overflow: auto;
   }
 
   .active-match-action-bar {
@@ -88,7 +88,7 @@
     flex: 1;
     display: flex;
     flex-direction: column;
-    overflow: scroll;
+    overflow: auto;
   }
 
   .active-stats-top-players {
