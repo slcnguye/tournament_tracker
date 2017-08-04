@@ -7,6 +7,27 @@ $fa-font-path: '/assets/fonts/font-awesome/';
 
 // Sang's Style Kit
 
+@font-face {
+  font-family: 'TheSans';
+  src: url('../assets/fonts/TheSans/thesans-2-xlight-webfont.woff') format('woff');
+  font-weight: 100;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: TheSans;
+  src: url('../assets/fonts/TheSans/thesans-5-regular-webfont.woff') format('woff');
+  //font-weight: normal;
+  //font-style: normal;
+}
+
+@font-face {
+  font-family: 'TheSans';
+  src: url('../assets/fonts/TheSans/thesans-7-bold-webfont.woff') format('woff');
+  font-weight: bold;
+  font-style: normal;
+}
+
 // Color
 $ssk-red: #c83738;
 $ssk-blue: #152339;
@@ -66,6 +87,10 @@ $ssk-font-color: white;
 // Typography
 .ssk-text-large {
   font-size: 150%;
+}
+
+.ssk-text-light {
+  font-weight: 100;
 }
 
 // Flex
@@ -149,6 +174,7 @@ $ssk-font-color: white;
 body {
   background: url('../assets/images/Magic-BG2.png');
   color: $ssk-font-color;
+  font-family: TheSans;
 }
 
 // Component styles are injected through gulp

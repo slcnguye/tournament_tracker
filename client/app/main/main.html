@@ -13,7 +13,7 @@
             <div class="tournament-box ssk-text-large padding cursor"
                  ng-repeat="activeTournament in $ctrl.activeTournaments"
                  ng-click="$ctrl.setSelectedTournament(activeTournament)">
-              <div class="tournament" ng-class="{'selected-tournament': $ctrl.selectedTournamentId === activeTournament._id}"
+              <div class="tournament ssk-text-light" ng-class="{'selected-tournament': $ctrl.selectedTournamentId === activeTournament._id}"
                    ng-bind="activeTournament.name"></div>
             </div>
             <div class="tournament-box">
@@ -44,8 +44,8 @@
               <td>
                 <i class="fa fa-lg fa-trophy padding-right padding-left" aria-hidden="true"></i>
                 <strong ng-bind="$ctrl.tournamentPlayersById[match['match-results'][0].tournamentPlayerId].name"></strong>
-                <span>vs.</span>
-                <span ng-bind="$ctrl.tournamentPlayersById[match['match-results'][1].tournamentPlayerId].name"></span>
+                <span class="ssk-text-light">vs.</span>
+                <span class="ssk-text-light" ng-bind="$ctrl.tournamentPlayersById[match['match-results'][1].tournamentPlayerId].name"></span>
               </td>
               <td>
                 <strong>
@@ -53,7 +53,7 @@
                 </strong>
               </td>
               <td><span ng-bind="match['match-results'][1].scoreDelta"></span></td>
-              <td ng-bind="match.createdAt | date:'mediumDate'"></td>
+              <td class="ssk-text-light" ng-bind="match.createdAt | date:'mediumDate'"></td>
             </tr>
             </tbody>
           </table>
@@ -95,7 +95,7 @@
             <div class="pull-right">
               <a class="ssk-link small" ui-sref="add-player({tournamentId: $ctrl.selectedTournamentId})">Add Player</a>
             </div>
-            <h1 class="text-large" ng-bind="$ctrl.tournamentPlayers.length"></h1>
+            <div class="num-players ssk-text-light" ng-bind="$ctrl.tournamentPlayers.length"></div>
           </div>
         </div>
       </div>
