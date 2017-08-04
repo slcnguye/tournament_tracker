@@ -1,6 +1,6 @@
 <div class="container">
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item active">Tournaments</li>
+  <ol class="breadcrumb ssk-breadcrumb">
+    <li class="breadcrumb-item"><a class="ssk-link" ui-sref="tournament">Tournaments</a></li>
   </ol>
 
   <div ng-form="$ctrl.form">
@@ -19,7 +19,9 @@
     <div class="form-group has-error">
       <p class="help-block">{{ $ctrl.errors }}</p>
     </div>
-    <button type="submit" class="btn btn-primary pull-right" ng-disabled="$ctrl.form.$invalid" ng-click="$ctrl.createTournament()">Create</button>
+    <div class="ssk-flex-end">
+      <button type="submit" class="btn ssk-btn-primary" ng-disabled="$ctrl.form.$invalid" ng-click="$ctrl.createTournament()">Create</button>
+    </div>
   </div>
 
 </div>

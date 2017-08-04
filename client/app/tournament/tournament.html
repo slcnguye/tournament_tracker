@@ -1,28 +1,29 @@
 <div id="tournament" class="container">
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item active">Tournaments</li>
+  <ol class="breadcrumb ssk-breadcrumb">
+    <li class="breadcrumb-item active"></li>
   </ol>
 
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <a class="btn btn-default" ui-sref="new-tournament">Create Tournament</a>
+  <div class="panel ssk-panel">
+    <div class="panel-heading ssk-flex-space-between">
+      <span class="ssk-text-large padding-left">Tournaments</span>
+      <a class="ssk-link" ui-sref="new-tournament">Create New</a>
     </div>
-    <table class="table">
-      <thead>
-      <th>Name</th>
-      <th>Score Type</th>
-      <th>Date</th>
-      <!--<th>Completed</th>-->
-      </thead>
-      <tbody>
-      <tr ng-repeat="tournament in $ctrl.tournaments"
-          ui-sref="tournament-detail({ tournamentId: tournament._id })" class="tournament-row">
-        <td ng-bind="tournament.name"></td>
-        <td ng-bind="tournament.scoreType"></td>
-        <td ng-bind="tournament.createdAt | date:'mediumDate'"></td>
-        <!--<td ng-bind="tournament.completed"></td>-->
-      </tr>
-      </tbody>
-    </table>
+    <div class="panel-body">
+      <table class="table ssk-table">
+        <thead>
+        <th>Name</th>
+        <th>Score Type</th>
+        <th>Date</th>
+        </thead>
+        <tbody>
+        <tr ng-repeat="tournament in $ctrl.tournaments"
+            ui-sref="tournament-detail({ tournamentId: tournament._id })" class="tournament-row">
+          <td ng-bind="tournament.name"></td>
+          <td ng-bind="tournament.scoreType"></td>
+          <td ng-bind="tournament.createdAt | date:'mediumDate'"></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>
