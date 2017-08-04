@@ -7,10 +7,11 @@ import routes from './tournament-detail.routes';
 import _ from 'lodash';
 
 export class TournamentDetailComponent {
-  constructor($q, $stateParams, Tournament, TournamentPlayer, Player, Match, MatchResult) {
+  constructor($uibModal, $q, $stateParams, Tournament, TournamentPlayer, Player, Match, MatchResult) {
     'ngInject';
     this.$q = $q;
     this.$stateParams = $stateParams;
+    this.$uibModal = $uibModal;
     this.Tournament = Tournament;
     this.TournamentPlayer = TournamentPlayer;
     this.Player = Player;
@@ -48,6 +49,20 @@ export class TournamentDetailComponent {
       _.each(this.tournamentPlayers, tournamentPlayer => {
         this.tournamentPlayersById[tournamentPlayer._id] = tournamentPlayer;
       });
+    });
+  }
+
+  showPlayerInfo(tournamentPlayer) {
+    console.log(tournamentPlayer);
+    this.$uibModal.open({
+      component: 'playerStatsModal',
+      windowClass: 'ssk-modal-right',
+      backdropClass: 'ssk-model-backdrop',
+      resolve: {
+        tournamentPlayer: function() {
+          return tournamentPlayer;
+        }
+      }
     });
   }
 

@@ -83,25 +83,25 @@ export class MainController {
   getAvatar(playerId) {
     let background;
     const imageIndex = playerId % 10 + 1;
-    if (imageIndex === 1) {
+    if(imageIndex === 1) {
       background = image1;
-    } else if (imageIndex === 2) {
+    } else if(imageIndex === 2) {
       background = image2;
-    } else if (imageIndex === 3) {
+    } else if(imageIndex === 3) {
       background = image3;
-    } else if (imageIndex === 4) {
+    } else if(imageIndex === 4) {
       background = image4;
-    } else if (imageIndex === 5) {
+    } else if(imageIndex === 5) {
       background = image5;
-    } else if (imageIndex === 6) {
+    } else if(imageIndex === 6) {
       background = image6;
-    } else if (imageIndex === 7) {
+    } else if(imageIndex === 7) {
       background = image7;
-    } else if (imageIndex === 8) {
+    } else if(imageIndex === 8) {
       background = image8;
-    } else if (imageIndex === 9) {
+    } else if(imageIndex === 9) {
       background = image9;
-    } else if (imageIndex === 10) {
+    } else if(imageIndex === 10) {
       background = image10;
     }
 

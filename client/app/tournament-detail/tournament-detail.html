@@ -19,7 +19,8 @@
         <th>Score</th>
         </thead>
         <tbody>
-        <tr ng-repeat="tournamentPlayer in $ctrl.tournamentPlayers | orderBy: 'score':true ">
+        <tr ng-click="$ctrl.showPlayerInfo(tournamentPlayer)"
+            ng-repeat="tournamentPlayer in $ctrl.tournamentPlayers | orderBy: 'score':true ">
           <td ng-bind="$index + 1"></td>
           <td ng-bind="tournamentPlayer.name"></td>
           <td ng-bind="tournamentPlayer.score"></td>

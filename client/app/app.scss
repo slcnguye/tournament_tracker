@@ -160,6 +160,34 @@ $ssk-font-color: white;
   color: $ssk-font-color;
 }
 
+// Modal
+.ssk-modal-right {
+  margin-top: 51px;
+  height: calc(100% - 100px);
+}
+
+.ssk-modal-right.fade:not(.in) .modal-dialog {
+  -webkit-transform: translate3d(25%, 0, 0);
+  transform: translate3d(25%, 0, 0);
+}
+
+.ssk-modal-right>.modal-dialog {
+  height: 100%;
+  position: absolute;
+  right: 0;
+  margin: 0;
+  width: 500px;
+}
+
+.ssk-modal-right>.modal-dialog>.modal-content {
+  height: 100%;
+  background: url('../assets/images/Magic-BG2.png');
+}
+
+.ssk-model-backdrop.in {
+  opacity: 0;
+}
+
   /**
    * App-wide Styles
    */
@@ -178,10 +206,10 @@ body {
   font-family: TheSans;
 }
 
+
 // Component styles are injected through gulp
 /* inject:scss */
 @import 'add-player/add-player';
-@import 'admin/admin';
 @import 'main/main';
 @import 'new-tournament/new-tournament';
 @import 'tournament-detail/tournament-detail';
@@ -189,4 +217,5 @@ body {
 @import '../components/footer/footer';
 @import '../components/modal/modal';
 @import '../components/navbar/navbar';
+@import '../components/player-stats-modal/player-stats-modal';
 /* endinject */
