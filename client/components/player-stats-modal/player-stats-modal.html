@@ -1,0 +1,43 @@
+<div id="player-stats-modal">
+  <div class="ssk-flex-space-between padding">
+    <div class="ssk-flex-space-between ssk-flex-align-center">
+      <div class="padding-right">
+        <div class="ssk-profile-image-lg" ng-style="$ctrl.getAvatar($ctrl.tournamentPlayer.playerId)"></div>
+      </div>
+      <div>
+        <h1 class="no-margin" ng-bind="$ctrl.tournamentPlayer.name"></h1>
+        <h3 class="no-margin" ng-bind="$ctrl.tournamentPlayer.score"></h3>
+      </div>
+    </div>
+    <div class="padding-right">
+      <div class="ssk-profile-image-lg">
+        <div class="padding-top text-center">Rank</div>
+        <h1 class="text-center no-margin" ng-bind="$ctrl.tournamentPlayer.rank"></h1>
+      </div>
+    </div>
+  </div>
+  <hr class="ssk-hr">
+  <div class="ssk-flex-space-around text-center">
+    <div>
+      <div>Matches</div>
+      <h1 class="no-margin" ng-bind="$ctrl.playerStats.totalMatches"></h1>
+    </div>
+    <div>
+      <div>Wins</div>
+      <h1 class="no-margin" ng-bind="$ctrl.playerStats.wins"></h1>
+    </div>
+    <div>
+      <div>Loses</div>
+      <h1 class="no-margin" ng-bind="$ctrl.playerStats.losses"></h1>
+    </div>
+  </div>
+  <hr class="ssk-hr">
+  <div class="padding text-center">
+    <h1 class="no-margin-top" ng-bind="$ctrl.playerStats.winPercentage"></h1>
+    <div class="padding-top">Likely to win next match</div>
+  </div>
+  <hr class="ssk-hr">
+  <div class="text-center">
+    <button type="button" class="btn ssk-btn-secondary" ng-click="$ctrl.close()">Close</button>
+  </div>
+</div>

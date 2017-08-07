@@ -7,10 +7,11 @@ import routes from './tournament-detail.routes';
 import _ from 'lodash';
 
 export class TournamentDetailComponent {
-  constructor($q, $stateParams, Tournament, TournamentPlayer, Player, Match, MatchResult) {
+  constructor($uibModal, $q, $stateParams, Tournament, TournamentPlayer, Player, Match, MatchResult) {
     'ngInject';
     this.$q = $q;
     this.$stateParams = $stateParams;
+    this.$uibModal = $uibModal;
     this.Tournament = Tournament;
     this.TournamentPlayer = TournamentPlayer;
     this.Player = Player;
@@ -28,7 +29,7 @@ export class TournamentDetailComponent {
       this.Match.query({tournamentId: this.tournamentId}).$promise
     ]).then(response => {
       this.tournament = response[0];
-      const tournamentPlayers = response[1];
+      const tournamentPlayers = _.orderBy(response[1], ['score'], ['desc']);
       this.players = response[2];
       this.matches = response[3];
 
@@ -37,10 +38,11 @@ export class TournamentDetailComponent {
         this.playersById[player._id] = player;
       });
 
-      this.tournamentPlayers = _.map(tournamentPlayers, tournamentPlayer => {
+      this.tournamentPlayers = _.map(tournamentPlayers, (tournamentPlayer, index) => {
         const player = angular.copy(tournamentPlayer);
         player.name = this.playersById[player.playerId].name;
         player.score = player.score || 0;
+        player.rank = index + 1;
         return player;
       });
 
@@ -49,6 +51,27 @@ export class TournamentDetailComponent {
         this.tournamentPlayersById[tournamentPlayer._id] = tournamentPlayer;
       });
     });
+  }
+
+  showPlayerInfo(tournamentPlayer) {
+    const matchesForPlayer = _.filter(this.matches, match => {
+      return _.find(match['match-results'], { tournamentPlayerId: tournamentPlayer._id });
+    });
+    this.$uibModal.open({
+      template: require('../../components/player-stats-modal/player-stats-modal.html'),
+      controller: 'playerStatsModal',
+      controllerAs: '$ctrl',
+      windowClass: 'ssk-modal-right',
+      backdropClass: 'ssk-model-backdrop',
+      resolve: {
+        tournamentPlayer: () => {
+          return tournamentPlayer;
+        },
+        matches: () => {
+          return matchesForPlayer;
+        }
+      }
+    }).result.then(() => {}, () => {});
   }
 
 
