@@ -120,16 +120,6 @@
     margin-top: 10px;
   }
 
-  .profile-image {
-    height: 60px;
-    width: 60px;
-    border-radius: 50%;
-    border: 2px solid $ssk-gray;
-    background-clip: content-box;
-    margin: 0 auto;
-    padding: 3px;
-  }
-
   .active-stats-player-of-week {
     flex: 1;
     background: linear-gradient($ssk-light-purple, $ssk-purple);

@@ -19,7 +19,7 @@
         <th>Score</th>
         </thead>
         <tbody>
-        <tr ng-click="$ctrl.showPlayerInfo(tournamentPlayer)"
+        <tr ng-click="$ctrl.showPlayerInfo(tournamentPlayer)" class="ssk-table-link"
             ng-repeat="tournamentPlayer in $ctrl.tournamentPlayers | orderBy: 'score':true ">
           <td ng-bind="$index + 1"></td>
           <td ng-bind="tournamentPlayer.name"></td>

@@ -17,7 +17,7 @@
         </thead>
         <tbody>
         <tr ng-repeat="tournament in $ctrl.tournaments"
-            ui-sref="tournament-detail({ tournamentId: tournament._id })" class="tournament-row">
+            ui-sref="tournament-detail({ tournamentId: tournament._id })" class="ssk-table-link">
           <td ng-bind="tournament.name"></td>
           <td ng-bind="tournament.scoreType"></td>
           <td class="ssk-text-light" ng-bind="tournament.createdAt | date:'mediumDate'"></td>

@@ -64,6 +64,10 @@ $ssk-font-color: white;
   margin: 0;
 }
 
+.no-margin-top {
+  margin-top: 0;
+}
+
 .cursor {
   cursor: pointer;
 }
@@ -82,6 +86,10 @@ $ssk-font-color: white;
   color: $ssk-font-color;
   background-color: inherit;
   border: 2px #ccc solid;
+}
+
+.ssk-hr {
+  border-color: $ssk-gray;
 }
 
 // Typography
@@ -104,11 +112,26 @@ $ssk-font-color: white;
   justify-content: space-between;
 }
 
+.ssk-flex-space-around {
+  display: flex;
+  justify-content: space-around;
+}
+
+.ssk-flex-align-center {
+  align-items: center;
+}
+
 // Button
 .ssk-btn-primary {
   color: $ssk-font-color;
   background-color: $ssk-light-blue;
   border-color: $ssk-light-blue;
+}
+
+.ssk-btn-secondary {
+  color: $ssk-font-color;
+  background-color: $ssk-gray;
+  border-color: $ssk-gray;
 }
 
 .ssk-link {
@@ -142,6 +165,11 @@ $ssk-font-color: white;
   border: none;
 }
 
+.ssk-table-link:hover {
+  background-color: $ssk-blue;
+  cursor: pointer;
+}
+
 // Breadcrumbs
 .ssk-breadcrumb {
   margin: 30px 0;
@@ -160,6 +188,26 @@ $ssk-font-color: white;
   color: $ssk-font-color;
 }
 
+.ssk-profile-image {
+  height: 60px;
+  width: 60px;
+  border-radius: 50%;
+  border: 2px solid $ssk-gray;
+  background-clip: content-box;
+  margin: 0 auto;
+  padding: 3px;
+}
+
+.ssk-profile-image-lg {
+  height: 80px;
+  width: 80px;
+  border-radius: 50%;
+  border: 2px solid $ssk-gray;
+  background-clip: content-box;
+  margin: 0 auto;
+  padding: 3px;
+}
+
 // Modal
 .ssk-modal-right {
   margin-top: 51px;
@@ -176,7 +224,7 @@ $ssk-font-color: white;
   position: absolute;
   right: 0;
   margin: 0;
-  width: 500px;
+  width: 400px;
 }
 
 .ssk-modal-right>.modal-dialog>.modal-content {

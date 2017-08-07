@@ -71,7 +71,7 @@
             <div class="player-info padding-bottom" ng-repeat="tournamentPlayer in $ctrl.tournamentPlayers | limitTo: 3 track by tournamentPlayer._id">
               <div class="rank-indicator ssk-text-large" ng-bind="tournamentPlayer.rank"></div>
               <div class="padding-left padding-right">
-                <div class="profile-image" ng-style="$ctrl.getAvatar(tournamentPlayer.playerId)"></div>
+                <div class="ssk-profile-image" ng-style="$ctrl.getAvatar(tournamentPlayer.playerId)"></div>
               </div>
               <div class="ssk-text-large" ng-bind="tournamentPlayer.name"></div>
               <div class="score padding-right ssk-text-large" ng-bind="tournamentPlayer.score"></div>
@@ -84,7 +84,7 @@
             <div class="player-info" ng-repeat="tournamentPlayer in $ctrl.tournamentPlayers | orderBy:'updatedAt':true | limitTo: 1 track by tournamentPlayer._id">
               <div class="rank-indicator ssk-text-large" ng-bind="tournamentPlayer.rank"></div>
               <div class="padding-left padding-right profile-display">
-                <div class="profile-image" ng-style="$ctrl.getAvatar(tournamentPlayer.playerId)"></div>
+                <div class="ssk-profile-image" ng-style="$ctrl.getAvatar(tournamentPlayer.playerId)"></div>
               </div>
               <div class="ssk-text-large" ng-bind="tournamentPlayer.name"></div>
               <div class="score padding-right ssk-text-large" ng-bind="tournamentPlayer.score"></div>

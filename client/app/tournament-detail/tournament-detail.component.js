@@ -29,7 +29,7 @@ export class TournamentDetailComponent {
       this.Match.query({tournamentId: this.tournamentId}).$promise
     ]).then(response => {
       this.tournament = response[0];
-      const tournamentPlayers = response[1];
+      const tournamentPlayers = _.orderBy(response[1], ['score'], ['desc']);
       this.players = response[2];
       this.matches = response[3];
 
@@ -38,10 +38,11 @@ export class TournamentDetailComponent {
         this.playersById[player._id] = player;
       });
 
-      this.tournamentPlayers = _.map(tournamentPlayers, tournamentPlayer => {
+      this.tournamentPlayers = _.map(tournamentPlayers, (tournamentPlayer, index) => {
         const player = angular.copy(tournamentPlayer);
         player.name = this.playersById[player.playerId].name;
         player.score = player.score || 0;
+        player.rank = index + 1;
         return player;
       });
 
@@ -53,17 +54,24 @@ export class TournamentDetailComponent {
   }
 
   showPlayerInfo(tournamentPlayer) {
-    console.log(tournamentPlayer);
+    const matchesForPlayer = _.filter(this.matches, match => {
+      return _.find(match['match-results'], { tournamentPlayerId: tournamentPlayer._id });
+    });
     this.$uibModal.open({
-      component: 'playerStatsModal',
+      template: require('../../components/player-stats-modal/player-stats-modal.html'),
+      controller: 'playerStatsModal',
+      controllerAs: '$ctrl',
       windowClass: 'ssk-modal-right',
       backdropClass: 'ssk-model-backdrop',
       resolve: {
-        tournamentPlayer: function() {
+        tournamentPlayer: () => {
           return tournamentPlayer;
+        },
+        matches: () => {
+          return matchesForPlayer;
         }
       }
-    });
+    }).result.then(() => {}, () => {});
   }
 
 
