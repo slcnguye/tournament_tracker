@@ -7,6 +7,39 @@ $fa-font-path: '/assets/fonts/font-awesome/';
 
 // Sang's Style Kit
 
+@font-face {
+  font-family: 'TheSans';
+  src: url('../assets/fonts/TheSans/thesans-2-xlight-webfont.woff') format('woff');
+  font-weight: 100;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: TheSans;
+  src: url('../assets/fonts/TheSans/thesans-5-regular-webfont.woff') format('woff');
+  //font-weight: normal;
+  //font-style: normal;
+}
+
+@font-face {
+  font-family: 'TheSans';
+  src: url('../assets/fonts/TheSans/thesans-7-bold-webfont.woff') format('woff');
+  font-weight: bold;
+  font-style: normal;
+}
+
+// Color
+$ssk-red: #c83738;
+$ssk-blue: #152339;
+$ssk-dark-blue: #181F2E;
+$ssk-dark-gray: #29313E;
+$ssk-gray: #3F4C61;
+$ssk-light-blue: #5196c6;
+$ssk-light-purple: #834b6c;
+$ssk-purple: #9e3656;
+
+$ssk-font-color: white;
+
 .padding {
   padding: 10px;
 }
@@ -31,6 +64,10 @@ $fa-font-path: '/assets/fonts/font-awesome/';
   margin: 0;
 }
 
+.no-margin-top {
+  margin-top: 0;
+}
+
 .cursor {
   cursor: pointer;
 }
@@ -46,30 +83,162 @@ $fa-font-path: '/assets/fonts/font-awesome/';
 }
 
 .ssk-btn-transparent {
-  color: white;
+  color: $ssk-font-color;
   background-color: inherit;
   border: 2px #ccc solid;
 }
 
-// Button Links
+.ssk-hr {
+  border-color: $ssk-gray;
+}
+
+// Typography
+.ssk-text-large {
+  font-size: 150%;
+}
+
+.ssk-text-light {
+  font-weight: 100;
+}
+
+// Flex
+.ssk-flex-end {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.ssk-flex-space-between {
+  display: flex;
+  justify-content: space-between;
+}
+
+.ssk-flex-space-around {
+  display: flex;
+  justify-content: space-around;
+}
+
+.ssk-flex-align-center {
+  align-items: center;
+}
+
+// Button
+.ssk-btn-primary {
+  color: $ssk-font-color;
+  background-color: $ssk-light-blue;
+  border-color: $ssk-light-blue;
+}
+
+.ssk-btn-secondary {
+  color: $ssk-font-color;
+  background-color: $ssk-gray;
+  border-color: $ssk-gray;
+}
+
 .ssk-link {
-  color: inherit;
+  color: $ssk-font-color;
   text-decoration: underline;
 }
 
-// Color
-$ssk-red: #c83738;
-$ssk-blue: #152339;
-$ssk-dark-blue: #181F2E;
-$ssk-dark-gray: #29313E;
-$ssk-gray: #3F4C61;
-$ssk-light-blue: #5196c6;
-$ssk-light-purple: #834b6c;
-$ssk-purple: #9e3656;
+// Panel
+.ssk-panel {
+  color: white;
+  background-color: $ssk-dark-blue;
+}
 
-/**
- * App-wide Styles
- */
+// Tables
+.ssk-table {
+  margin: 0;
+}
+
+.ssk-table>thead>tr>th {
+  border-bottom: 0;
+  padding: 8px 15px;
+}
+
+.ssk-table>tbody>tr>td {
+  border: none;
+  border-bottom: 2px $ssk-gray solid;
+  padding: 15px;
+}
+
+.ssk-table>tbody>tr:last-child>td {
+  border: none;
+}
+
+.ssk-table-link:hover {
+  background-color: $ssk-blue;
+  cursor: pointer;
+}
+
+// Breadcrumbs
+.ssk-breadcrumb {
+  margin: 30px 0;
+  background-color: inherit;
+  padding: 0;
+  color: $ssk-font-color;
+}
+
+.ssk-breadcrumb>.active {
+  color: $ssk-font-color;
+}
+
+.ssk-breadcrumb>li+li:before {
+  content: ">";
+  padding: 0 30px;
+  color: $ssk-font-color;
+}
+
+.ssk-profile-image {
+  height: 60px;
+  width: 60px;
+  border-radius: 50%;
+  border: 2px solid $ssk-gray;
+  background-clip: content-box;
+  margin: 0 auto;
+  padding: 3px;
+}
+
+.ssk-profile-image-lg {
+  height: 80px;
+  width: 80px;
+  border-radius: 50%;
+  border: 2px solid $ssk-gray;
+  background-clip: content-box;
+  margin: 0 auto;
+  padding: 3px;
+}
+
+// Modal
+.ssk-modal-right {
+  margin-top: 51px;
+  height: calc(100% - 100px);
+}
+
+.ssk-modal-right.fade:not(.in) .modal-dialog {
+  -webkit-transform: translate3d(25%, 0, 0);
+  transform: translate3d(25%, 0, 0);
+}
+
+.ssk-modal-right>.modal-dialog {
+  height: 100%;
+  position: absolute;
+  right: 0;
+  margin: 0;
+  width: 400px;
+}
+
+.ssk-modal-right>.modal-dialog>.modal-content {
+  height: 100%;
+  background: url('../assets/images/Magic-BG2.png');
+}
+
+.ssk-model-backdrop.in {
+  opacity: 0;
+}
+
+  /**
+   * App-wide Styles
+   */
 
 .browserupgrade {
   margin: 0.2em 0;
@@ -79,13 +248,16 @@ $ssk-purple: #9e3656;
 }
 
 body {
-  background: linear-gradient(to bottom right, $ssk-dark-gray, $ssk-gray) no-repeat;
+  background: url('../assets/images/Magic-BG2.png') no-repeat;
+  background-size: cover;
+  color: $ssk-font-color;
+  font-family: TheSans;
 }
+
 
 // Component styles are injected through gulp
 /* inject:scss */
 @import 'add-player/add-player';
-@import 'admin/admin';
 @import 'main/main';
 @import 'new-tournament/new-tournament';
 @import 'tournament-detail/tournament-detail';
@@ -93,4 +265,5 @@ body {
 @import '../components/footer/footer';
 @import '../components/modal/modal';
 @import '../components/navbar/navbar';
+@import '../components/player-stats-modal/player-stats-modal';
 /* endinject */

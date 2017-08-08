@@ -1,6 +1,7 @@
 #main {
   //background: url("../assets/images/mtg_background2.jpg") top no-repeat, linear-gradient(to bottom right, $ssk-dark-gray, $ssk-gray) bottom no-repeat;
-  //background-size: 100% 50%, 100%;
+  //background: url("../assets/images/Magic-BG1.png") top no-repeat;
+  background-size: 100% 50%;
   height: 100%;
 
   .content {
@@ -15,10 +16,14 @@
     width: 80%;
     margin-left: auto;
     margin-right: auto;
-    padding-bottom: 75px;
-    margin-top: 75px;
-
     color: white;
+  }
+
+  @media only screen and (min-width: 970px) {
+    .content-body {
+      padding-bottom: 75px;
+      margin-top: 75px;
+    }
   }
 
   .active-tournaments {
@@ -63,13 +68,7 @@
     background-color: $ssk-dark-blue;
     height: 66.6666666%;
     padding: 20px;
-    overflow: hidden;
-  }
-
-  .match-table>tbody>tr>td {
-    border: none;
-    border-bottom: 2px $ssk-gray solid;
-    padding: 15px;
+    overflow: auto;
   }
 
   .active-match-action-bar {
@@ -89,6 +88,7 @@
     flex: 1;
     display: flex;
     flex-direction: column;
+    overflow: auto;
   }
 
   .active-stats-top-players {
@@ -120,16 +120,6 @@
     margin-top: 10px;
   }
 
-  .profile-image {
-    height: 60px;
-    width: 60px;
-    border-radius: 50%;
-    border: 2px solid $ssk-gray;
-    background-clip: content-box;
-    margin: 0 auto;
-    padding: 3px;
-  }
-
   .active-stats-player-of-week {
     flex: 1;
     background: linear-gradient($ssk-light-purple, $ssk-purple);
@@ -139,5 +129,10 @@
   .active-stats-players {
     flex: 1;
     padding: 20px;
+  }
+
+  .num-players {
+    line-height: 60px;
+    font-size: 80px;
   }
 }

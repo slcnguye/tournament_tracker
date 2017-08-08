@@ -1,18 +1,13 @@
 <div id="navbar" class="navbar navbar-default navbar-static-top">
   <div class="container">
-    <!--<div class="navbar-header">-->
-    <!--</div>-->
     <div id="navbar-main">
       <img ng-if="$ctrl.isDashboard()" class="magic-dashboard-logo" src="assets/images/magic_logo.png">
-      <ul class="nav navbar-nav">
+      <ul class="nav navbar-nav pull-left">
         <a href="/">
           <img ng-if="!$ctrl.isDashboard()" class="magic-logo" src="assets/images/magic_logo.png">
         </a>
-        <!--<li>-->
-          <!--<a ui-sref="tournament">Tournaments</a>-->
-        <!--</li>-->
       </ul>
-      <ul class="nav navbar-nav navbar-right">
+      <ul class="nav navbar-nav navbar-right pull-right">
         <a href="/" class="navbar-brand">Tournament Tracker</a>
       </ul>
     </div>
