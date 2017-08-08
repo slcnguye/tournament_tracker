@@ -51,7 +51,6 @@ export class TournamentDetailComponent {
     });
   }
 
-
   addMatch() {
     this.addMatching = true;
   }
@@ -77,8 +76,10 @@ export class TournamentDetailComponent {
         };
 
         const updatedWinner = this.tournamentPlayersById[winner._id];
+        matchResult1.lastScore = updatedWinner.score;
         updatedWinner.score += winnerScoreDelta;
         const updatedLoser = this.tournamentPlayersById[loser._id];
+        matchResult2.lastScore = updatedLoser.score;
         updatedLoser.score += loserScoreDelta;
 
         this.$q.all([

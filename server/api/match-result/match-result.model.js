@@ -12,6 +12,11 @@ export default function(sequelize, DataTypes) {
       type: DataTypes.INTEGER,
       defaultValue: 0,
       allowNull: false
+    },
+    lastScore: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0,
+      allowNull: false
     }
   }, {
     timestamps: true
