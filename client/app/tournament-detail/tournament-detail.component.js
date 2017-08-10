@@ -52,7 +52,7 @@ export class TournamentDetailComponent {
       });
     });
   }
-
+  
   showPlayerInfo(tournamentPlayer) {
     const matchesForPlayer = _.filter(this.matches, match => {
       return _.find(match['match-results'], { tournamentPlayerId: tournamentPlayer._id });
@@ -73,7 +73,6 @@ export class TournamentDetailComponent {
       }
     }).result.then(() => {}, () => {});
   }
-
 
   addMatch() {
     this.addMatching = true;
@@ -100,8 +99,10 @@ export class TournamentDetailComponent {
         };
 
         const updatedWinner = this.tournamentPlayersById[winner._id];
+        matchResult1.lastScore = updatedWinner.score;
         updatedWinner.score += winnerScoreDelta;
         const updatedLoser = this.tournamentPlayersById[loser._id];
+        matchResult2.lastScore = updatedLoser.score;
         updatedLoser.score += loserScoreDelta;
 
         this.$q.all([
