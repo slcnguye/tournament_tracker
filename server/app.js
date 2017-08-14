@@ -5,14 +5,14 @@
 'use strict';
 
 import express from 'express';
-import sqldb from './sqldb';
+import migration from './migration';
 import config from './config/environment';
 import http from 'http';
 import seedDatabaseIfNeeded from './config/seed';
 
 // Setup server
-var app = express();
-var server = http.createServer(app);
+let app = express();
+let server = http.createServer(app);
 require('./config/express').default(app);
 require('./routes').default(app);
 
@@ -23,7 +23,7 @@ function startServer() {
   });
 }
 
-sqldb.sequelize.sync()
+migration()
   .then(seedDatabaseIfNeeded)
   .then(startServer)
   .catch(function(err) {

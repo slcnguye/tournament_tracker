@@ -49,7 +49,9 @@ export class MainController {
         this.$q.all(getTournamentsDeferred)
           .then(tournaments => {
             this.activeTournaments = tournaments;
-            this.setSelectedTournament(_.first(tournaments));
+            if (_.size(this.activeTournaments) > 0) {
+              this.setSelectedTournament(_.first(tournaments));
+            }
           });
       });
   }

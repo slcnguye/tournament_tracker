@@ -9,6 +9,7 @@ export default function(sequelize, DataTypes) {
       autoIncrement: true
     }
   }, {
-    timestamps: true
+    timestamps: true,
+    freezeTableName: true
   });
 }

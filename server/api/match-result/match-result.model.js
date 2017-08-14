@@ -17,8 +17,14 @@ export default function(sequelize, DataTypes) {
       type: DataTypes.INTEGER,
       defaultValue: 0,
       allowNull: false
+    },
+    lastRank: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0,
+      allowNull: false
     }
   }, {
-    timestamps: true
+    timestamps: true,
+    freezeTableName: true
   });
 }

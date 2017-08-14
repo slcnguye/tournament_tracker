@@ -26,9 +26,13 @@
     }
   }
 
+  .active-tournaments-matches {
+    flex: 2;
+  }
+
   .active-tournaments {
     background-color: $ssk-blue;
-    height: 33.3333333%;
+    flex: 1;
     padding: 20px;
   }
 
@@ -66,7 +70,7 @@
 
   .active-matches {
     background-color: $ssk-dark-blue;
-    height: 66.6666666%;
+    flex: 2;
     padding: 20px;
     overflow: auto;
   }

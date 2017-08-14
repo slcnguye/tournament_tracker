@@ -102,6 +102,16 @@ $ssk-font-color: white;
 }
 
 // Flex
+.ssk-flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.ssk-flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
 .ssk-flex-end {
   display: flex;
   justify-content: flex-end;

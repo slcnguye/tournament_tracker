@@ -7,9 +7,10 @@ import routes from './tournament-detail.routes';
 import _ from 'lodash';
 
 export class TournamentDetailComponent {
-  constructor($uibModal, $q, $stateParams, Tournament, TournamentPlayer, Player, Match, MatchResult) {
+  constructor($uibModal, $q, $state, $stateParams, Tournament, TournamentPlayer, Player, Match, MatchResult) {
     'ngInject';
     this.$q = $q;
+    this.$state = $state;
     this.$stateParams = $stateParams;
     this.$uibModal = $uibModal;
     this.Tournament = Tournament;
@@ -29,6 +30,7 @@ export class TournamentDetailComponent {
       this.Match.query({tournamentId: this.tournamentId}).$promise
     ]).then(response => {
       this.tournament = response[0];
+
       const tournamentPlayers = _.orderBy(response[1], ['score'], ['desc']);
       this.players = response[2];
       this.matches = response[3];
@@ -50,9 +52,11 @@ export class TournamentDetailComponent {
       _.each(this.tournamentPlayers, tournamentPlayer => {
         this.tournamentPlayersById[tournamentPlayer._id] = tournamentPlayer;
       });
+    }, error => {
+      this.$state.go('tournament');
     });
   }
-  
+
   showPlayerInfo(tournamentPlayer) {
     const matchesForPlayer = _.filter(this.matches, match => {
       return _.find(match['match-results'], { tournamentPlayerId: tournamentPlayer._id });
@@ -87,23 +91,26 @@ export class TournamentDetailComponent {
 
     this.Match.create(match).$promise
       .then(savedMatch => {
+        const updatedWinner = this.tournamentPlayersById[winner._id];
+        updatedWinner.score += winnerScoreDelta;
+        const updatedLoser = this.tournamentPlayersById[loser._id];
+        updatedLoser.score += loserScoreDelta;
+
         const matchResult1 = {
           tournamentPlayerId: winner._id,
           matchId: savedMatch._id,
-          scoreDelta: winnerScoreDelta
+          scoreDelta: winnerScoreDelta,
+          lastScore: updatedWinner.score,
+          lastRank: updatedWinner.rank
         };
+
         const matchResult2 = {
           tournamentPlayerId: loser._id,
           matchId: savedMatch._id,
-          scoreDelta: loserScoreDelta
+          scoreDelta: loserScoreDelta,
+          lastScore: updatedLoser.score,
+          lastRank: updatedLoser.rank
         };
-
-        const updatedWinner = this.tournamentPlayersById[winner._id];
-        matchResult1.lastScore = updatedWinner.score;
-        updatedWinner.score += winnerScoreDelta;
-        const updatedLoser = this.tournamentPlayersById[loser._id];
-        matchResult2.lastScore = updatedLoser.score;
-        updatedLoser.score += loserScoreDelta;
 
         this.$q.all([
           this.MatchResult.create(matchResult1).$promise,
@@ -161,7 +168,6 @@ export class TournamentDetailComponent {
       return lose;
     }
   }
-//  how do you create matches with match results
 }
 
 export default angular.module('tournamentTrackerApp.tournament-detail', [uiRouter])

@@ -14,6 +14,7 @@ export default function(sequelize, DataTypes) {
       allowNull: false
     }
   }, {
-    timestamps: true
+    timestamps: true,
+    freezeTableName: true
   });
 }
