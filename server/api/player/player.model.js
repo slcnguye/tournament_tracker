@@ -19,6 +19,7 @@ export default function(sequelize, DataTypes) {
       }
     }
   }, {
-    timestamps: true
+    timestamps: true,
+    freezeTableName: true
   });
 }

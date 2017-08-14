@@ -1,7 +1,7 @@
 <div id="main">
   <div class="content">
     <div class="content-body">
-      <div style="flex: 2; background-color: white">
+      <div class="ssk-flex-column active-tournaments-matches">
         <div class="active-tournaments">
           <div>
             <span class="ssk-text-large">Active Tournaments</span>
@@ -26,9 +26,9 @@
             </div>
           </div>
         </div>
-        <div class="active-matches">
+        <div class="active-matches" ng-if="$ctrl.selectedTournamentId">
           <div class="active-match-action-bar">
-            <span class="ssk-text-large">Matches</span>
+            <span class="ssk-text-large">Recent Matches</span>
             <div class="pull-right">
               <a class="ssk-link small" ui-sref="tournament-detail({tournamentId: $ctrl.selectedTournamentId})">All Matches</a>
             </div>
@@ -59,7 +59,7 @@
           </table>
         </div>
       </div>
-      <div class="active-stats-bg hidden-xs hidden-sm">
+      <div class="active-stats-bg hidden-xs hidden-sm" ng-if="$ctrl.selectedTournamentId">
         <div class="active-stats">
           <div class="active-stats-top-players">
             <div class="padding-bottom">
