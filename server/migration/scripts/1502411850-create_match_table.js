@@ -13,7 +13,7 @@ module.exports = {
         tournamentId: {
           type: DataTypes.INTEGER,
           allowNull: false,
-          references: { model: "tournament", key: "_id" }
+          references: { model: 'tournament', key: '_id' }
         },
         createdAt: {
           type: DataTypes.DATE
@@ -21,10 +21,10 @@ module.exports = {
         updatedAt: {
           type: DataTypes.DATE
         }
-      })
+      });
   },
 
   down: (queryInterface, DataTypes) => {
-    queryInterface.dropTable('match')
+    queryInterface.dropTable('match');
   }
 };

@@ -144,6 +144,12 @@ $ssk-font-color: white;
   border-color: $ssk-gray;
 }
 
+.ssk-btn-danger {
+  color: $ssk-font-color;
+  background-color: $ssk-red;
+  border-color: $ssk-red;
+}
+
 .ssk-link {
   color: $ssk-font-color;
   text-decoration: underline;

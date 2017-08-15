@@ -36,10 +36,10 @@ module.exports = {
         updatedAt: {
           type: DataTypes.DATE
         }
-      })
+      });
   },
 
-  down: (queryInterface, DataTypes) => {
-    queryInterface.dropTable('tournament')
+  down: (queryInterface) => {
+    queryInterface.dropTable('tournament');
   }
 };

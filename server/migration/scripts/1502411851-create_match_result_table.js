@@ -13,12 +13,12 @@ module.exports = {
         matchId: {
           type: DataTypes.INTEGER,
           allowNull: false,
-          references: { model: "match", key: "_id" }
+          references: { model: 'match', key: '_id' }
         },
         tournamentPlayerId: {
           type: DataTypes.INTEGER,
           allowNull: false,
-          references: { model: "tournament-player", key: "_id" }
+          references: { model: 'tournament-player', key: '_id' }
         },
         scoreDelta: {
           type: DataTypes.INTEGER,
@@ -31,10 +31,10 @@ module.exports = {
         updatedAt: {
           type: DataTypes.DATE
         }
-      })
+      });
   },
 
-  down: (queryInterface, DataTypes) => {
-    queryInterface.dropTable('match-result')
+  down: (queryInterface) => {
+    queryInterface.dropTable('match-result');
   }
 };

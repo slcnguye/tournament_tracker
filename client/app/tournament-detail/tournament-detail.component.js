@@ -168,6 +168,15 @@ export class TournamentDetailComponent {
       return lose;
     }
   }
+
+  // Edit mode
+  enableEditMode() {
+    this.editMode = true;
+  }
+
+  recalcMatches() {
+
+  }
 }
 
 export default angular.module('tournamentTrackerApp.tournament-detail', [uiRouter])
