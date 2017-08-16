@@ -52,6 +52,8 @@ export class TournamentDetailComponent {
       _.each(this.tournamentPlayers, tournamentPlayer => {
         this.tournamentPlayersById[tournamentPlayer._id] = tournamentPlayer;
       });
+
+      this.preparePagedMatches(this.matches, 0);
     }, error => {
       this.$state.go('tournament');
     });
@@ -120,6 +122,7 @@ export class TournamentDetailComponent {
           savedMatch['match-results'].push(matchResults[0]);
           savedMatch['match-results'].push(matchResults[1]);
           this.matches.push(savedMatch);
+          this.preparePagedMatches(this.matches, 0);
         });
       });
 
@@ -165,6 +168,19 @@ export class TournamentDetailComponent {
       const lose = Math.round(k * (0 - percentage));
       return lose;
     }
+  }
+
+  // Paging
+  preparePagedMatches(matches, page) {
+    this.paging = this.paging || {};
+    this.paging.totalPages = Math.ceil(_.size(matches) / 10);
+    this.paging.pages = _.range(this.paging.totalPages);
+    this.getPagedMatches(matches, this.paging, page);
+  }
+
+  getPagedMatches(matches, paging, page) {
+    paging.currentPage = page;
+    this.pagedMatches = _.slice(matches, page * 10, page * 10 + 10);
   }
 
   // Edit mode
