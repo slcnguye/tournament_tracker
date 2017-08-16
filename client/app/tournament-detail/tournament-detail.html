@@ -94,8 +94,8 @@
         <tr ng-if="$ctrl.matches.length === 0">
           <td colspan="100%">No matches played.</td>
         </tr>
-        <tr ng-repeat="match in $ctrl.matches | orderBy: 'createdAt':true">
-          <td ng-bind="$ctrl.matches.length - $index"></td>
+        <tr ng-repeat="match in $ctrl.pagedMatches | orderBy: 'createdAt':true">
+          <td ng-bind="$ctrl.matches.length - ($ctrl.paging.currentPage * 10) - $index"></td>
           <td>
             <i class="fa fa-trophy" aria-hidden="true"></i>
             <span ng-bind="$ctrl.tournamentPlayersById[match['match-results'][0].tournamentPlayerId].name"></span>
@@ -112,6 +112,15 @@
         </tr>
         </tbody>
       </table>
+      <div class="text-center">
+        <ul class="pagination">
+          <li ng-repeat="page in $ctrl.paging.pages">
+            <a class="btn-primary" ng-bind="page + 1"
+               ng-class="{'active': page === $ctrl.paging.currentPage, 'cursor': page != $ctrl.paging.currentPage}"
+               ng-click="$ctrl.getPagedMatches($ctrl.matches, $ctrl.paging, page)"></a>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
 
