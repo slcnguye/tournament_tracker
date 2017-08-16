@@ -101,7 +101,6 @@ export class TournamentDetailComponent {
           matchId: savedMatch._id,
           scoreDelta: winnerScoreDelta,
           lastScore: updatedWinner.score,
-          lastRank: updatedWinner.rank
         };
 
         const matchResult2 = {
@@ -109,7 +108,6 @@ export class TournamentDetailComponent {
           matchId: savedMatch._id,
           scoreDelta: loserScoreDelta,
           lastScore: updatedLoser.score,
-          lastRank: updatedLoser.rank
         };
 
         this.$q.all([
@@ -175,7 +173,44 @@ export class TournamentDetailComponent {
   }
 
   recalcMatches() {
+    this.recalcingMatches = true;
+    const initScore = this.tournament.scoreType === 'ELO' ? 2000 : 0;
+    _.each(this.tournamentPlayersById, tournamentPlayer => {
+      tournamentPlayer.score = initScore;
+    });
 
+    const deferred = [];
+    const orderedMatchesByDate = _.orderBy(this.matches, ['createdAt'], ['asc']);
+    _.each(orderedMatchesByDate, match => {
+      const winnerMatchResult = match['match-results'][0];
+      const loserMatchResult = match['match-results'][1];
+
+      const winner = this.tournamentPlayersById[winnerMatchResult.tournamentPlayerId];
+      const loser = this.tournamentPlayersById[loserMatchResult.tournamentPlayerId];
+      const winnerScoreDelta = this.calculateScoreForWinner(winner, loser);
+      const loserScoreDelta = this.calculateScoreForLoser(winner, loser);
+
+      winnerMatchResult.scoreDelta = winnerScoreDelta;
+      winnerMatchResult.lastScore = winner.score;
+      winner.score += winnerScoreDelta;
+
+      loserMatchResult.scoreDelta = loserScoreDelta;
+      loserMatchResult.lastScore = loser.score;
+      loser.score += loserScoreDelta;
+
+      deferred.push(this.MatchResult.patch({id: winnerMatchResult._id, lastScore: winnerMatchResult.lastScore, scoreDelta: winnerMatchResult.scoreDelta}).$promise);
+      deferred.push(this.MatchResult.patch({id: loserMatchResult._id, lastScore: loserMatchResult.lastScore, scoreDelta: loserMatchResult.scoreDelta}).$promise);
+    });
+
+    const tournamentPlayers = _.orderBy(this.tournamentPlayers, ['score'], ['desc']);
+    _.each(tournamentPlayers, (tournamentPlayer, index) => {
+      tournamentPlayer.rank = index + 1;
+      deferred.push(this.TournamentPlayer.patch({id: tournamentPlayer._id, score: tournamentPlayer.score}).$promise);
+    });
+
+    this.$q.all(deferred).then(() => {
+      this.recalcingMatches = false;
+    });
   }
 }
 

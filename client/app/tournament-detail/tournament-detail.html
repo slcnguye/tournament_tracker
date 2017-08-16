@@ -10,8 +10,9 @@
       Edit
     </button>
     <button ng-if="$ctrl.editMode" class="btn ssk-btn-primary" type="button"
-            ng-click="$ctrl.recalcMatches()">
+            ng-click="$ctrl.recalcMatches()" ng-disabled="$ctrl.recalcingMatches">
       Recalc Scores
+      <i ng-if="$ctrl.recalcingMatches" class="fa fa-spinner fa-spin"></i>
     </button>
   </div>
 
