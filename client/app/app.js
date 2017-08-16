@@ -26,6 +26,7 @@ import Tournament from './tournament/tournament.component';
 import TournamentDetail from './tournament-detail/tournament-detail.component';
 import PlayerStatsModal from '../components/player-stats-modal/player-stats-modal.component';
 import PlayerScoreChart from '../components/player-score-chart/player-score-chart.component';
+import ChangeLogModal from '../components/change-log-modal/change-log-modal.component';
 import constants from './app.constants';
 import util from '../components/util/util.module';
 
@@ -33,7 +34,7 @@ import './app.scss';
 
 angular.module('tournamentTrackerApp', [ngCookies, ngResource, ngSanitize, uiRouter, uiBootstrap,
   _Auth, 'validation.match', navbar, footer, ngenter, constants, util, angularChart,
-  Main, AddPlayer, NewTournament, Tournament, TournamentDetail, PlayerStatsModal, PlayerScoreChart
+  Main, AddPlayer, NewTournament, Tournament, TournamentDetail, PlayerStatsModal, PlayerScoreChart, ChangeLogModal
 ])
   .config(routeConfig)
   .run();
