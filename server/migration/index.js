@@ -7,13 +7,11 @@ import {sequelize} from '../sqldb';
 let migrations = function() {
   const umzug = new Umzug({
     migrations: {
-      params: [ sequelize.getQueryInterface(), Sequelize ],
+      params: [sequelize.getQueryInterface(), Sequelize],
       path: 'server/migration/scripts'
     },
-    storage: "sequelize",
-    storageOptions: {
-      sequelize: sequelize
-    },
+    storage: 'sequelize',
+    storageOptions: { sequelize },
     logging: console.log
   });
 

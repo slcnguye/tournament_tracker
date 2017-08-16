@@ -31,6 +31,11 @@
       <h1 class="no-margin" ng-bind="$ctrl.playerStats.losses"></h1>
     </div>
   </div>
+  <hr ng-if="$ctrl.playerStats.totalMatches > 0" class="ssk-hr">
+  <div ng-if="$ctrl.playerStats.totalMatches > 0" class="text-center padding-left padding-right">
+    <player-score-chart class="ssk-flex-column" scores="$ctrl.playerStats.matchScores"></player-score-chart>
+    <div>Score Trend</div>
+  </div>
   <hr class="ssk-hr">
   <div class="padding text-center">
     <h1 class="no-margin-top" ng-bind="$ctrl.playerStats.winPercentage"></h1>

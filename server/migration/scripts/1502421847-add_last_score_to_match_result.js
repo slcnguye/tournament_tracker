@@ -10,10 +10,10 @@ module.exports = {
         defaultValue: 0,
         allowNull: false
       }
-    )
+    );
   },
 
-  down: (queryInterface, DataTypes) => {
-    queryInterface.removeColumn('match-result', 'lastScore')
+  down: (queryInterface) => {
+    queryInterface.removeColumn('match-result', 'lastScore');
   }
 };

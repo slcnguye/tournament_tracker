@@ -18,12 +18,12 @@ module.exports = {
         playerId: {
           type: DataTypes.INTEGER,
           allowNull: false,
-          references: { model: "player", key: "_id" }
+          references: { model: 'player', key: '_id' }
         },
         tournamentId: {
           type: DataTypes.INTEGER,
           allowNull: false,
-          references: { model: "tournament", key: "_id" }
+          references: { model: 'tournament', key: '_id' }
         },
         createdAt: {
           type: DataTypes.DATE
@@ -31,10 +31,10 @@ module.exports = {
         updatedAt: {
           type: DataTypes.DATE
         }
-      })
+      });
   },
 
-  down: (queryInterface, DataTypes) => {
-    queryInterface.dropTable('tournament-player')
+  down: (queryInterface) => {
+    queryInterface.dropTable('tournament-player');
   }
 };

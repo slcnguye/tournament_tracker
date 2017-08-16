@@ -14,6 +14,9 @@ export function MatchResultResource($resource) {
     },
     delete: {
       method: 'DELETE'
+    },
+    patch: {
+      method: 'PATCH'
     }
   });
 }

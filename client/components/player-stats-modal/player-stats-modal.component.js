@@ -21,7 +21,7 @@ export class playerStatsModalController {
 
     this.$uibModalInstance = $uibModalInstance;
     this.tournamentPlayer = tournamentPlayer;
-    this.matches = _.orderBy(matches, ['createdAt'], ['desc']);
+    this.matches = _.orderBy(matches, ['createdAt'], ['asc']);
   }
 
   $onInit() {
@@ -46,6 +46,20 @@ export class playerStatsModalController {
       playerStats.winPercentage = parseFloat(playerStats.wins * 100 / playerStats.totalMatches).toFixed(2) + '%';
     } else {
       playerStats.winPercentage = '-';
+    }
+
+    playerStats.matchScores = [];
+    if (playerStats.totalMatches > 0) {
+      const firstMatchResult = _.find(_.first(matches)['match-results'], matchResult => {
+        return matchResult.tournamentPlayerId === tournamentPlayer._id;
+      });
+      playerStats.matchScores.push(firstMatchResult.lastScore);
+      _.each(matches, match => {
+        const playerMatchResult = _.find(match['match-results'], matchResult => {
+          return matchResult.tournamentPlayerId === tournamentPlayer._id;
+        });
+        playerStats.matchScores.push(playerMatchResult.lastScore + playerMatchResult.scoreDelta);
+      });
     }
 
     return playerStats;

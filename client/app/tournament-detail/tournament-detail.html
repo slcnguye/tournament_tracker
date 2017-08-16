@@ -4,6 +4,18 @@
     <li class="breadcrumb-item active" ng-bind="$ctrl.tournament.name"></li>
   </ol>
 
+  <div class="ssk-flex-end padding-bottom">
+    <button ng-if="!$ctrl.editMode" class="btn ssk-btn-danger" type="button"
+            ng-click="$ctrl.enableEditMode()">
+      Edit
+    </button>
+    <button ng-if="$ctrl.editMode" class="btn ssk-btn-primary" type="button"
+            ng-click="$ctrl.recalcMatches()" ng-disabled="$ctrl.recalcingMatches">
+      Recalc Scores
+      <i ng-if="$ctrl.recalcingMatches" class="fa fa-spinner fa-spin"></i>
+    </button>
+  </div>
+
   <div class="panel ssk-panel">
     <div class="panel-heading ssk-flex-space-between">
       <span class="ssk-text-large padding-left">Players</span>
