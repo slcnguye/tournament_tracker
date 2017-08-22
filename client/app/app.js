@@ -1,7 +1,7 @@
 'use strict';
 
 import angular from 'angular';
-// import ngAnimate from 'angular-animate';
+import ngAnimate from 'angular-animate';
 import ngCookies from 'angular-cookies';
 import ngResource from 'angular-resource';
 import ngSanitize from 'angular-sanitize';
@@ -9,7 +9,6 @@ import ngSanitize from 'angular-sanitize';
 import uiRouter from 'angular-ui-router';
 import uiBootstrap from 'angular-ui-bootstrap';
 import 'angular-validation-match';
-import {name as angularChart} from 'angular-chart/angular-chart';
 
 import {
   routeConfig
@@ -32,8 +31,8 @@ import util from '../components/util/util.module';
 
 import './app.scss';
 
-angular.module('tournamentTrackerApp', [ngCookies, ngResource, ngSanitize, uiRouter, uiBootstrap,
-  _Auth, 'validation.match', navbar, footer, ngenter, constants, util, angularChart,
+angular.module('tournamentTrackerApp', [ngCookies, ngAnimate, ngResource, ngSanitize, uiRouter, uiBootstrap,
+  _Auth, 'validation.match', navbar, footer, ngenter, constants, util,
   Main, AddPlayer, NewTournament, Tournament, TournamentDetail, PlayerStatsModal, PlayerScoreChart, ChangeLogModal
 ])
   .config(routeConfig)
