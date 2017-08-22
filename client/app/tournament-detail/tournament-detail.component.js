@@ -33,7 +33,7 @@ export class TournamentDetailComponent {
 
       const tournamentPlayers = _.orderBy(response[1], ['score'], ['desc']);
       this.players = response[2];
-      this.matches = response[3];
+      this.matches = _.orderBy(response[3], ['createdAt'], ['desc']);
 
       this.playersById = {};
       _.each(this.players, player => {
@@ -121,7 +121,7 @@ export class TournamentDetailComponent {
           savedMatch['match-results'] = [];
           savedMatch['match-results'].push(matchResults[0]);
           savedMatch['match-results'].push(matchResults[1]);
-          this.matches.push(savedMatch);
+          this.matches.unshift(savedMatch);
           this.preparePagedMatches(this.matches, 0);
         });
       });
