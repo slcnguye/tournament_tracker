@@ -5,7 +5,7 @@ import angular from 'angular';
 
 export class NavbarComponent {
 
-  constructor(Auth, $state) {
+  constructor($state) {
     'ngInject';
 
     this.$state = $state;

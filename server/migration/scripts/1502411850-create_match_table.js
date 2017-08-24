@@ -24,7 +24,7 @@ module.exports = {
       });
   },
 
-  down: (queryInterface, DataTypes) => {
+  down: queryInterface => {
     queryInterface.dropTable('match');
   }
 };

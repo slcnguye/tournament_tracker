@@ -29,8 +29,8 @@ export class playerScoreChartComponent {
         show: false
       },
       axis: {
-        x: { show:false },
-        y: { show:false }
+        x: { show: false },
+        y: { show: false }
       },
       tooltip: {
         show: false
@@ -42,11 +42,11 @@ export class playerScoreChartComponent {
 
     this.$timeout(() => {
       chart.load({
-          columns: [
-            scoreColumnData
-          ]
-      })
-    })
+        columns: [
+          scoreColumnData
+        ]
+      });
+    });
   }
 
 }

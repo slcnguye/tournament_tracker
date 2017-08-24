@@ -13,6 +13,7 @@ export default function(app) {
   app.use('/api/players', require('./api/player'));
   app.use('/api/matches', require('./api/match'));
   app.use('/api/tournament-players', require('./api/tournament-player'));
+  app.use('/api/tournament-player-notes', require('./api/tournament-player-note'));
   app.use('/api/match-results', require('./api/match-result'));
 
   // All undefined asset or api routes should return a 404

@@ -8,13 +8,12 @@ import ngSanitize from 'angular-sanitize';
 
 import uiRouter from 'angular-ui-router';
 import uiBootstrap from 'angular-ui-bootstrap';
-import 'angular-validation-match';
 
 import {
   routeConfig
 } from './app.config';
 
-import _Auth from '../components/auth/auth.module';
+import services from '../services/services.module';
 import navbar from '../components/navbar/navbar.component';
 import footer from '../components/footer/footer.component';
 import ngenter from '../components/ng-enter/ng-enter.directive';
@@ -27,12 +26,11 @@ import PlayerStatsModal from '../components/player-stats-modal/player-stats-moda
 import PlayerScoreChart from '../components/player-score-chart/player-score-chart.component';
 import ChangeLogModal from '../components/change-log-modal/change-log-modal.component';
 import constants from './app.constants';
-import util from '../components/util/util.module';
 
 import './app.scss';
 
 angular.module('tournamentTrackerApp', [ngCookies, ngAnimate, ngResource, ngSanitize, uiRouter, uiBootstrap,
-  _Auth, 'validation.match', navbar, footer, ngenter, constants, util,
+  services, navbar, footer, ngenter, constants,
   Main, AddPlayer, NewTournament, Tournament, TournamentDetail, PlayerStatsModal, PlayerScoreChart, ChangeLogModal
 ])
   .config(routeConfig)

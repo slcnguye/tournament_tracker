@@ -223,7 +223,7 @@
         "wrap-regex": 0,                                            //require regex literals to be wrapped in parentheses
 
         //ECMAScript 6
-        "arrow-body-style": [2, "as-needed"],                       //require braces in arrow function body
+        "arrow-body-style": [1],                                    //require braces in arrow function body
         "arrow-parens": [2, "as-needed"],                           //require parens in arrow function arguments
         "arrow-spacing": 2,                                         //require space before/after arrow function's arrow
         "constructor-super": 2,                                     //verify calls of super() in constructors

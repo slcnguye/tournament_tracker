@@ -29,7 +29,7 @@ module.exports = {
       });
   },
 
-  down: (queryInterface) => {
+  down: queryInterface => {
     queryInterface.dropTable('player');
   }
 };

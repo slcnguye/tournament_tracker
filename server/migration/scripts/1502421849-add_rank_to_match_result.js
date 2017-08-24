@@ -13,7 +13,7 @@ module.exports = {
     );
   },
 
-  down: (queryInterface) => {
+  down: queryInterface => {
     queryInterface.removeColumn('match-result', 'rank');
   }
 };
