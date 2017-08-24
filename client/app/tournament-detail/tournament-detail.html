@@ -124,7 +124,7 @@
         </tr>
         </tbody>
       </table>
-      <div class="text-center" ng-if="!$ctrl.matches">
+      <div class="text-center" ng-if="$ctrl.matches">
         <ul class="pagination">
           <li ng-repeat="page in $ctrl.paging.pages">
             <a class="btn-primary" ng-bind="page + 1"
