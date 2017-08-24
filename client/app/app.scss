@@ -158,8 +158,14 @@ $ssk-font-color: white;
 
 // Panel
 .ssk-panel {
-  color: white;
+  color: $ssk-font-color;
   background-color: $ssk-dark-blue;
+}
+
+.ssk-text-area {
+  color: $ssk-font-color;
+  background-color: transparent;
+  resize: vertical;
 }
 
 // Tables
@@ -282,7 +288,6 @@ body {
 @import 'tournament/tournament';
 @import '../components/change-log-modal/change-log-modal';
 @import '../components/footer/footer';
-@import '../components/modal/modal';
 @import '../components/navbar/navbar';
 @import '../components/player-stats-modal/player-stats-modal';
 /* endinject */

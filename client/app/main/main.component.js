@@ -16,18 +16,18 @@ import image10 from '../../assets/images/profile_images/10.jpg';
 
 export class MainController {
 
-  constructor($q, TournamentPlayer, Player, Tournament, Match) {
+  constructor($q, TournamentPlayerService, PlayerService, TournamentService, MatchService) {
     'ngInject';
 
     this.$q = $q;
-    this.Player = Player;
-    this.TournamentPlayer = TournamentPlayer;
-    this.Tournament = Tournament;
-    this.Match = Match;
+    this.PlayerService = PlayerService;
+    this.TournamentPlayerService = TournamentPlayerService;
+    this.TournamentService = TournamentService;
+    this.MatchService = MatchService;
   }
 
   $onInit() {
-    this.TournamentPlayer.query().$promise
+    this.TournamentPlayerService.query().$promise
       .then(tournamentPlayers => {
         // Group tournament players by tournament
         const tournamentPlayersByTournament = _.groupBy(tournamentPlayers, 'tournamentId');
@@ -43,13 +43,13 @@ export class MainController {
         const getTournamentsDeferred = [];
         for(let i = 0; i < numTournamentsToDisplay; ++i) {
           const tournamentId = orderedRecentMatches[i].tournamentId;
-          getTournamentsDeferred.push(this.Tournament.get({ id: tournamentId }).$promise);
+          getTournamentsDeferred.push(this.TournamentService.get({ id: tournamentId }).$promise);
         }
 
         this.$q.all(getTournamentsDeferred)
           .then(tournaments => {
             this.activeTournaments = tournaments;
-            if (_.size(this.activeTournaments) > 0) {
+            if(_.size(this.activeTournaments) > 0) {
               this.setSelectedTournament(_.first(tournaments));
             }
           });
@@ -59,9 +59,9 @@ export class MainController {
   setSelectedTournament(tournament) {
     this.selectedTournamentId = tournament._id;
     this.$q.all([
-      this.TournamentPlayer.query({tournamentId: this.selectedTournamentId}).$promise,
-      this.Match.query({tournamentId: this.selectedTournamentId}).$promise,
-      this.Player.query().$promise
+      this.TournamentPlayerService.query({tournamentId: this.selectedTournamentId}).$promise,
+      this.MatchService.query({tournamentId: this.selectedTournamentId}).$promise,
+      this.PlayerService.query().$promise
     ]).then(response => {
       const tournamentPlayers = _.orderBy(response[0], ['score'], ['desc']);
       this.matches = response[1];

@@ -7,27 +7,29 @@ import routes from './tournament-detail.routes';
 import _ from 'lodash';
 
 export class TournamentDetailComponent {
-  constructor($uibModal, $q, $state, $stateParams, Tournament, TournamentPlayer, Player, Match, MatchResult) {
+  constructor($uibModal, $q, $state, $stateParams, TournamentService, TournamentPlayerNoteService, TournamentPlayerService,
+              PlayerService, MatchService, MatchResultService) {
     'ngInject';
     this.$q = $q;
     this.$state = $state;
     this.$stateParams = $stateParams;
     this.$uibModal = $uibModal;
-    this.Tournament = Tournament;
-    this.TournamentPlayer = TournamentPlayer;
-    this.Player = Player;
-    this.Match = Match;
-    this.MatchResult = MatchResult;
+    this.TournamentService = TournamentService;
+    this.TournamentPlayerNoteService = TournamentPlayerNoteService;
+    this.TournamentPlayerService = TournamentPlayerService;
+    this.PlayerService = PlayerService;
+    this.MatchService = MatchService;
+    this.MatchResult = MatchResultService;
 
     this.tournamentId = this.$stateParams.tournamentId;
   }
 
   $onInit() {
     this.$q.all([
-      this.Tournament.get({id: this.tournamentId}).$promise,
-      this.TournamentPlayer.query({tournamentId: this.tournamentId}).$promise,
-      this.Player.query().$promise,
-      this.Match.query({tournamentId: this.tournamentId}).$promise
+      this.TournamentService.get({id: this.tournamentId}).$promise,
+      this.TournamentPlayerService.query({tournamentId: this.tournamentId}).$promise,
+      this.PlayerService.query().$promise,
+      this.MatchService.query({tournamentId: this.tournamentId}).$promise
     ]).then(response => {
       this.tournament = response[0];
 
@@ -49,12 +51,23 @@ export class TournamentDetailComponent {
       });
 
       this.tournamentPlayersById = {};
+      this.notesByTournamentPlayerId = {};
+      this.notesPromises = [];
       _.each(this.tournamentPlayers, tournamentPlayer => {
         this.tournamentPlayersById[tournamentPlayer._id] = tournamentPlayer;
+        const notesPromise = this.TournamentPlayerNoteService.getNotes({tournamentPlayerId: tournamentPlayer._id}).$promise;
+        notesPromise.then(notes => {
+          this.notesByTournamentPlayerId[tournamentPlayer._id] = _.orderBy(notes, ['createdAt'], ['desc']);
+        });
+        this.notesPromises.push(notesPromise);
       });
 
-      this.preparePagedMatches(this.matches, 0);
-    }, error => {
+      this.$q.all(this.notesPromises).then(() => {
+        this.playersInfoLoaded = true;
+      });
+
+      this.preparePagedMatches();
+    }, () => {
       this.$state.go('tournament');
     });
   }
@@ -63,6 +76,8 @@ export class TournamentDetailComponent {
     const matchesForPlayer = _.filter(this.matches, match => {
       return _.find(match['match-results'], { tournamentPlayerId: tournamentPlayer._id });
     });
+    const notes = this.notesByTournamentPlayerId[tournamentPlayer._id];
+    const currentNote = _.isEmpty(notes) ? { tournamentPlayerId: tournamentPlayer._id } : angular.copy(_.first(notes));
     this.$uibModal.open({
       template: require('../../components/player-stats-modal/player-stats-modal.html'),
       controller: 'playerStatsModal',
@@ -75,9 +90,26 @@ export class TournamentDetailComponent {
         },
         matches: () => {
           return matchesForPlayer;
+        },
+        notes: () => {
+          return notes;
+        },
+        currentNote: () => {
+          return currentNote;
         }
       }
-    }).result.then(() => {}, () => {});
+    }).result.then(() => {
+      this.saveNote(currentNote, notes);
+    }, () => {
+      this.saveNote(currentNote, notes);
+    });
+  }
+
+  saveNote(note, notes) {
+    if(!note._id || note.message != _.first(notes).message) {
+      this.TournamentPlayerNoteService.create({ tournamentPlayerId: note.tournamentPlayerId, message: note.message});
+      notes.unshift(note);
+    }
   }
 
   addMatch() {
@@ -91,7 +123,7 @@ export class TournamentDetailComponent {
       tournamentId: this.tournament._id
     };
 
-    this.Match.create(match).$promise
+    this.MatchService.create(match).$promise
       .then(savedMatch => {
         const updatedWinner = this.tournamentPlayersById[winner._id];
         updatedWinner.score += winnerScoreDelta;
@@ -115,14 +147,14 @@ export class TournamentDetailComponent {
         this.$q.all([
           this.MatchResult.create(matchResult1).$promise,
           this.MatchResult.create(matchResult2).$promise,
-          this.TournamentPlayer.patch({id: updatedWinner._id, score: updatedWinner.score}).$promise,
-          this.TournamentPlayer.patch({id: updatedLoser._id, score: updatedLoser.score}).$promise
+          this.TournamentPlayerService.patch({id: updatedWinner._id, score: updatedWinner.score}).$promise,
+          this.TournamentPlayerService.patch({id: updatedLoser._id, score: updatedLoser.score}).$promise
         ]).then(matchResults => {
           savedMatch['match-results'] = [];
           savedMatch['match-results'].push(matchResults[0]);
           savedMatch['match-results'].push(matchResults[1]);
           this.matches.unshift(savedMatch);
-          this.preparePagedMatches(this.matches, 0);
+          this.preparePagedMatches();
         });
       });
 
@@ -171,11 +203,12 @@ export class TournamentDetailComponent {
   }
 
   // Paging
-  preparePagedMatches(matches, page) {
+  preparePagedMatches() {
+    this.matches = _.orderBy(this.matches, ['createdAt'], ['desc']);
     this.paging = this.paging || {};
-    this.paging.totalPages = Math.ceil(_.size(matches) / 10);
+    this.paging.totalPages = Math.ceil(_.size(this.matches) / 10);
     this.paging.pages = _.range(this.paging.totalPages);
-    this.getPagedMatches(matches, this.paging, page);
+    this.getPagedMatches(this.matches, this.paging, 0);
   }
 
   getPagedMatches(matches, paging, page) {
@@ -221,12 +254,16 @@ export class TournamentDetailComponent {
     const tournamentPlayers = _.orderBy(this.tournamentPlayers, ['score'], ['desc']);
     _.each(tournamentPlayers, (tournamentPlayer, index) => {
       tournamentPlayer.rank = index + 1;
-      deferred.push(this.TournamentPlayer.patch({id: tournamentPlayer._id, score: tournamentPlayer.score}).$promise);
+      deferred.push(this.TournamentPlayerService.patch({id: tournamentPlayer._id, score: tournamentPlayer.score}).$promise);
     });
 
     this.$q.all(deferred).then(() => {
       this.recalcingMatches = false;
     });
+  }
+
+  getNote(notes) {
+    return !_.isEmpty(notes) ? _.first(notes).message : null;
   }
 }
 

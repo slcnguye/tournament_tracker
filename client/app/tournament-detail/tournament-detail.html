@@ -29,13 +29,20 @@
         <th>Rank</th>
         <th>Name</th>
         <th>Score</th>
+        <th>Note</th>
         </thead>
         <tbody>
-        <tr ng-click="$ctrl.showPlayerInfo(tournamentPlayer)" class="ssk-table-link"
+        <tr ng-if="$ctrl.playersInfoLoaded" ng-click="$ctrl.showPlayerInfo(tournamentPlayer)" class="ssk-table-link"
             ng-repeat="tournamentPlayer in $ctrl.tournamentPlayers | orderBy: 'score':true ">
           <td ng-bind="$index + 1"></td>
           <td ng-bind="tournamentPlayer.name"></td>
           <td ng-bind="tournamentPlayer.score"></td>
+          <td ng-bind="$ctrl.getNote($ctrl.notesByTournamentPlayerId[tournamentPlayer._id])"></td>
+        </tr>
+        <tr ng-if="!$ctrl.playersInfoLoaded">
+          <td colspan="100%" class="text-center">
+            <i class="fa fa-spinner fa-spin fa-2x"></i>
+          </td>
         </tr>
         </tbody>
       </table>
@@ -91,10 +98,15 @@
         <th>Date</th>
         </thead>
         <tbody>
+        <tr ng-if="!$ctrl.matches">
+          <td colspan="100%" class="text-center">
+            <i class="fa fa-spinner fa-spin fa-2x"></i>
+          </td>
+        </tr>
         <tr ng-if="$ctrl.matches.length === 0">
           <td colspan="100%">No matches played.</td>
         </tr>
-        <tr ng-repeat="match in $ctrl.pagedMatches | orderBy: 'createdAt':true">
+        <tr ng-repeat="match in $ctrl.pagedMatches">
           <td ng-bind="$ctrl.matches.length - ($ctrl.paging.currentPage * 10) - $index"></td>
           <td>
             <i class="fa fa-trophy" aria-hidden="true"></i>
@@ -112,7 +124,7 @@
         </tr>
         </tbody>
       </table>
-      <div class="text-center">
+      <div class="text-center" ng-if="!$ctrl.matches">
         <ul class="pagination">
           <li ng-repeat="page in $ctrl.paging.pages">
             <a class="btn-primary" ng-bind="page + 1"

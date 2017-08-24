@@ -3,27 +3,20 @@
 module.exports = {
   up: (queryInterface, DataTypes) => {
     queryInterface.createTable(
-      'match-result', {
+      'tournament-player-note', {
         _id: {
           type: DataTypes.INTEGER,
           allowNull: false,
           primaryKey: true,
           autoIncrement: true
         },
-        matchId: {
-          type: DataTypes.INTEGER,
-          allowNull: false,
-          references: { model: 'match', key: '_id' }
-        },
         tournamentPlayerId: {
           type: DataTypes.INTEGER,
           allowNull: false,
           references: { model: 'tournament-player', key: '_id' }
         },
-        scoreDelta: {
-          type: DataTypes.INTEGER,
-          defaultValue: 0,
-          allowNull: false
+        message: {
+          type: DataTypes.STRING
         },
         createdAt: {
           type: DataTypes.DATE
@@ -35,6 +28,6 @@ module.exports = {
   },
 
   down: queryInterface => {
-    queryInterface.dropTable('match-result');
+    queryInterface.dropTable('tournament-player-note');
   }
 };

@@ -6,11 +6,11 @@ import routes from './add-player.routes';
 import _ from 'lodash';
 
 export class AddPlayerComponent {
-  constructor($state, $q, $stateParams, Tournament, Player, TournamentPlayer) {
+  constructor($q, $stateParams, TournamentService, PlayerService, TournamentPlayerService) {
     'ngInject';
-    this.Tournament = Tournament;
-    this.Player = Player;
-    this.TournamentPlayer = TournamentPlayer;
+    this.TournamentService = TournamentService;
+    this.PlayerService = PlayerService;
+    this.TournamentPlayerService = TournamentPlayerService;
     this.$stateParams = $stateParams;
     this.$q = $q;
   }
@@ -19,9 +19,9 @@ export class AddPlayerComponent {
     const tournamentId = this.$stateParams.tournamentId;
 
     this.$q.all([
-      this.Tournament.get({id: tournamentId}).$promise,
-      this.Player.query().$promise,
-      this.TournamentPlayer.query({tournamentId}).$promise
+      this.TournamentService.get({id: tournamentId}).$promise,
+      this.PlayerService.query().$promise,
+      this.TournamentPlayerService.query({tournamentId}).$promise
     ]).then(response => {
       this.tournament = response[0];
       this.players = response[1];
@@ -40,7 +40,7 @@ export class AddPlayerComponent {
     let promise;
     let existingPlayer = _.find(this.players, { name: playerName });
     if(!existingPlayer) {
-      promise = this.Player.create({ name: playerName }).$promise
+      promise = this.PlayerService.create({ name: playerName }).$promise
         .then(savedPlayer => {
           this.players.push(savedPlayer);
           this.playersById[savedPlayer._id] = savedPlayer;
@@ -53,7 +53,7 @@ export class AddPlayerComponent {
     this.$q.when(promise).then(player => {
       if(!_.find(this.tournamentPlayers, { playerId: player._id })) {
         const initScore = this.tournament.scoreType === 'ELO' ? 2000 : 0;
-        this.TournamentPlayer.create({
+        this.TournamentPlayerService.create({
           tournamentId: this.tournament._id,
           playerId: player._id,
           score: initScore
@@ -66,7 +66,7 @@ export class AddPlayerComponent {
   }
 
   removePlayer(tournamentPlayer) {
-    this.TournamentPlayer.delete({ id: tournamentPlayer._id }).$promise
+    this.TournamentPlayerService.delete({ id: tournamentPlayer._id }).$promise
       .then(() => {
         _.pull(this.tournamentPlayers, tournamentPlayer);
       });

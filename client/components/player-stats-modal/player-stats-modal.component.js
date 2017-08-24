@@ -16,12 +16,14 @@ import image10 from '../../assets/images/profile_images/10.jpg';
 
 export class playerStatsModalController {
 
-  constructor($uibModalInstance, tournamentPlayer, matches) {
+  constructor($uibModalInstance, tournamentPlayer, matches, notes, currentNote) {
     'ngInject';
 
     this.$uibModalInstance = $uibModalInstance;
     this.tournamentPlayer = tournamentPlayer;
     this.matches = _.orderBy(matches, ['createdAt'], ['asc']);
+    this.notes = notes;
+    this.currentNote = currentNote;
   }
 
   $onInit() {
@@ -49,7 +51,7 @@ export class playerStatsModalController {
     }
 
     playerStats.matchScores = [];
-    if (playerStats.totalMatches > 0) {
+    if(playerStats.totalMatches > 0) {
       const firstMatchResult = _.find(_.first(matches)['match-results'], matchResult => {
         return matchResult.tournamentPlayerId === tournamentPlayer._id;
       });
