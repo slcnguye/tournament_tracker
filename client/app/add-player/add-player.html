@@ -9,12 +9,12 @@
     <li class="breadcrumb-item active">Players</li>
   </ol>
 
-  <input type="text" ng-model="$ctrl.playerNameToAdd" class="form-control"
+  <input type="text" ng-model="$ctrl.playerNameToAdd" class="form-control ssk-input"
          uib-typeahead="player.name for player in $ctrl.players | filter:$viewValue | limitTo:8"
          ng-enter="$ctrl.addPlayer()" placeholder="Add new player...">
 
   <ul class="list-group">
-    <li class="list-group-item" ng-repeat="tournamentPlayer in $ctrl.tournamentPlayers">
+    <li class="list-group-item ssk-list-group-item" ng-repeat="tournamentPlayer in $ctrl.tournamentPlayers">
       <button type="button" class="btn btn-default badge">
         <i class="fa fa-minus" aria-hidden="true" ng-click="$ctrl.removePlayer(tournamentPlayer)"></i>
       </button>

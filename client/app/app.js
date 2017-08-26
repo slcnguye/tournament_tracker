@@ -14,24 +14,18 @@ import {
 } from './app.config';
 
 import services from '../services/services.module';
-import navbar from '../components/navbar/navbar.component';
-import footer from '../components/footer/footer.component';
-import ngenter from '../components/ng-enter/ng-enter.directive';
+import components from '../components/components.module';
 import Main from './main/main.component';
 import NewTournament from './new-tournament/new-tournament.component';
 import AddPlayer from './add-player/add-player.component';
 import Tournament from './tournament/tournament.component';
 import TournamentDetail from './tournament-detail/tournament-detail.component';
-import PlayerStatsModal from '../components/player-stats-modal/player-stats-modal.component';
-import PlayerScoreChart from '../components/player-score-chart/player-score-chart.component';
-import ChangeLogModal from '../components/change-log-modal/change-log-modal.component';
 import constants from './app.constants';
 
 import './app.scss';
 
 angular.module('tournamentTrackerApp', [ngCookies, ngAnimate, ngResource, ngSanitize, uiRouter, uiBootstrap,
-  services, navbar, footer, ngenter, constants,
-  Main, AddPlayer, NewTournament, Tournament, TournamentDetail, PlayerStatsModal, PlayerScoreChart, ChangeLogModal
+  services, components, constants, Main, AddPlayer, NewTournament, Tournament, TournamentDetail
 ])
   .config(routeConfig)
   .run();
