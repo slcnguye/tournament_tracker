@@ -29,7 +29,7 @@
         <th>Rank</th>
         <th>Name</th>
         <th>Score</th>
-        <th>Note</th>
+        <th class="hidden-xs">Note</th>
         </thead>
         <tbody>
         <tr ng-if="$ctrl.playersInfoLoaded" ng-click="$ctrl.showPlayerInfo(tournamentPlayer)" class="ssk-table-link"
@@ -37,7 +37,7 @@
           <td ng-bind="$index + 1"></td>
           <td ng-bind="tournamentPlayer.name"></td>
           <td ng-bind="tournamentPlayer.score"></td>
-          <td ng-bind="$ctrl.getNote($ctrl.notesByTournamentPlayerId[tournamentPlayer._id])"></td>
+          <td class="hidden-xs" ng-bind="$ctrl.getNote($ctrl.notesByTournamentPlayerId[tournamentPlayer._id])"></td>
         </tr>
         <tr ng-if="!$ctrl.playersInfoLoaded">
           <td colspan="100%" class="text-center">

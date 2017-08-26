@@ -1,13 +1,15 @@
 <div id="navbar" class="navbar navbar-default navbar-static-top">
   <div class="container">
     <div id="navbar-main">
-      <img ng-if="$ctrl.isDashboard()" class="magic-dashboard-logo" src="assets/images/Logo_T_new_square.png">
-      <ul class="nav navbar-nav pull-left">
+      <img ng-if="$ctrl.isDashboard()" class="magic-dashboard-logo hidden-xs" src="assets/images/Logo_T_new_square.png">
+      <img ng-if="$ctrl.isDashboard()" class="magic-logo visible-xs-inline-block" src="assets/images/Logo_T_5.png">
+
+      <ul class="no-margin nav navbar-nav pull-left">
         <a href="/">
           <img ng-if="!$ctrl.isDashboard()" class="magic-logo" src="assets/images/Logo_T_5.png">
         </a>
       </ul>
-      <ul class="nav navbar-nav navbar-right pull-right">
+      <ul class="no-margin nav navbar-nav navbar-right pull-right">
         <a href="/" class="navbar-brand">Tournament Tracker</a>
       </ul>
     </div>

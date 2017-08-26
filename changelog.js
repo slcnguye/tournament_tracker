@@ -1,6 +1,13 @@
 'use strict';
 
 const changelog = {
+  'v1.9.0': {
+    date: '2017-08-26',
+    author: 'Sang Nguyen',
+    changes: [
+      { description: 'Screens are now mobile friendly.' }
+    ]
+  },
   'v1.8.0': {
     date: '2017-08-26',
     author: 'Sang Nguyen',
@@ -14,7 +21,7 @@ const changelog = {
     author: 'Sang Nguyen',
     changes: [
       { description: 'Added ability to filter matches by player name.' },
-      { description: 'Fixed bug around entering player names when adding played matches.' }
+      { description: 'Fixed bug around entering player names when adding matches.' }
     ]
   },
   'v1.6.1': {
