@@ -14,8 +14,10 @@ export class matchTableComponent {
     this.TournamentViewService = TournamentViewService;
   }
 
-  $onInit() {
-    this.preparePagedMatches(this.matches);
+  $onChanges(changes) {
+    if(changes.matches && changes.matches.currentValue) {
+      this.preparePagedMatches(this.matches);
+    }
   }
 
   addMatch() {

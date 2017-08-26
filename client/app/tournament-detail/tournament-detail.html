@@ -19,7 +19,7 @@
   <div class="panel ssk-panel">
     <div class="panel-heading ssk-flex-space-between">
       <span class="ssk-text-large padding-left">Players</span>
-      <a class="ssk-link" ui-sref="add-player({ tournamentId: $ctrl.tournamentId })">
+      <a ng-if="$ctrl.playersInfoLoaded" class="ssk-link" ui-sref="add-player({ tournamentId: $ctrl.tournamentId })">
         Add Players
       </a>
     </div>
@@ -49,7 +49,7 @@
     </div>
   </div>
 
-  <match-table ng-if="$ctrl.matches" tournament-players-by-id="$ctrl.tournamentPlayersById"
+  <match-table tournament-players-by-id="$ctrl.tournamentPlayersById"
                tournament-players="$ctrl.tournamentPlayers" matches="$ctrl.matches"
                tournament="$ctrl.tournament" players-by-id="$ctrl.playersById"></match-table>
 
