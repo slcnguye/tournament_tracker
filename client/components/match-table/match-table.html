@@ -1,0 +1,94 @@
+<div id="match-table" class="panel ssk-panel">
+  <div class="panel-heading ssk-flex-space-between">
+    <span class="ssk-text-large padding-left">Matches</span>
+    <a ng-show="!$ctrl.addMatching" class="ssk-link" ng-click="$ctrl.addMatch()">
+      Add Matches
+    </a>
+  </div>
+  <div class="panel-body">
+    <div class="row padding-bottom" ng-if="$ctrl.addMatching">
+      <div class="col-xs-5">
+        <div class="input-group player-input-group">
+            <span class="input-group-addon">
+              <i class="fa fa-trophy" aria-hidden="true"></i>
+              <div ng-bind="'+' + $ctrl.calculateScoreForWinner($ctrl.matchPlayer1, $ctrl.matchPlayer2)"></div>
+            </span>
+          <input type="text" ng-model="$ctrl.matchPlayer1" class="form-control player-input"
+                 uib-typeahead="player as player.name for player in $ctrl.tournamentPlayers | filter:$viewValue | limitTo:8"
+                 placeholder="Match Winner..." typeahead-select-on-exact="true">
+        </div>
+      </div>
+      <div class="col-xs-5">
+        <div class="input-group player-input-group">
+            <span class="input-group-addon">
+              <i class="fa fa-thumbs-o-down" aria-hidden="true"></i>
+              <div ng-bind="$ctrl.calculateScoreForLoser($ctrl.matchPlayer1, $ctrl.matchPlayer2) || '-'"></div>
+            </span>
+          <input type="text" ng-model="$ctrl.matchPlayer2" class="form-control player-input"
+                 uib-typeahead="player as player.name for player in $ctrl.tournamentPlayers | filter:$viewValue | limitTo:8"
+                 placeholder="Match Contender..." typeahead-select-on-exact="true">
+        </div>
+      </div>
+      <button class="btn btn-default"
+              type="submit"
+              ng-disabled="(!$ctrl.playersById[$ctrl.matchPlayer1.playerId] || !$ctrl.playersById[$ctrl.matchPlayer2.playerId]) || $ctrl.playersById[$ctrl.matchPlayer1.playerId] == $ctrl.playersById[$ctrl.matchPlayer2.playerId]"
+              ng-click="$ctrl.saveMatch($ctrl.matchPlayer1, $ctrl.matchPlayer2)">
+        Save
+      </button>
+      <a class="ssk-link padding-left" ng-click="$ctrl.cancelMatch()">
+        Cancel
+      </a>
+    </div>
+    <table class="table ssk-table">
+      <thead>
+      <th class="ssk-vertical-middle">Match</th>
+      <th>
+        <div>
+          <input ng-if="$ctrl.showMatchPlayerFilter"
+                 type="text" ng-model="$ctrl.playerFilterName" class="form-control ssk-input"
+                 uib-typeahead="player as player.name for player in $ctrl.tournamentPlayers | filter:$viewValue | limitTo:8"
+                 placeholder="Player" typeahead-select-on-exact="true"
+                 ng-change="$ctrl.filterOnMatchPlayerChange($ctrl.playerFilterName, $ctrl.tournamentPlayers)"
+                 typeahead-on-select="$ctrl.filterOnMatchPlayer($item)">
+        </div>
+        <div class="cursor" ng-if="!$ctrl.showMatchPlayerFilter" ng-click="$ctrl.showMatchPlayerFilter = true">
+          <span>Player</span>
+          <i class="padding-left fa fa-filter"></i>
+        </div>
+      </th>
+      <th class="ssk-vertical-middle" colspan="2">Score</th>
+      <th class="ssk-vertical-middle">Date</th>
+      </thead>
+      <tbody>
+      <tr ng-if="$ctrl.filteredMatches.length === 0">
+        <td colspan="100%">No matches played.</td>
+      </tr>
+      <tr ng-repeat="match in $ctrl.pagedMatches">
+        <td ng-bind="$ctrl.filteredMatches.length - ($ctrl.paging.currentPage * 10) - $index"></td>
+        <td>
+          <i class="fa fa-trophy" aria-hidden="true"></i>
+          <span ng-bind="$ctrl.tournamentPlayersById[match['match-results'][0].tournamentPlayerId].name"></span>
+          <span class="ssk-text-light">vs.</span>
+          <span class="ssk-text-light" ng-bind="$ctrl.tournamentPlayersById[match['match-results'][1].tournamentPlayerId].name"></span>
+        </td>
+        <td>
+          <strong>
+            +<span ng-bind="match['match-results'][0].scoreDelta"></span>
+          </strong>
+        </td>
+        <td><span ng-bind="match['match-results'][1].scoreDelta"></span></td>
+        <td class="ssk-text-light" ng-bind="match.createdAt | date:'mediumDate'"></td>
+      </tr>
+      </tbody>
+    </table>
+    <div class="text-center" ng-if="$ctrl.matches">
+      <ul class="pagination">
+        <li ng-repeat="page in $ctrl.paging.pages">
+          <a class="btn-primary" ng-bind="page + 1"
+             ng-class="{'active': page === $ctrl.paging.currentPage, 'cursor': page != $ctrl.paging.currentPage}"
+             ng-click="$ctrl.getPagedMatches($ctrl.filteredMatches, $ctrl.paging, page)"></a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

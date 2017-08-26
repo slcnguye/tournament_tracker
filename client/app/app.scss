@@ -83,6 +83,11 @@ $ssk-font-color: white;
   border-radius: 15px;
 }
 
+// Common
+.ssk-vertical-middle {
+  vertical-align: middle !important;
+}
+
 .ssk-btn-transparent {
   color: $ssk-font-color;
   background-color: inherit;
@@ -154,6 +159,7 @@ $ssk-font-color: white;
 .ssk-link {
   color: $ssk-font-color;
   text-decoration: underline;
+  cursor: pointer;
 }
 
 // Panel
@@ -166,6 +172,16 @@ $ssk-font-color: white;
   color: $ssk-font-color;
   background-color: transparent;
   resize: vertical;
+}
+
+.ssk-input {
+  background-color: transparent;
+  color: $ssk-font-color;
+}
+
+.ssk-list-group-item {
+  background-color: transpare;
+  color: $ssk-font-color;
 }
 
 // Tables
@@ -288,6 +304,7 @@ body {
 @import 'tournament/tournament';
 @import '../components/change-log-modal/change-log-modal';
 @import '../components/footer/footer';
+@import '../components/match-table/match-table';
 @import '../components/navbar/navbar';
 @import '../components/player-stats-modal/player-stats-modal';
 /* endinject */
