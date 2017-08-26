@@ -1,7 +1,7 @@
 <div id="match-table" class="panel ssk-panel">
   <div class="panel-heading ssk-flex-space-between">
     <span class="ssk-text-large padding-left">Matches</span>
-    <a ng-show="!$ctrl.addMatching" class="ssk-link" ng-click="$ctrl.addMatch()">
+    <a ng-show="!$ctrl.addMatching && $ctrl.matches" class="ssk-link" ng-click="$ctrl.addMatch()">
       Add Matches
     </a>
   </div>
@@ -60,6 +60,11 @@
       <th class="ssk-vertical-middle">Date</th>
       </thead>
       <tbody>
+      <tr ng-if="!$ctrl.matches">
+        <td colspan="100%" class="text-center">
+          <i class="fa fa-spinner fa-spin fa-2x"></i>
+        </td>
+      </tr>
       <tr ng-if="$ctrl.filteredMatches.length === 0">
         <td colspan="100%">No matches played.</td>
       </tr>

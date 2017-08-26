@@ -67,7 +67,6 @@ export class TournamentDetailComponent {
       this.$q.all(this.notesPromises).then(() => {
         this.playersInfoLoaded = true;
       });
-
     }, () => {
       this.$state.go('tournament');
     });
@@ -111,6 +110,10 @@ export class TournamentDetailComponent {
       this.TournamentPlayerNoteService.create({ tournamentPlayerId: note.tournamentPlayerId, message: note.message});
       notes.unshift(note);
     }
+  }
+
+  getNote(notes) {
+    return !_.isEmpty(notes) ? _.first(notes).message : null;
   }
 
   // Edit mode
@@ -159,9 +162,6 @@ export class TournamentDetailComponent {
     });
   }
 
-  getNote(notes) {
-    return !_.isEmpty(notes) ? _.first(notes).message : null;
-  }
 }
 
 export default angular.module('tournamentTrackerApp.tournament-detail', [uiRouter])

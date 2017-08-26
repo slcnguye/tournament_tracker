@@ -1,11 +1,20 @@
 import angular from 'angular';
 
+import changelog from '../../../changelog';
+import _ from 'lodash';
+
 export class FooterComponent {
 
   constructor($uibModal) {
     'ngInject';
 
     this.$uibModal = $uibModal;
+    this.changelog = changelog;
+  }
+
+  $onInit() {
+    this.latestChangeVersion = _.first(_.keys(this.changelog));
+    this.latestChangeInfo = this.changelog[this.latestChangeVersion];
   }
 
   showChangeLog() {
