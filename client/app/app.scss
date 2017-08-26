@@ -266,6 +266,20 @@ $ssk-font-color: white;
   width: 400px;
 }
 
+@media only screen and (max-width: 480px) {
+  .ssk-modal-right {
+    height: 100%;
+  }
+
+  .ssk-modal-right>.modal-dialog {
+    width: 100%;
+  }
+
+  .ssk-modal-right>.modal-dialog>.modal-content {
+    padding-bottom: 50px;
+  }
+}
+
 .ssk-modal-right>.modal-dialog>.modal-content {
   height: 100%;
   background: url('../assets/images/Magic-BG2.png');

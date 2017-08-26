@@ -16,7 +16,7 @@
               <div class="tournament ssk-text-light" ng-class="{'selected-tournament': $ctrl.selectedTournamentId === activeTournament._id}"
                    ng-bind="activeTournament.name"></div>
             </div>
-            <div class="tournament-box">
+            <div class="tournament-box hidden-xs hidden-sm">
               <a class="ssk-link" ui-sref="new-tournament">
                 <btn class="btn btn-circle ssk-btn-transparent">
                   <i class="fa fa-plus" aria-hidden="true"></i>
@@ -47,12 +47,14 @@
                 <span class="ssk-text-light">vs.</span>
                 <span class="ssk-text-light" ng-bind="$ctrl.tournamentPlayersById[match['match-results'][1].tournamentPlayerId].name"></span>
               </td>
-              <td>
+              <td class="hidden-xs">
                 <strong>
                   +<span ng-bind="match['match-results'][0].scoreDelta"></span>
                 </strong>
               </td>
-              <td><span ng-bind="match['match-results'][1].scoreDelta"></span></td>
+              <td class="hidden-xs">
+                <span ng-bind="match['match-results'][1].scoreDelta"></span>
+              </td>
               <td class="ssk-text-light" ng-bind="match.createdAt | date:'mediumDate'"></td>
             </tr>
             </tbody>

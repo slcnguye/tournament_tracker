@@ -7,7 +7,7 @@
   </div>
   <div class="panel-body">
     <div class="row padding-bottom" ng-if="$ctrl.addMatching">
-      <div class="col-xs-5">
+      <div class="col-sm-5">
         <div class="input-group player-input-group">
             <span class="input-group-addon">
               <i class="fa fa-trophy" aria-hidden="true"></i>
@@ -18,7 +18,7 @@
                  placeholder="Match Winner..." typeahead-select-on-exact="true">
         </div>
       </div>
-      <div class="col-xs-5">
+      <div class="col-sm-5">
         <div class="input-group player-input-group">
             <span class="input-group-addon">
               <i class="fa fa-thumbs-o-down" aria-hidden="true"></i>
@@ -29,19 +29,21 @@
                  placeholder="Match Contender..." typeahead-select-on-exact="true">
         </div>
       </div>
-      <button class="btn btn-default"
-              type="submit"
-              ng-disabled="(!$ctrl.playersById[$ctrl.matchPlayer1.playerId] || !$ctrl.playersById[$ctrl.matchPlayer2.playerId]) || $ctrl.playersById[$ctrl.matchPlayer1.playerId] == $ctrl.playersById[$ctrl.matchPlayer2.playerId]"
-              ng-click="$ctrl.saveMatch($ctrl.matchPlayer1, $ctrl.matchPlayer2)">
-        Save
-      </button>
-      <a class="ssk-link padding-left" ng-click="$ctrl.cancelMatch()">
-        Cancel
-      </a>
+      <div class="col-sm-2 text-right">
+        <button class="btn btn-default"
+                type="submit"
+                ng-disabled="(!$ctrl.playersById[$ctrl.matchPlayer1.playerId] || !$ctrl.playersById[$ctrl.matchPlayer2.playerId]) || $ctrl.playersById[$ctrl.matchPlayer1.playerId] == $ctrl.playersById[$ctrl.matchPlayer2.playerId]"
+                ng-click="$ctrl.saveMatch($ctrl.matchPlayer1, $ctrl.matchPlayer2)">
+          Save
+        </button>
+        <a class="ssk-link padding-left" ng-click="$ctrl.cancelMatch()">
+          Cancel
+        </a>
+      </div>
     </div>
     <table class="table ssk-table">
       <thead>
-      <th class="ssk-vertical-middle">Match</th>
+      <th class="hidden-xs" class="ssk-vertical-middle">Match</th>
       <th>
         <div>
           <input ng-if="$ctrl.showMatchPlayerFilter"
@@ -69,7 +71,7 @@
         <td colspan="100%">No matches played.</td>
       </tr>
       <tr ng-repeat="match in $ctrl.pagedMatches">
-        <td ng-bind="$ctrl.filteredMatches.length - ($ctrl.paging.currentPage * 10) - $index"></td>
+        <td class="hidden-xs" ng-bind="$ctrl.filteredMatches.length - ($ctrl.paging.currentPage * 10) - $index"></td>
         <td>
           <i class="fa fa-trophy" aria-hidden="true"></i>
           <span ng-bind="$ctrl.tournamentPlayersById[match['match-results'][0].tournamentPlayerId].name"></span>
