@@ -26,6 +26,14 @@
     }
   }
 
+  @media only screen and (max-width: 480px) {
+    .content-body {
+      width: 100%;
+      flex: 1;
+      padding: 40px 15px 15px;
+    }
+  }
+
   .active-tournaments-matches {
     flex: 2;
   }

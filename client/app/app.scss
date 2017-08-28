@@ -227,6 +227,17 @@ $ssk-font-color: white;
   color: $ssk-font-color;
 }
 
+
+@media only screen and (max-width: 480px) {
+  .ssk-breadcrumb {
+    margin: 10px 0;
+  }
+
+  .ssk-breadcrumb>li+li:before {
+    padding: 0 10px;
+  }
+}
+
 .ssk-profile-image {
   height: 60px;
   width: 60px;
