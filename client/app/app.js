@@ -5,6 +5,7 @@ import ngAnimate from 'angular-animate';
 import ngCookies from 'angular-cookies';
 import ngResource from 'angular-resource';
 import ngSanitize from 'angular-sanitize';
+import ngStorage from 'angular-storage';
 
 import uiRouter from 'angular-ui-router';
 import uiBootstrap from 'angular-ui-bootstrap';
@@ -26,7 +27,7 @@ import constants from './app.constants';
 
 import './app.scss';
 
-angular.module('tournamentTrackerApp', [ngCookies, ngAnimate, ngResource, ngSanitize, uiRouter, uiBootstrap,
+angular.module('tournamentTrackerApp', [ngCookies, ngAnimate, ngResource, ngSanitize, ngStorage, uiRouter, uiBootstrap,
   auth, services, components, constants, Main, AddPlayer, NewTournament, Tournament, TournamentDetail, LoginComponent
 ])
   .config(routeConfig)

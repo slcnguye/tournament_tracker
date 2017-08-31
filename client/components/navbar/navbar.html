@@ -9,9 +9,18 @@
           <img ng-if="!$ctrl.isDashboard()" class="magic-logo pull-left" src="assets/images/Logo_T_5.png">
         </a>
       </ul>
-      <ul class="no-margin nav navbar-nav navbar-right pull-right">
-        <a href="/" class="navbar-brand">Image</a>
-      </ul>
+      <div class="no-margin nav navbar-nav navbar-right pull-right padding-top">
+        <div class="btn-group" uib-dropdown>
+          <button ng-if="$ctrl.user" type="button" class="ssk-flex-center btn btn-primary user-button" uib-dropdown-toggle>
+            <span ng-bind="$ctrl.user.first_name" class="padding-left padding-right"></span>
+            <i class="fa fa-caret-down padding-right"></i>
+            <img class="fb-profile-image" ng-if="$ctrl.user.picture.data.url" ng-src="{{$ctrl.user.picture.data.url}}">
+          </button>
+          <ul class="dropdown-menu" uib-dropdown-menu role="menu">
+            <li><a href="#" ng-click="$ctrl.logout()">Logout</a></li>
+          </ul>
+        </div>
+      </div>
     </div>
   </div>
 </div>

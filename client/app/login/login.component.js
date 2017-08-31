@@ -8,23 +8,12 @@ import routes from './login.routes';
 export class LoginComponent {
   constructor(FacebookAuthService) {
     'ngInject';
+
     this.FacebookAuthService = FacebookAuthService;
   }
 
   $onInit() {
-    this.FacebookAuthService.getLoginStatus()
-      .then(response => {
-        console.log(response);
-        this.FacebookAuthService.getUserInfo()
-          .then(b => {
-            this.userInfo = b;
-            console.log(this.userInfo);
-          });
-      });
-  }
-
-  logout() {
-    this.FacebookAuthService.logout();
+    this.FacebookAuthService.initAuth();
   }
 }
 
