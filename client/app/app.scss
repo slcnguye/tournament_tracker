@@ -133,8 +133,10 @@ $ssk-font-color: white;
   justify-content: space-around;
 }
 
-.ssk-flex-align-center {
+.ssk-flex-center {
+  display: flex;
   align-items: center;
+  justify-content: center;
 }
 
 // Button
@@ -323,6 +325,7 @@ body {
 // Component styles are injected through gulp
 /* inject:scss */
 @import 'add-player/add-player';
+@import 'login/login';
 @import 'main/main';
 @import 'new-tournament/new-tournament';
 @import 'tournament-detail/tournament-detail';

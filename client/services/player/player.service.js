@@ -1,6 +1,6 @@
 'use strict';
 
-export function PlayerResource($resource) {
+export function PlayerService($resource) {
   'ngInject';
 
   return $resource('/api/players/:id', {
