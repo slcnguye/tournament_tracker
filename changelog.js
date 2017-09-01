@@ -1,6 +1,13 @@
 'use strict';
 
 const changelog = {
+  'v2.0.0': {
+    date: '2017-08-31',
+    author: 'Sang Nguyen',
+    changes: [
+      { description: 'Support Facebook authentication.' }
+    ]
+  },
   'v1.9.0': {
     date: '2017-08-26',
     author: 'Sang Nguyen',

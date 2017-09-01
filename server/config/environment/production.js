@@ -18,5 +18,9 @@ module.exports = {
   sequelize: {
     uri: JSON.parse(process.env.VCAP_SERVICES).wfmysql[0].credentials.uri,
     options: {}
-  }
+  },
+
+  facebook: {
+    appId: '264875180684568'
+  },
 };

@@ -1,6 +1,6 @@
 'use strict';
 
-export function TournamentPlayerNoteResource($resource) {
+export function TournamentPlayerNoteService($resource) {
   'ngInject';
 
   return $resource('/api/tournament-player-notes/:id', {

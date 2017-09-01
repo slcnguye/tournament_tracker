@@ -1,6 +1,6 @@
 'use strict';
 
-export function TournamentResource($resource) {
+export function TournamentService($resource) {
   'ngInject';
 
   return $resource('/api/tournaments/:id', {

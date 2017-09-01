@@ -1,6 +1,6 @@
 'use strict';
 
-export function MatchResultResource($resource) {
+export function MatchResultService($resource) {
   'ngInject';
 
   return $resource('/api/match-results/:id', {
