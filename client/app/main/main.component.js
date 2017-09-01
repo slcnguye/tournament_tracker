@@ -57,29 +57,31 @@ export class MainController {
   }
 
   setSelectedTournament(tournament) {
-    this.selectedTournamentId = tournament._id;
-    this.$q.all([
-      this.TournamentPlayerService.query({tournamentId: this.selectedTournamentId}).$promise,
-      this.MatchService.query({tournamentId: this.selectedTournamentId}).$promise,
-      this.PlayerService.query().$promise
-    ]).then(response => {
-      const tournamentPlayers = _.orderBy(response[0], ['score'], ['desc']);
-      this.matches = response[1];
-      this.players = response[2];
+    if (this.selectedTournamentId != tournament._id) {
+      this.selectedTournamentId = tournament._id;
+      this.$q.all([
+        this.TournamentPlayerService.query({tournamentId: this.selectedTournamentId}).$promise,
+        this.MatchService.query({tournamentId: this.selectedTournamentId}).$promise,
+        this.PlayerService.query().$promise
+      ]).then(response => {
+        const tournamentPlayers = _.orderBy(response[0], ['score'], ['desc']);
+        this.matches = response[1];
+        this.players = response[2];
 
-      this.tournamentPlayers = _.map(tournamentPlayers, (tournamentPlayer, index) => {
-        const player = angular.copy(tournamentPlayer);
-        player.name = _.find(this.players, {_id: player.playerId}).name;
-        player.score = player.score || 0;
-        player.rank = index + 1;
-        return player;
-      });
+        this.tournamentPlayers = _.map(tournamentPlayers, (tournamentPlayer, index) => {
+          const player = angular.copy(tournamentPlayer);
+          player.name = _.find(this.players, {_id: player.playerId}).name;
+          player.score = player.score || 0;
+          player.rank = index + 1;
+          return player;
+        });
 
-      this.tournamentPlayersById = {};
-      _.each(this.tournamentPlayers, tournamentPlayer => {
-        this.tournamentPlayersById[tournamentPlayer._id] = tournamentPlayer;
+        this.tournamentPlayersById = {};
+        _.each(this.tournamentPlayers, tournamentPlayer => {
+          this.tournamentPlayersById[tournamentPlayer._id] = tournamentPlayer;
+        });
       });
-    });
+    }
   }
 
   getAvatar(playerId) {

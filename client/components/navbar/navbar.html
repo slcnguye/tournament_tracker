@@ -4,11 +4,11 @@
       <img ng-if="$ctrl.isDashboard()" class="magic-dashboard-logo hidden-xs" src="assets/images/Logo_T_new_square.png">
       <img ng-if="$ctrl.isDashboard()" class="magic-logo visible-xs-inline-block" src="assets/images/Logo_T_5.png">
 
-      <ul class="no-margin nav navbar-nav">
+      <div class="no-margin pull-left">
         <a href="/">
           <img ng-if="!$ctrl.isDashboard()" class="magic-logo pull-left" src="assets/images/Logo_T_5.png">
         </a>
-      </ul>
+      </div>
       <div class="no-margin pull-right">
         <a ng-if="!$ctrl.user" class="navbar-brand" href="/">Tournament Tracker</a>
         <div ng-if="$ctrl.user" class="btn-group padding-top" uib-dropdown>
