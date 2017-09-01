@@ -14,7 +14,7 @@ export class NavbarComponent {
   }
 
   $onInit() {
-    this.$rootScope.$on("$stateChangeStart", () => {
+    this.$rootScope.$on('$stateChangeStart', () => {
       this.user = this.store.get('user');
     });
   }

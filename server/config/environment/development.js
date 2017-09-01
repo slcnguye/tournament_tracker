@@ -13,6 +13,10 @@ module.exports = {
     }
   },
 
+  facebook: {
+    appId: '141753913094110'
+  },
+
   // Seed database on startup
   seedDB: true
 

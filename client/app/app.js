@@ -23,12 +23,11 @@ import AddPlayer from './add-player/add-player.component';
 import Tournament from './tournament/tournament.component';
 import TournamentDetail from './tournament-detail/tournament-detail.component';
 import LoginComponent from './login/login.component';
-import constants from './app.constants';
 
 import './app.scss';
 
 angular.module('tournamentTrackerApp', [ngCookies, ngAnimate, ngResource, ngSanitize, ngStorage, uiRouter, uiBootstrap,
-  auth, services, components, constants, Main, AddPlayer, NewTournament, Tournament, TournamentDetail, LoginComponent
+  auth, services, components, Main, AddPlayer, NewTournament, Tournament, TournamentDetail, LoginComponent
 ])
   .config(routeConfig)
   .run();
