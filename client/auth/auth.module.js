@@ -12,12 +12,8 @@ module.run(
     'ngInject';
 
     $rootScope.$on('$stateChangeStart', (event, next) => {
-      if(next.name === 'login') {
-        return;
-      }
-
       let user = store.get('user');
-      if(!user) {
+      if(!user && next.name != 'login') {
         event.preventDefault();
         $state.go('login');
       }
