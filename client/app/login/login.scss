@@ -1,10 +1,14 @@
 #login {
   height: 100%;
 
-  .login-background {
-    height: 75%;
-    width: 100%;
-    background: url("../assets/images/login-background.png");
-    background-size: cover;
+  @media only screen and (min-width: 970px) {
+    .login-background {
+      height: 75%;
+      width: 100%;
+      background: url("../assets/images/login-background.png");
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center center;
+    }
   }
 }
