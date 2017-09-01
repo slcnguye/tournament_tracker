@@ -2,6 +2,8 @@
 
 This project was generated with the [Angular Full-Stack Generator](https://github.com/DaftMonk/generator-angular-fullstack) version 4.2.2.
 
+[![Stories in Ready](https://badge.waffle.io/slcnguye/tournament-tracker.png?label=ready&title=Ready)](http://waffle.io/slcnguye/tournament-tracker)
+
 ## Getting Started
 
 ### Prerequisites
