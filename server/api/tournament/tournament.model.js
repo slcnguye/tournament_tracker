@@ -27,6 +27,14 @@ export default function(sequelize, DataTypes) {
       type: DataTypes.BOOLEAN,
       defaultValue: false,
       allowNull: false
+    },
+    createdBy: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
+    updatedBy: {
+      type: DataTypes.INTEGER,
+      allowNull: false
     }
   }, {
     timestamps: true,

@@ -12,7 +12,7 @@
       <div class="no-margin pull-right">
         <a ng-if="!$ctrl.user" class="navbar-brand" href="/">Tournament Tracker</a>
         <div ng-if="$ctrl.user" class="btn-group padding-top" uib-dropdown>
-          <button type="button" class="ssk-flex-center btn btn-primary user-button" uib-dropdown-toggle>
+          <button type="button" class="ssk-flex-center btn ssk-btn-primary user-button" uib-dropdown-toggle>
             <span ng-bind="$ctrl.user.firstName" class="padding-left padding-right"></span>
             <i class="fa fa-caret-down padding-right"></i>
             <img class="fb-profile-image" ng-if="$ctrl.user.picture" ng-src="{{$ctrl.user.picture}}">

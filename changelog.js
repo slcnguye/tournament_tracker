@@ -1,11 +1,19 @@
 'use strict';
 
 const changelog = {
+  'v2.1.0': {
+    date: '2017-09-04',
+    author: 'Sang Nguyen',
+    changes: [
+      { description: 'Added support for authentication with Google.' },
+      { description: 'Added createdBy and updatedBy columns.' },
+    ]
+  },
   'v2.0.0': {
     date: '2017-08-31',
     author: 'Sang Nguyen',
     changes: [
-      { description: 'Support Facebook authentication.' }
+      { description: 'Added support for authentication with Facebook.' }
     ]
   },
   'v1.9.0': {

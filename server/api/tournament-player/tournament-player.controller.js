@@ -41,6 +41,8 @@ export function show(req, res) {
 
 // Creates a new TournamentPlayer in the DB
 export function create(req, res) {
+  req.body.createdBy = req.user;
+  req.body.updatedBy = req.user;
   return TournamentPlayer.create(req.body)
     .then(apiutils.respondWithResult(res, 201))
     .catch(apiutils.handleError(res));
@@ -51,7 +53,7 @@ export function upsert(req, res) {
   if(req.body._id) {
     Reflect.deleteProperty(req.body, '_id');
   }
-
+  req.body.updatedBy = req.user;
   return TournamentPlayer.upsert(req.body, {
     where: {
       _id: req.params.id
@@ -72,7 +74,7 @@ export function patch(req, res) {
     }
   })
     .then(apiutils.handleEntityNotFound(res))
-    .then(apiutils.patchUpdates(req.body))
+    .then(apiutils.patchUpdates(req, req.body))
     .then(apiutils.respondWithResult(res))
     .catch(apiutils.handleError(res));
 }

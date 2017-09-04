@@ -14,8 +14,9 @@ apiutils.respondWithResult = function(res, statusCode) {
   };
 };
 
-apiutils.patchUpdates = function(patches) {
+apiutils.patchUpdates = function(req, patches) {
   return function(entity) {
+    patches.updatedBy = req.user;
     _.each(patches, (value, key) => {
       entity[key] = value;
     });

@@ -7,6 +7,14 @@ export default function(sequelize, DataTypes) {
       allowNull: false,
       primaryKey: true,
       autoIncrement: true
+    },
+    createdBy: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
+    updatedBy: {
+      type: DataTypes.INTEGER,
+      allowNull: false
     }
   }, {
     timestamps: true,
