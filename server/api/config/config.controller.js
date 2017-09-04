@@ -15,5 +15,14 @@ import config from '../../config/environment';
 
 // Gets a list of Configs
 export function index(req, res) {
-  return apiutils.respondWithResult(res)(config.facebook);
+  return apiutils.respondWithResult(res)({
+    auth: {
+      google: {
+        clientId: config.auth.google.clientId
+      },
+      facebook: {
+        clientId: config.auth.facebook.clientId
+      }
+    }
+  });
 }

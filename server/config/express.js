@@ -14,10 +14,9 @@ import cookieParser from 'cookie-parser';
 import errorHandler from 'errorhandler';
 import path from 'path';
 import config from './environment';
-import passport from 'passport';
 
 export default function(app) {
-  var env = app.get('env');
+  const env = app.get('env');
 
   if(env === 'development' || env === 'test') {
     app.use(express.static(path.join(config.root, '.tmp')));
@@ -39,7 +38,6 @@ export default function(app) {
   app.use(bodyParser.json());
   app.use(methodOverride());
   app.use(cookieParser());
-  app.use(passport.initialize());
 
   if(env === 'development') {
     const webpackDevMiddleware = require('webpack-dev-middleware');
@@ -77,7 +75,6 @@ export default function(app) {
      * or send a fullscreen error message to the browser instead
      */
     compiler.plugin('done', function(stats) {
-      console.log('webpack done hook');
       if(stats.hasErrors() || stats.hasWarnings()) {
         return browserSync.sockets.emit('fullscreen:message', {
           title: 'Webpack Error:',

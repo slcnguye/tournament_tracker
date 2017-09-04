@@ -20,7 +20,16 @@ module.exports = {
     options: {}
   },
 
-  facebook: {
-    appId: '264875180684568'
+  auth: {
+    google: {
+      clientId: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET
+    },
+    facebook: {
+      clientId: process.env.FACEBOOK_CLIENT_ID,
+      clientSecret: process.env.FACEBOOK_CLIENT_SECRET
+    }
   },
+
+  tokenSecret: process.env.TOKEN_SECRET
 };

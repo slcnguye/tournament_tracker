@@ -6,6 +6,7 @@ import ngCookies from 'angular-cookies';
 import ngResource from 'angular-resource';
 import ngSanitize from 'angular-sanitize';
 import ngStorage from 'angular-storage';
+import satellizer from 'satellizer/dist/satellizer';
 
 import uiRouter from 'angular-ui-router';
 import uiBootstrap from 'angular-ui-bootstrap';
@@ -13,8 +14,10 @@ import uiBootstrap from 'angular-ui-bootstrap';
 import {
   routeConfig
 } from './app.config';
+import {
+  authInterceptor
+} from './authInterceptor';
 
-import auth from '../auth/auth.module';
 import services from '../services/services.module';
 import components from '../components/components.module';
 import Main from './main/main.component';
@@ -27,9 +30,15 @@ import LoginComponent from './login/login.component';
 import './app.scss';
 
 angular.module('tournamentTrackerApp', [ngCookies, ngAnimate, ngResource, ngSanitize, ngStorage, uiRouter, uiBootstrap,
-  auth, services, components, Main, AddPlayer, NewTournament, Tournament, TournamentDetail, LoginComponent
+  satellizer, services, components, Main, AddPlayer, NewTournament, Tournament, TournamentDetail, LoginComponent
 ])
+  .factory('authInterceptor', authInterceptor)
   .config(routeConfig)
+  .config(function($httpProvider) {
+    'ngInject';
+
+    $httpProvider.interceptors.push('authInterceptor');
+  })
   .run();
 
 angular.element(document)

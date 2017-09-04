@@ -14,6 +14,7 @@ import seedDatabaseIfNeeded from './config/seed';
 let app = express();
 let server = http.createServer(app);
 require('./config/express').default(app);
+require('./auth/auth').default(app);
 require('./routes').default(app);
 
 // Start server
