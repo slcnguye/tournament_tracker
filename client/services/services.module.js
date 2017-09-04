@@ -10,6 +10,7 @@ import { TournamentViewService } from './tournament-view/tournament-view.service
 import { PlayerService } from './player/player.service';
 import { MatchService } from './match/match.service';
 import { MatchResultService } from './match-result/match-result.service';
+import { UserService } from './user/user.service';
 
 const module = angular.module('tournamentTrackerApp.services', []);
 
@@ -21,5 +22,6 @@ module.service('TournamentViewService', TournamentViewService);
 module.service('PlayerService', PlayerService);
 module.service('MatchService', MatchService);
 module.service('MatchResultService', MatchResultService);
+module.service('UserService', UserService);
 
 export default module.name;

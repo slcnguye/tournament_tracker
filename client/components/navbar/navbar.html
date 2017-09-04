@@ -13,9 +13,9 @@
         <a ng-if="!$ctrl.user" class="navbar-brand" href="/">Tournament Tracker</a>
         <div ng-if="$ctrl.user" class="btn-group padding-top" uib-dropdown>
           <button type="button" class="ssk-flex-center btn btn-primary user-button" uib-dropdown-toggle>
-            <span ng-bind="$ctrl.user.first_name" class="padding-left padding-right"></span>
+            <span ng-bind="$ctrl.user.firstName" class="padding-left padding-right"></span>
             <i class="fa fa-caret-down padding-right"></i>
-            <img class="fb-profile-image" ng-if="$ctrl.user.picture.data.url" ng-src="{{$ctrl.user.picture.data.url}}">
+            <img class="fb-profile-image" ng-if="$ctrl.user.picture" ng-src="{{$ctrl.user.picture}}">
           </button>
           <ul class="dropdown-menu dropdown-menu-right" uib-dropdown-menu role="menu">
             <li><a href="#" ng-click="$ctrl.logout()">Logout</a></li>

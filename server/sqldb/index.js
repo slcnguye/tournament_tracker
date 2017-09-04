@@ -19,6 +19,7 @@ db.Match = db.sequelize.import('../api/match/match.model');
 db.TournamentPlayer = db.sequelize.import('../api/tournament-player/tournament-player.model');
 db.TournamentPlayerNote = db.sequelize.import('../api/tournament-player-note/tournament-player-note.model');
 db.MatchResult = db.sequelize.import('../api/match-result/match-result.model');
+db.User = db.sequelize.import('../api/user/user.model');
 
 db.Tournament.hasMany(db.Match, {as: 'Matches'});
 db.Tournament.belongsToMany(db.Player, {through: db.TournamentPlayer});

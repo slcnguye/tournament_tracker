@@ -4,13 +4,13 @@ import angular from 'angular';
 
 export class NavbarComponent {
 
-  constructor($rootScope, $state, store, FacebookAuthService) {
+  constructor($rootScope, $state, store, $auth) {
     'ngInject';
 
     this.$rootScope = $rootScope;
     this.$state = $state;
     this.store = store;
-    this.FacebookAuthService = FacebookAuthService;
+    this.$auth = $auth;
   }
 
   $onInit() {
@@ -24,9 +24,10 @@ export class NavbarComponent {
   }
 
   logout() {
-    this.user = null;
-    this.store.remove('user');
-    this.FacebookAuthService.logout();
+    this.$auth.logout().then(() => {
+      this.store.remove('user');
+      this.$state.go('login');
+    });
   }
 }
 
