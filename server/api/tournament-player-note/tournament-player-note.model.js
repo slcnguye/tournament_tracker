@@ -21,6 +21,14 @@ export default function(sequelize, DataTypes) {
     },
     updatedAt: {
       type: DataTypes.DATE
+    },
+    createdBy: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
+    updatedBy: {
+      type: DataTypes.INTEGER,
+      allowNull: false
     }
   }, {
     timestamps: true,

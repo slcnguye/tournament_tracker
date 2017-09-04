@@ -41,6 +41,17 @@ export default function(app) {
         // Step 3. Create a new user account or return an existing one.
         User.find({ where: { google: profile.id }}).then(existingUser => {
           if(existingUser) {
+            const picture = !profile.image.isDefault ? profile.image.url.replace('sz=50', 'sz=200') : null;
+            if(existingUser.name != profile.displayName || existingUser.picture != picture ||
+              existingUser.firstName != profile.name.givenName || existingUser.lastName != profile.name.familyName ||
+              existingUser.link != profile.url) {
+              existingUser.picture = picture;
+              existingUser.name = profile.displayName;
+              existingUser.firstName = profile.name.givenName;
+              existingUser.lastName = profile.name.familyName;
+              existingUser.link = profile.url;
+              existingUser.save();
+            }
             return res.send({ token: createJWT(existingUser) });
           }
           User.build({
@@ -84,6 +95,14 @@ export default function(app) {
           // Step 3. Create a new user account or return an existing one.
         User.find({ where: { facebook: profile.id }}).then(existingUser => {
           if(existingUser) {
+            if(existingUser.name != profile.name || existingUser.firstName != profile.first_name ||
+              existingUser.lastName != profile.last_name || existingUser.link != profile.link) {
+              existingUser.name = profile.name;
+              existingUser.firstName = profile.first_name;
+              existingUser.lastName = profile.last_name;
+              existingUser.link = profile.link;
+              existingUser.save();
+            }
             return res.send({ token: createJWT(existingUser) });
           }
           User.build({

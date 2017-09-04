@@ -40,7 +40,11 @@ export class LoginComponent {
           this.loggingIn = false;
           this.$state.go('main');
       });
-    });
+    })
+      .catch(response => {
+        console.log(response);
+        this.loggingIn = false;
+      });
   }
 }
 

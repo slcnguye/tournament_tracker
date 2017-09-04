@@ -17,6 +17,14 @@ export default function(sequelize, DataTypes) {
       validate: {
         notEmpty: true
       }
+    },
+    createdBy: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
+    updatedBy: {
+      type: DataTypes.INTEGER,
+      allowNull: false
     }
   }, {
     timestamps: true,
