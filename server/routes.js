@@ -32,6 +32,7 @@ export default function(app) {
   }
 
   app.use('/api/configs', require('./api/config'));
+  app.use('/api/leagues', ensureAuthenticated, require('./api/league'));
   app.use('/api/tournaments', ensureAuthenticated, require('./api/tournament'));
   app.use('/api/players', ensureAuthenticated, require('./api/player'));
   app.use('/api/matches', ensureAuthenticated, require('./api/match'));

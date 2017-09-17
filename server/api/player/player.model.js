@@ -18,6 +18,16 @@ export default function(sequelize, DataTypes) {
         notEmpty: true
       }
     },
+    leagueId: {
+      type: DataTypes.INTEGER,
+      references: { model: 'league', key: '_id' },
+      allowNull: false
+    },
+    userId: {
+      type: DataTypes.INTEGER,
+      references: { model: 'user', key: '_id' },
+      allowNull: false
+    },
     createdBy: {
       type: DataTypes.INTEGER,
       allowNull: false

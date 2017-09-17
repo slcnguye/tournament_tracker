@@ -1,0 +1,10 @@
+<div id="league-create-modal">
+  <div class="ssk-text-large padding-bottom">Create League</div>
+  <input type="text" class="form-control" ng-model="$ctrl.leagueName" placeholder="Name">
+  <hr class="ssk-hr">
+  <div class="ssk-flex-space-around">
+    <button type="button" class="btn ssk-btn-primary" ng-disabled="!$ctrl.leagueName"
+            ng-click="$ctrl.save($ctrl.leagueName)">Save</button>
+    <button type="button" class="btn ssk-btn-secondary" ng-click="$ctrl.close()">Close</button>
+  </div>
+</div>

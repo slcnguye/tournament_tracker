@@ -65,6 +65,7 @@ export function patch(req, res) {
   if(req.body._id) {
     Reflect.deleteProperty(req.body, '_id');
   }
+  req.body.updatedBy = req.user;
   return MatchResult.find({
     where: {
       _id: req.params.id

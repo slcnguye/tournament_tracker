@@ -10,7 +10,7 @@ import PlayerScoreChart from './player-score-chart/player-score-chart.component'
 import ChangeLogModal from './change-log-modal/change-log-modal.component';
 import MatchTable from './match-table/match-table.component';
 
-const module = angular.module('tournamentTrackerApp.components', [Navbar, Footer, NgEnter, PlayerStatsModal,
-  PlayerScoreChart, ChangeLogModal, MatchTable]);
+const module = angular.module('tournamentTrackerApp.components', [Navbar, Footer, NgEnter,
+  PlayerStatsModal, PlayerScoreChart, ChangeLogModal, MatchTable]);
 
 export default module.name;
