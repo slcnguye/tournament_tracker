@@ -7,7 +7,7 @@ module.exports = {
 
   // Sequelize connection options
   sequelize: {
-    uri: 'mariadb://tournament_tracker:Admin1!@localhost:3306/tournament_tracker',
+    uri: 'mysql://tournament_tracker:Admin1!@localhost:3306/tournament_tracker',
     options: {
       logging: console.log,
     }

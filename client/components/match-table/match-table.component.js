@@ -4,7 +4,7 @@ const angular = require('angular');
 import _ from 'lodash';
 
 export class matchTableComponent {
-  constructor($q, TournamentPlayerService, MatchService, MatchResultService, TournamentViewService) {
+  constructor($q, TournamentPlayerService, MatchService, MatchResultService, TournamentViewService, StateUtil) {
     'ngInject';
 
     this.$q = $q;
@@ -12,6 +12,8 @@ export class matchTableComponent {
     this.MatchService = MatchService;
     this.MatchResultService = MatchResultService;
     this.TournamentViewService = TournamentViewService;
+
+    this.leagueCode = StateUtil.getLeagueCodeFromUrl();
   }
 
   $onChanges(changes) {
@@ -31,7 +33,7 @@ export class matchTableComponent {
       tournamentId: this.tournament._id
     };
 
-    this.MatchService.create(match).$promise
+    this.MatchService.create({leagueCode: this.leagueCode}, match).$promise
       .then(savedMatch => {
         const updatedWinner = this.tournamentPlayersById[winner._id];
         updatedWinner.score += winnerScoreDelta;
@@ -53,10 +55,10 @@ export class matchTableComponent {
         };
 
         this.$q.all([
-          this.MatchResultService.create(matchResult1).$promise,
-          this.MatchResultService.create(matchResult2).$promise,
-          this.TournamentPlayerService.patch({id: updatedWinner._id, score: updatedWinner.score}).$promise,
-          this.TournamentPlayerService.patch({id: updatedLoser._id, score: updatedLoser.score}).$promise
+          this.MatchResultService.create({leagueCode: this.leagueCode}, matchResult1).$promise,
+          this.MatchResultService.create({leagueCode: this.leagueCode}, matchResult2).$promise,
+          this.TournamentPlayerService.patch({id: updatedWinner._id, score: updatedWinner.score, leagueCode: this.leagueCode}).$promise,
+          this.TournamentPlayerService.patch({id: updatedLoser._id, score: updatedLoser.score, leagueCode: this.leagueCode}).$promise
         ]).then(matchResults => {
           savedMatch['match-results'] = [];
           savedMatch['match-results'].push(matchResults[0]);

@@ -40,6 +40,7 @@ export function show(req, res) {
 export function create(req, res) {
   req.body.createdBy = req.user;
   req.body.updatedBy = req.user;
+  req.body.leagueId = req.league;
   return MatchResult.create(req.body)
     .then(apiutils.respondWithResult(res, 201))
     .catch(apiutils.handleError(res));
@@ -65,6 +66,7 @@ export function patch(req, res) {
   if(req.body._id) {
     Reflect.deleteProperty(req.body, '_id');
   }
+  req.body.updatedBy = req.user;
   return MatchResult.find({
     where: {
       _id: req.params.id

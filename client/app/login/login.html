@@ -1,12 +1,22 @@
-<div id="login" class="container text-center ssk-flex-center">
+<div id="login" class="text-center ssk-flex-center">
+  <div class="background-image"></div>
   <div class="login-background ssk-flex-center">
     <div ng-if="!$ctrl.loggingIn" class="ssk-flex-column">
-      <button class="btn btn-facebook text-center login-button" ng-click="$ctrl.authenticate('facebook')">
-        Continue with Facebook
-      </button>
-      <button class="btn btn-google text-center login-button" ng-click="$ctrl.authenticate('google')">
-        Continue with Google
-      </button>
+      <div class="text-center">
+        <img class="logo" src="assets/images/Logo_T_new_square.png">
+      </div>
+      <h3>Welcome to Tournament Tracker</h3>
+      <br>
+      <div>Sign in with</div>
+      <br>
+      <div class="ssk-flex-space-around">
+        <button class="btn btn-facebook text-center login-button" ng-click="$ctrl.authenticate('facebook')">
+          <img src="assets/images/facebook_logo2.png" class="image-logo">
+        </button>
+        <button class="btn btn-google text-center login-button" ng-click="$ctrl.authenticate('google')">
+          <img src="assets/images/google_logo.png" class="image-logo">
+        </button>
+      </div>
     </div>
     <div ng-if="$ctrl.loggingIn">
       <i class="fa fa-spinner fa-spin fa-3x"></i>

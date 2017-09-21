@@ -16,11 +16,10 @@ export default function(sequelize, DataTypes) {
     message: {
       type: DataTypes.STRING
     },
-    createdAt: {
-      type: DataTypes.DATE
-    },
-    updatedAt: {
-      type: DataTypes.DATE
+    leagueId: {
+      type: DataTypes.INTEGER,
+      references: { model: 'league', key: '_id' },
+      allowNull: false
     },
     createdBy: {
       type: DataTypes.INTEGER,

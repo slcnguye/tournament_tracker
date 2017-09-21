@@ -14,6 +14,7 @@ let db = {
 
 // Insert models below
 db.Tournament = db.sequelize.import('../api/tournament/tournament.model');
+db.League = db.sequelize.import('../api/league/league.model');
 db.Player = db.sequelize.import('../api/player/player.model');
 db.Match = db.sequelize.import('../api/match/match.model');
 db.TournamentPlayer = db.sequelize.import('../api/tournament-player/tournament-player.model');
@@ -21,9 +22,19 @@ db.TournamentPlayerNote = db.sequelize.import('../api/tournament-player-note/tou
 db.MatchResult = db.sequelize.import('../api/match-result/match-result.model');
 db.User = db.sequelize.import('../api/user/user.model');
 
-db.Tournament.hasMany(db.Match, {as: 'Matches'});
+db.League.hasMany(db.Player, {as: 'players'});
+db.Player.belongsTo(db.League);
+db.Tournament.belongsTo(db.League);
+db.TournamentPlayer.belongsTo(db.League);
+db.TournamentPlayerNote.belongsTo(db.League);
+db.Match.belongsTo(db.League);
+db.MatchResult.belongsTo(db.League);
+
+db.User.hasMany(db.Player, {as: 'players'});
+db.Player.belongsTo(db.User);
+db.Tournament.hasMany(db.Match, {as: 'matches'});
 db.Tournament.belongsToMany(db.Player, {through: db.TournamentPlayer});
-// db.TournamentPlayer.belongsTo(db.Player);
+db.TournamentPlayer.belongsTo(db.Player);
 db.Player.belongsToMany(db.Tournament, {through: db.TournamentPlayer});
 db.Match.belongsToMany(db.TournamentPlayer, {through: db.MatchResult});
 db.MatchResult.belongsTo(db.Match);

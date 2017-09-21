@@ -1,0 +1,42 @@
+<div id="league" class="container">
+  <ol class="breadcrumb ssk-breadcrumb">
+  </ol>
+
+  <div class="panel ssk-panel">
+    <div class="panel-heading ssk-flex-space-between">
+      <span class="ssk-text-large padding-left">Leagues</span>
+      <div>
+        <a ng-if="$ctrl.leaguesLoaded" class="ssk-link" ng-click="$ctrl.createLeague()">
+          Create League
+        </a>
+        <a ng-if="$ctrl.leaguesLoaded" class="ssk-link padding-left" ng-click="$ctrl.joinLeague()">
+          Join League
+        </a>
+      </div>
+    </div>
+    <div class="panel-body">
+      <table class="table ssk-table">
+        <thead>
+        <th>Name</th>
+        <th>Code</th>
+        </thead>
+        <tbody>
+        <tr ng-if="$ctrl.leaguesLoaded && $ctrl.leagues.length === 0">
+          <td>You are not in a league.</td>
+        </tr>
+        <tr ng-if="$ctrl.leaguesLoaded && $ctrl.leagues.length > 0" class="ssk-table-link"
+            ng-repeat="league in $ctrl.leagues | orderBy: 'updatedAt':true"
+            ui-sref="league.dashboard({leagueCode: league.code})">
+          <td ng-bind="league.name"></td>
+          <td ng-bind="league.code"></td>
+        </tr>
+        <tr ng-if="!$ctrl.leaguesLoaded">
+          <td colspan="100%" class="text-center">
+            <i class="fa fa-spinner fa-spin fa-2x"></i>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

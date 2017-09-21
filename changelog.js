@@ -1,6 +1,14 @@
 'use strict';
 
 const changelog = {
+  'v3.0.0': {
+    date: '2017-09-21',
+    author: 'Sang Nguyen',
+    changes: [
+      { description: 'New login page.' },
+      { description: 'Added concept of leagues.' },
+    ]
+  },
   'v2.1.0': {
     date: '2017-09-04',
     author: 'Sang Nguyen',

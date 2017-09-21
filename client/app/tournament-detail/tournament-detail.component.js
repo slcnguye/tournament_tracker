@@ -8,7 +8,7 @@ import _ from 'lodash';
 
 export class TournamentDetailComponent {
   constructor($uibModal, $q, $state, $stateParams, $timeout, TournamentService, TournamentPlayerNoteService,
-              TournamentPlayerService, PlayerService, MatchService, MatchResultService, TournamentViewService) {
+              TournamentPlayerService, PlayerService, MatchService, MatchResultService, TournamentViewService, StateUtil) {
     'ngInject';
     this.$q = $q;
     this.$state = $state;
@@ -24,14 +24,15 @@ export class TournamentDetailComponent {
     this.TournamentViewService = TournamentViewService;
 
     this.tournamentId = this.$stateParams.tournamentId;
+    this.leagueCode = StateUtil.getLeagueCodeFromUrl();
   }
 
   $onInit() {
     this.$q.all([
-      this.TournamentService.get({id: this.tournamentId}).$promise,
-      this.TournamentPlayerService.query({tournamentId: this.tournamentId}).$promise,
-      this.PlayerService.query().$promise,
-      this.MatchService.query({tournamentId: this.tournamentId}).$promise
+      this.TournamentService.get({id: this.tournamentId, leagueCode: this.leagueCode}).$promise,
+      this.TournamentPlayerService.query({tournamentId: this.tournamentId, leagueCode: this.leagueCode}).$promise,
+      this.PlayerService.query({leagueCode: this.leagueCode}).$promise,
+      this.MatchService.query({tournamentId: this.tournamentId, leagueCode: this.leagueCode}).$promise
     ]).then(response => {
       this.tournament = response[0];
 
@@ -57,7 +58,7 @@ export class TournamentDetailComponent {
       this.notesPromises = [];
       _.each(this.tournamentPlayers, tournamentPlayer => {
         this.tournamentPlayersById[tournamentPlayer._id] = tournamentPlayer;
-        const notesPromise = this.TournamentPlayerNoteService.getNotes({tournamentPlayerId: tournamentPlayer._id}).$promise;
+        const notesPromise = this.TournamentPlayerNoteService.getNotes({tournamentPlayerId: tournamentPlayer._id, leagueCode: this.leagueCode}).$promise;
         notesPromise.then(notes => {
           this.notesByTournamentPlayerId[tournamentPlayer._id] = _.orderBy(notes, ['createdAt'], ['desc']);
         });
@@ -68,7 +69,7 @@ export class TournamentDetailComponent {
         this.playersInfoLoaded = true;
       });
     }, () => {
-      this.$state.go('tournament');
+      this.$state.go('league.tournament');
     });
   }
 
@@ -107,7 +108,7 @@ export class TournamentDetailComponent {
 
   saveNote(note, notes) {
     if(!note._id || note.message != _.first(notes).message) {
-      this.TournamentPlayerNoteService.create({ tournamentPlayerId: note.tournamentPlayerId, message: note.message});
+      this.TournamentPlayerNoteService.create({ tournamentPlayerId: note.tournamentPlayerId, message: note.message, leagueCode: this.leagueCode});
       notes.unshift(note);
     }
   }
@@ -147,14 +148,14 @@ export class TournamentDetailComponent {
       loserMatchResult.lastScore = loser.score;
       loser.score += loserScoreDelta;
 
-      deferred.push(this.MatchResultService.patch({id: winnerMatchResult._id, lastScore: winnerMatchResult.lastScore, scoreDelta: winnerMatchResult.scoreDelta}).$promise);
-      deferred.push(this.MatchResultService.patch({id: loserMatchResult._id, lastScore: loserMatchResult.lastScore, scoreDelta: loserMatchResult.scoreDelta}).$promise);
+      deferred.push(this.MatchResultService.patch({id: winnerMatchResult._id, lastScore: winnerMatchResult.lastScore, scoreDelta: winnerMatchResult.scoreDelta, leagueCode: this.leagueCode}).$promise);
+      deferred.push(this.MatchResultService.patch({id: loserMatchResult._id, lastScore: loserMatchResult.lastScore, scoreDelta: loserMatchResult.scoreDelta, leagueCode: this.leagueCode}).$promise);
     });
 
     const tournamentPlayers = _.orderBy(this.tournamentPlayers, ['score'], ['desc']);
     _.each(tournamentPlayers, (tournamentPlayer, index) => {
       tournamentPlayer.rank = index + 1;
-      deferred.push(this.TournamentPlayerService.patch({id: tournamentPlayer._id, score: tournamentPlayer.score}).$promise);
+      deferred.push(this.TournamentPlayerService.patch({id: tournamentPlayer._id, score: tournamentPlayer.score, leagueCode: this.leagueCode}).$promise);
     });
 
     this.$q.all(deferred).then(() => {

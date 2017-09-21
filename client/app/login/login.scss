@@ -1,13 +1,15 @@
 #login {
   height: 100%;
 
-  .login-button {
-    width: 250px;
-    height: 40px;
+  .logo {
+    background-size: contain;
+    height: 150px;
+    width: 150px;
   }
 
-  .login-button + .login-button {
-    margin-top: 10px;
+  .login-button {
+    width: 150px;
+    height: 150px;
   }
 
   .btn-facebook {
@@ -16,18 +18,30 @@
   }
 
   .btn-google {
-    background-color: #df493a;
+    background-color: #f4511e;
     color: $ssk-font-color;
   }
 
+  .image-logo {
+    width: 100px;
+    height: 100px;
+  }
+
   @media only screen and (min-width: 970px) {
-    .login-background {
-      height: 75%;
+    .background-image {
+      position: absolute;
+      height: 50%;
       width: 100%;
-      background: url("../assets/images/login-background.png");
+      top: 0;
+      background: url("/assets/images/mtg_background2.jpg") no-repeat center center fixed;
       background-size: cover;
-      background-repeat: no-repeat;
-      background-position: center center;
+    }
+
+    .login-background {
+      height: 60%;
+      width: 60%;
+      background: linear-gradient($ssk-blue, $ssk-dark-blue);
+      opacity: 0.97;
     }
   }
 }

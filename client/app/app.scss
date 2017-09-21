@@ -325,6 +325,9 @@ body {
 // Component styles are injected through gulp
 /* inject:scss */
 @import 'add-player/add-player';
+@import 'league/components/league-create-modal/league-create-modal';
+@import 'league/components/league-join-modal/league-join-modal';
+@import 'league/league';
 @import 'login/login';
 @import 'main/main';
 @import 'new-tournament/new-tournament';

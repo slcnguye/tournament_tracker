@@ -3,7 +3,7 @@
 export default function($stateProvider) {
   'ngInject';
   $stateProvider
-    .state('tournament', {
+    .state('league.tournament', {
       url: '/tournament',
       template: '<tournament></tournament>'
     });

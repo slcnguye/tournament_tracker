@@ -3,8 +3,9 @@
 export function MatchResultService($resource) {
   'ngInject';
 
-  return $resource('/api/match-results/:id', {
-    id: '@id'
+  return $resource('/api/leagues/:leagueCode/match-results/:id', {
+    id: '@id',
+    leagueCode: '@leagueCode'
   }, {
     create: {
       method: 'POST'

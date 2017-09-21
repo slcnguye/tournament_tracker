@@ -3,8 +3,9 @@
 export function PlayerService($resource) {
   'ngInject';
 
-  return $resource('/api/players/:id', {
-    id: '@id'
+  return $resource('/api/leagues/:leagueCode/players/:id', {
+    id: '@id',
+    leagueCode: '@leagueCode',
   }, {
     create: {
       method: 'POST'

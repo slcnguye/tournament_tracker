@@ -36,6 +36,7 @@ export function show(req, res) {
 export function create(req, res) {
   req.body.createdBy = req.user;
   req.body.updatedBy = req.user;
+  req.body.leagueId = req.league;
   return Tournament.create(req.body)
     .then(apiutils.respondWithResult(res, 201))
     .catch(apiutils.handleError(res));

@@ -44,6 +44,7 @@ export function show(req, res) {
 export function create(req, res) {
   req.body.createdBy = req.user;
   req.body.updatedBy = req.user;
+  req.body.leagueId = req.league;
   return Match.create(req.body)
     .then(apiutils.respondWithResult(res, 201))
     .catch(apiutils.handleError(res));
@@ -55,7 +56,6 @@ export function upsert(req, res) {
     Reflect.deleteProperty(req.body, '_id');
   }
   req.body.updatedBy = req.user;
-
   return Match.upsert(req.body, {
     where: {
       _id: req.params.id
@@ -70,6 +70,7 @@ export function patch(req, res) {
   if(req.body._id) {
     Reflect.deleteProperty(req.body, '_id');
   }
+  req.body.updatedBy = req.user;
   return Match.find({
     where: {
       _id: req.params.id

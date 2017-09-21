@@ -3,8 +3,9 @@
 export function TournamentService($resource) {
   'ngInject';
 
-  return $resource('/api/tournaments/:id', {
-    id: '@id'
+  return $resource('/api/leagues/:leagueCode/tournaments/:id', {
+    id: '@id',
+    leagueCode: '@leagueCode'
   }, {
     create: {
       method: 'POST'

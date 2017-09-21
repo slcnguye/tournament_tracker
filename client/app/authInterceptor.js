@@ -8,7 +8,7 @@ export function authInterceptor($q, $injector) {
   return {
     // Intercept 401s and redirect you to login
     responseError(response) {
-      if(response.status === 401) {
+      if(response.status === 401 || response.status === 404) {
         (store || (store = $injector.get('store')))
           .remove('user');
         (state || (state = $injector.get('$state')))

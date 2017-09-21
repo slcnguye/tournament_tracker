@@ -1,6 +1,6 @@
 <div id="tournament-detail" class="container">
   <ol class="breadcrumb ssk-breadcrumb">
-    <li class="breadcrumb-item"><a class="ssk-link" ui-sref="tournament">Tournaments</a></li>
+    <li class="breadcrumb-item"><a class="ssk-link" ui-sref="league.tournament">Tournaments</a></li>
     <li class="breadcrumb-item active" ng-bind="$ctrl.tournament.name"></li>
   </ol>
 
@@ -19,7 +19,7 @@
   <div class="panel ssk-panel">
     <div class="panel-heading ssk-flex-space-between">
       <span class="ssk-text-large padding-left">Players</span>
-      <a ng-if="$ctrl.playersInfoLoaded" class="ssk-link" ui-sref="add-player({ tournamentId: $ctrl.tournamentId })">
+      <a ng-if="$ctrl.playersInfoLoaded" class="ssk-link" ui-sref="league.add-player({ tournamentId: $ctrl.tournamentId })">
         Add Players
       </a>
     </div>

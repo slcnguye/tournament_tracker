@@ -16,18 +16,31 @@ import image10 from '../../assets/images/profile_images/10.jpg';
 
 export class MainController {
 
-  constructor($q, TournamentPlayerService, PlayerService, TournamentService, MatchService) {
+  constructor($q, $state, LeagueService, TournamentPlayerService, PlayerService, TournamentService, MatchService, StateUtil) {
     'ngInject';
 
     this.$q = $q;
+    this.$state = $state;
+    this.LeagueService = LeagueService;
     this.PlayerService = PlayerService;
     this.TournamentPlayerService = TournamentPlayerService;
     this.TournamentService = TournamentService;
     this.MatchService = MatchService;
+
+    this.leagueCode = StateUtil.getLeagueCodeFromUrl();
   }
 
   $onInit() {
-    this.TournamentPlayerService.query().$promise
+    this.LeagueService.query({leagueCode: this.leagueCode}).$promise
+      .then(leagues => {
+        if(leagues.length < 1) {
+          this.$state.go('league-list');
+        } else {
+          this.league = leagues[0];
+        }
+      });
+
+    this.TournamentPlayerService.query({ leagueCode: this.leagueCode }).$promise
       .then(tournamentPlayers => {
         // Group tournament players by tournament
         const tournamentPlayersByTournament = _.groupBy(tournamentPlayers, 'tournamentId');
@@ -43,7 +56,7 @@ export class MainController {
         const getTournamentsDeferred = [];
         for(let i = 0; i < numTournamentsToDisplay; ++i) {
           const tournamentId = orderedRecentMatches[i].tournamentId;
-          getTournamentsDeferred.push(this.TournamentService.get({ id: tournamentId }).$promise);
+          getTournamentsDeferred.push(this.TournamentService.get({ id: tournamentId, leagueCode: this.leagueCode }).$promise);
         }
 
         this.$q.all(getTournamentsDeferred)
@@ -57,12 +70,12 @@ export class MainController {
   }
 
   setSelectedTournament(tournament) {
-    if (this.selectedTournamentId != tournament._id) {
+    if(this.selectedTournamentId != tournament._id) {
       this.selectedTournamentId = tournament._id;
       this.$q.all([
-        this.TournamentPlayerService.query({tournamentId: this.selectedTournamentId}).$promise,
-        this.MatchService.query({tournamentId: this.selectedTournamentId}).$promise,
-        this.PlayerService.query().$promise
+        this.TournamentPlayerService.query({tournamentId: this.selectedTournamentId, leagueCode: this.leagueCode}).$promise,
+        this.MatchService.query({tournamentId: this.selectedTournamentId, leagueCode: this.leagueCode}).$promise,
+        this.PlayerService.query({leagueCode: this.leagueCode}).$promise
       ]).then(response => {
         const tournamentPlayers = _.orderBy(response[0], ['score'], ['desc']);
         this.matches = response[1];
