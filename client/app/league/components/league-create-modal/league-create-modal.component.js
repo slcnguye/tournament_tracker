@@ -22,7 +22,8 @@ export class leagueCreateModalController {
       return this.PlayerService.create({
         name: this.user.firstName,
         userId: this.user._id,
-        leagueId: league._id
+        leagueId: league._id,
+        leagueCode: league.code,
       }).$promise.then(player => {
         league.players = [player];
         this.$uibModalInstance.close(league);

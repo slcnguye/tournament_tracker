@@ -22,10 +22,16 @@ db.TournamentPlayerNote = db.sequelize.import('../api/tournament-player-note/tou
 db.MatchResult = db.sequelize.import('../api/match-result/match-result.model');
 db.User = db.sequelize.import('../api/user/user.model');
 
-db.User.hasMany(db.Player, {as: 'players'});
 db.League.hasMany(db.Player, {as: 'players'});
-db.Player.belongsTo(db.User);
 db.Player.belongsTo(db.League);
+db.Tournament.belongsTo(db.League);
+db.TournamentPlayer.belongsTo(db.League);
+db.TournamentPlayerNote.belongsTo(db.League);
+db.Match.belongsTo(db.League);
+db.MatchResult.belongsTo(db.League);
+
+db.User.hasMany(db.Player, {as: 'players'});
+db.Player.belongsTo(db.User);
 db.Tournament.hasMany(db.Match, {as: 'matches'});
 db.Tournament.belongsToMany(db.Player, {through: db.TournamentPlayer});
 db.TournamentPlayer.belongsTo(db.Player);

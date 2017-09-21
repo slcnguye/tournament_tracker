@@ -18,6 +18,7 @@ import {
   authInterceptor
 } from './authInterceptor';
 
+import utils from '../utils/utils.module';
 import services from '../services/services.module';
 import components from '../components/components.module';
 import Main from './main/main.component';
@@ -31,7 +32,7 @@ import LeagueComponent from './league/league.component';
 import './app.scss';
 
 angular.module('tournamentTrackerApp', [ngCookies, ngAnimate, ngResource, ngSanitize, ngStorage, uiRouter, uiBootstrap,
-  satellizer, services, components, Main, AddPlayer, NewTournament, Tournament, TournamentDetail, LoginComponent, LeagueComponent
+  satellizer, utils, services, components, Main, AddPlayer, NewTournament, Tournament, TournamentDetail, LoginComponent, LeagueComponent
 ])
   .factory('authInterceptor', authInterceptor)
   .config(routeConfig)

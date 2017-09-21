@@ -19,7 +19,7 @@ export class LoginComponent {
 
   $onInit() {
     if(this.$auth.isAuthenticated()) {
-      this.$state.go('league');
+      this.$state.go('league-list');
     } else {
       this.loggingIn = false;
     }
@@ -38,7 +38,7 @@ export class LoginComponent {
         .then(user => {
           this.store.set('user', user);
           this.loggingIn = false;
-          this.$state.go('league');
+          this.$state.go('league-list');
         });
     })
       .catch(response => {

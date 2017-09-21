@@ -14,13 +14,13 @@ export class NavbarComponent {
   }
 
   $onInit() {
-    this.$rootScope.$on('$stateChangeStart', () => {
+    this.$rootScope.$on('$stateChangeStart', (event, toState) => {
       this.user = this.store.get('user');
+      if(toState.name !== 'login' && !this.user) {
+        event.preventDefault();
+        this.logout();
+      }
     });
-  }
-
-  isDashboard() {
-    return this.$state.current.name === 'main';
   }
 
   logout() {

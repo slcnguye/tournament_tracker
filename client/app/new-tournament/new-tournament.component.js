@@ -6,20 +6,24 @@ const uiRouter = require('angular-ui-router');
 import routes from './new-tournament.routes';
 
 export class NewTournamentComponent {
-  constructor($state, TournamentService) {
+  constructor($state, TournamentService, StateUtil) {
     'ngInject';
     this.$state = $state;
     this.TournamentService = TournamentService;
 
+    this.leagueCode = StateUtil.getLeagueCodeFromUrl();
+  }
+
+  $onInit() {
     this.tournament = {
       scoreType: '3PW'
     };
   }
 
   createTournament() {
-    this.TournamentService.create(this.tournament).$promise
+    this.TournamentService.create({leagueCode: this.leagueCode}, this.tournament).$promise
       .then(tournament => {
-        this.$state.go('add-player', { tournamentId: tournament._id });
+        this.$state.go('league.add-player', { tournamentId: tournament._id });
       })
       .catch(err => {
         this.errors = err.data.message;

@@ -9,19 +9,25 @@ import _ from 'lodash';
 
 export class LeagueComponent {
 
-  constructor($uibModal, LeagueService) {
+  constructor($uibModal, $stateParams, $state, LeagueService) {
     'ngInject';
 
     this.$uibModal = $uibModal;
+    this.$stateParams = $stateParams;
+    this.$state = $state;
     this.LeagueService = LeagueService;
   }
 
   $onInit() {
     this.leaguesLoaded = false;
+    this.noRedirect = this.$stateParams.noRedirect;
 
     this.LeagueService.query().$promise
       .then(leagues => {
         this.leagues = leagues;
+        if(this.leagues.length === 1 && !this.noRedirect) {
+          this.$state.go('league.dashboard', {leagueCode: _.first(this.leagues).code});
+        }
         this.leaguesLoaded = true;
       });
   }

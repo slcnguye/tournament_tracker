@@ -6,22 +6,24 @@ import routes from './add-player.routes';
 import _ from 'lodash';
 
 export class AddPlayerComponent {
-  constructor($q, $stateParams, TournamentService, PlayerService, TournamentPlayerService) {
+  constructor($q, $stateParams, TournamentService, PlayerService, TournamentPlayerService, StateUtil) {
     'ngInject';
     this.TournamentService = TournamentService;
     this.PlayerService = PlayerService;
     this.TournamentPlayerService = TournamentPlayerService;
     this.$stateParams = $stateParams;
     this.$q = $q;
+
+    this.leagueCode = StateUtil.getLeagueCodeFromUrl();
   }
 
   $onInit() {
     const tournamentId = this.$stateParams.tournamentId;
 
     this.$q.all([
-      this.TournamentService.get({id: tournamentId}).$promise,
-      this.PlayerService.query().$promise,
-      this.TournamentPlayerService.query({tournamentId}).$promise
+      this.TournamentService.get({id: tournamentId, leagueCode: this.leagueCode}).$promise,
+      this.PlayerService.query({leagueCode: this.leagueCode}).$promise,
+      this.TournamentPlayerService.query({tournamentId, leagueCode: this.leagueCode}).$promise
     ]).then(response => {
       this.tournament = response[0];
       this.players = response[1];
@@ -37,36 +39,25 @@ export class AddPlayerComponent {
     const playerName = this.playerNameToAdd;
     this.playerNameToAdd = null;
 
-    let promise;
     let existingPlayer = _.find(this.players, { name: playerName });
-    if(!existingPlayer) {
-      promise = this.PlayerService.create({ name: playerName }).$promise
-        .then(savedPlayer => {
-          this.players.push(savedPlayer);
-          this.playersById[savedPlayer._id] = savedPlayer;
-          return savedPlayer;
-        });
-    } else {
-      promise = existingPlayer;
-    }
-
-    this.$q.when(promise).then(player => {
-      if(!_.find(this.tournamentPlayers, { playerId: player._id })) {
+    if(existingPlayer) {
+      if(!_.find(this.tournamentPlayers, { playerId: existingPlayer._id, leagueCode: this.leagueCode })) {
         const initScore = this.tournament.scoreType === 'ELO' ? 2000 : 0;
         this.TournamentPlayerService.create({
           tournamentId: this.tournament._id,
-          playerId: player._id,
-          score: initScore
+          playerId: existingPlayer._id,
+          score: initScore,
+          leagueCode: this.leagueCode
         }).$promise
           .then(tournamentPlayer => {
             this.tournamentPlayers.push(tournamentPlayer);
           });
       }
-    });
+    }
   }
 
   removePlayer(tournamentPlayer) {
-    this.TournamentPlayerService.delete({ id: tournamentPlayer._id }).$promise
+    this.TournamentPlayerService.delete({ id: tournamentPlayer._id, leagueCode: this.leagueCode }).$promise
       .then(() => {
         _.pull(this.tournamentPlayers, tournamentPlayer);
       });

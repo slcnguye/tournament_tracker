@@ -19,17 +19,16 @@
         <thead>
         <th>Name</th>
         <th>Code</th>
-        <th># Players</th>
         </thead>
         <tbody>
         <tr ng-if="$ctrl.leaguesLoaded && $ctrl.leagues.length === 0">
           <td>You are not in a league.</td>
         </tr>
         <tr ng-if="$ctrl.leaguesLoaded && $ctrl.leagues.length > 0" class="ssk-table-link"
-            ng-repeat="league in $ctrl.leagues | orderBy: 'updatedAt':true ">
+            ng-repeat="league in $ctrl.leagues | orderBy: 'updatedAt':true"
+            ui-sref="league.dashboard({leagueCode: league.code})">
           <td ng-bind="league.name"></td>
           <td ng-bind="league.code"></td>
-          <td ng-bind="league.players.length"></td>
         </tr>
         <tr ng-if="!$ctrl.leaguesLoaded">
           <td colspan="100%" class="text-center">

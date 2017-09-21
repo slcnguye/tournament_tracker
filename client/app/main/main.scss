@@ -1,7 +1,4 @@
 #main {
-  //background: url("../assets/images/mtg_background2.jpg") top no-repeat, linear-gradient(to bottom right, $ssk-dark-gray, $ssk-gray) bottom no-repeat;
-  //background: url("../assets/images/Magic-BG1.png") top no-repeat;
-  background-size: 100% 50%;
   height: 100%;
 
   .content {
@@ -12,23 +9,7 @@
 
   .content-body {
     display: flex;
-    flex: 0.85;
     color: white;
-  }
-
-  @media only screen and (min-width: 970px) {
-    .content-body {
-      padding-bottom: 75px;
-      margin-top: 75px;
-    }
-  }
-
-  @media only screen and (max-width: 480px) {
-    .content-body {
-      width: 100%;
-      flex: 1;
-      padding: 40px 15px 15px;
-    }
   }
 
   .active-tournaments-matches {
