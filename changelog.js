@@ -1,6 +1,13 @@
 'use strict';
 
 const changelog = {
+  'v3.0.1': {
+    date: '2017-09-21',
+    author: 'Sang Nguyen',
+    changes: [
+      { description: 'Fixed clicking on logo causes user to logout.' },
+    ]
+  },
   'v3.0.0': {
     date: '2017-09-21',
     author: 'Sang Nguyen',

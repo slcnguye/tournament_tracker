@@ -4,13 +4,14 @@ import angular from 'angular';
 
 export class NavbarComponent {
 
-  constructor($rootScope, $state, store, $auth) {
+  constructor($rootScope, $state, store, $auth, StateUtil) {
     'ngInject';
 
     this.$rootScope = $rootScope;
     this.$state = $state;
     this.store = store;
     this.$auth = $auth;
+    this.StateUtil = StateUtil;
   }
 
   $onInit() {
@@ -20,6 +21,10 @@ export class NavbarComponent {
         event.preventDefault();
         this.logout();
       }
+    });
+
+    this.$rootScope.$on('$stateChangeSuccess', () => {
+      this.leagueCode = this.StateUtil.getLeagueCodeFromUrl();
     });
   }
 
