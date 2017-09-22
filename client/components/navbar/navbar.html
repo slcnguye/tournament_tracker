@@ -2,7 +2,10 @@
   <div class="container">
     <div id="navbar-main">
       <div class="no-margin pull-left">
-        <a ng-if="$ctrl.user" ui-sref="league.dashboard">
+        <a ng-if="$ctrl.user && $ctrl.leagueCode" ui-sref="league.dashboard({leagueCode: $ctrl.leagueCode})">
+          <img class="magic-logo pull-left" src="assets/images/Logo_T_5.png">
+        </a>
+        <a ng-if="$ctrl.user && !$ctrl.leagueCode">
           <img class="magic-logo pull-left" src="assets/images/Logo_T_5.png">
         </a>
       </div>
