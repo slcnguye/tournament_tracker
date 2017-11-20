@@ -12,11 +12,12 @@
       <div class="no-margin pull-right">
         <div ng-if="$ctrl.user" class="btn-group padding-top" uib-dropdown>
           <button type="button" class="ssk-flex-center btn ssk-btn-primary user-button" uib-dropdown-toggle>
-            <span ng-bind="$ctrl.user.firstName" class="padding-left padding-right"></span>
+            <span ng-bind="$ctrl.user.preferredName" class="padding-left padding-right"></span>
             <i class="fa fa-caret-down padding-right"></i>
             <img class="profile-image" ng-if="$ctrl.user.picture" ng-src="{{$ctrl.user.picture}}">
           </button>
           <ul class="dropdown-menu dropdown-menu-right" uib-dropdown-menu role="menu">
+            <li><a ui-sref="profile" ng-if="$ctrl.user">Profile</a></li>
             <li><a ui-sref="league-list({noRedirect: false})" ng-if="$ctrl.user">Leagues</a></li>
             <li><a href="#" ng-click="$ctrl.logout()">Logout</a></li>
           </ul>

@@ -28,11 +28,14 @@ import Tournament from './tournament/tournament.component';
 import TournamentDetail from './tournament-detail/tournament-detail.component';
 import LoginComponent from './login/login.component';
 import LeagueComponent from './league/league.component';
+import ProfileComponent from './profile/profile.component';
+
 
 import './app.scss';
 
 angular.module('tournamentTrackerApp', [ngCookies, ngAnimate, ngResource, ngSanitize, ngStorage, uiRouter, uiBootstrap,
-  satellizer, utils, services, components, Main, AddPlayer, NewTournament, Tournament, TournamentDetail, LoginComponent, LeagueComponent
+  satellizer, utils, services, components, Main, AddPlayer, NewTournament, Tournament, TournamentDetail, LoginComponent,
+  LeagueComponent, ProfileComponent
 ])
   .factory('authInterceptor', authInterceptor)
   .config(routeConfig)

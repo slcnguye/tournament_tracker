@@ -83,7 +83,7 @@ export class MainController {
 
         this.tournamentPlayers = _.map(tournamentPlayers, (tournamentPlayer, index) => {
           const player = angular.copy(tournamentPlayer);
-          player.name = _.find(this.players, {_id: player.playerId}).name;
+          player.name = _.find(this.players, {_id: player.playerId}).user.preferredName;
           player.score = player.score || 0;
           player.rank = index + 1;
           return player;

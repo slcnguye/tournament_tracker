@@ -1,6 +1,13 @@
 'use strict';
 
 const changelog = {
+  'v3.0.2': {
+    date: '2017-11-19',
+    author: 'Sang Nguyen',
+    changes: [
+      { description: 'Added preferred name to users and a profile page.' },
+    ]
+  },
   'v3.0.1': {
     date: '2017-09-21',
     author: 'Sang Nguyen',

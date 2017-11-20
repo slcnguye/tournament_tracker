@@ -10,12 +10,22 @@
 
 'use strict';
 
-import {Player} from '../../sqldb';
+import {Player, User} from '../../sqldb';
 import apiutils from '../api.utils';
 
 // Gets a list of Players
 export function index(req, res) {
-  return Player.findAll()
+  const query = {
+    where: {},
+    include: [{
+      model: User,
+      attributes: ['preferredName']
+    }]
+  };
+  if(req.query.tournamentId) {
+    query.where.leagueId = req.league;
+  }
+  return Player.findAll(query)
     .then(apiutils.respondWithResult(res))
     .catch(apiutils.handleError(res));
 }

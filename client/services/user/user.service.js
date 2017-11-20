@@ -6,6 +6,9 @@ export function UserService($resource) {
   return $resource('/api/users/me', {}, {
     me: {
       method: 'GET'
+    },
+    patch: {
+      method: 'PATCH'
     }
   });
 }

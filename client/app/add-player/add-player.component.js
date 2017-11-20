@@ -39,7 +39,7 @@ export class AddPlayerComponent {
     const playerName = this.playerNameToAdd;
     this.playerNameToAdd = null;
 
-    let existingPlayer = _.find(this.players, { name: playerName });
+    let existingPlayer = _.find(this.players, { user: { preferredName: playerName } });
     if(existingPlayer) {
       if(!_.find(this.tournamentPlayers, { playerId: existingPlayer._id, leagueCode: this.leagueCode })) {
         const initScore = this.tournament.scoreType === 'ELO' ? 2000 : 0;

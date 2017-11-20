@@ -47,7 +47,7 @@ export class TournamentDetailComponent {
 
       this.tournamentPlayers = _.map(tournamentPlayers, (tournamentPlayer, index) => {
         const player = angular.copy(tournamentPlayer);
-        player.name = this.playersById[player.playerId].name;
+        player.name = this.playersById[player.playerId].user.preferredName;
         player.score = player.score || 0;
         player.rank = index + 1;
         return player;

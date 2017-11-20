@@ -1,0 +1,16 @@
+<div class="container">
+  <ol class="breadcrumb ssk-breadcrumb"></ol>
+
+  <div ng-form="$ctrl.form">
+    <div class="form-group">
+      <label class="control-label required">Preferred Name</label>
+      <input class="form-control ssk-input" type="text" ng-model="$ctrl.preferredName" required>
+    </div>
+
+    <div class="ssk-flex-end">
+      <button type="submit" class="btn ssk-btn-primary" ng-disabled="$ctrl.form.$invalid" ng-click="$ctrl.saveProfile($ctrl.preferredName)">
+        Save
+      </button>
+    </div>
+  </div>
+</div>

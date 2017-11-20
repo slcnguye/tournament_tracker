@@ -58,6 +58,7 @@ export default function(app) {
             google: profile.id,
             picture: !profile.image.isDefault ? profile.image.url.replace('sz=50', 'sz=200') : null,
             name: profile.displayName,
+            preferredName: profile.displayName,
             firstName: profile.name.givenName,
             lastName: profile.name.familyName,
             link: profile.url
@@ -109,6 +110,7 @@ export default function(app) {
             facebook: profile.id,
             picture: `https://graph.facebook.com/${profile.id}/picture?type=large`,
             name: profile.name,
+            preferredName: profile.name,
             firstName: profile.first_name,
             lastName: profile.last_name,
             link: profile.link

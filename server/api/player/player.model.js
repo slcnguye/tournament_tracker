@@ -8,16 +8,6 @@ export default function(sequelize, DataTypes) {
       primaryKey: true,
       autoIncrement: true
     },
-    name: {
-      type: DataTypes.STRING,
-      unique: {
-        msg: 'The specified name is already in use.'
-      },
-      allowNull: false,
-      validate: {
-        notEmpty: true
-      }
-    },
     leagueId: {
       type: DataTypes.INTEGER,
       references: { model: 'league', key: '_id' },

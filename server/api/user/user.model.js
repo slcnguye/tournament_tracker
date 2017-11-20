@@ -11,6 +11,12 @@ export default function(sequelize, DataTypes) {
     name: {
       type: DataTypes.STRING
     },
+    preferredName: {
+      type: DataTypes.STRING,
+      unique: {
+        msg: 'The specified name is already in use.'
+      },
+    },
     firstName: {
       type: DataTypes.STRING
     },
